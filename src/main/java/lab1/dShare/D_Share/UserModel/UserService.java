@@ -18,7 +18,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public User getUser(int id){
+    public User getUser(String id){
         return userRepository.findById(id).orElse(null);
     }
 
@@ -26,8 +26,11 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(int id){
-        userRepository.deleteById(id);
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 
+    public void deleteUser(String id){
+        userRepository.deleteById(id);
+    }
 }

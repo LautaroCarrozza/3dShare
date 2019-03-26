@@ -5,7 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
@@ -14,12 +13,14 @@ public class User {
     private String name;
 
 
-    public User(String id, String name) {
+    public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
     }
 
     public User() {
+
     }
 
     public String getId() {
@@ -29,5 +30,10 @@ public class User {
     public String getName() {
         return name;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
 }
 
