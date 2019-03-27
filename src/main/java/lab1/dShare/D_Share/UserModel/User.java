@@ -1,8 +1,10 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.PrinterModel.Printer;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -11,6 +13,7 @@ public class User {
     private String id;
     private String password;
     private String name;
+
 
 
     public User(String id, String name, String password) {
