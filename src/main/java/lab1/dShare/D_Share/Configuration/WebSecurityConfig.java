@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         //Does not require to login
-        http.authorizeRequests().antMatchers("/home").permitAll()
+        http.authorizeRequests().antMatchers("/home", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

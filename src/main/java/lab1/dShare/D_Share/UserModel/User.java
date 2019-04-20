@@ -2,19 +2,27 @@ package lab1.dShare.D_Share.UserModel;
 
 import lab1.dShare.D_Share.PrinterModel.Printer;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String password;
+
+    @NotNull(message = "Invalid username")
     private String name;
 
+    @Email(message = "Invalid email")
+    private String email;
 
+    public String getEmail() {
+        return email;
+    }
 
     public User(String id, String name, String password) {
         this.id = id;
