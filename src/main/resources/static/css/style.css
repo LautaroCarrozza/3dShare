@@ -1,11 +1,11 @@
-#loginFailed {
+#loginFailed, #signupFailed {
     display: none;
     background-color: orangered;
     color: black;
     padding: 8px;
 }
 
-#loginSuccess {
+#loginSuccess, #signupSucces {
     display: none;
     background-color: limegreen;
     color: white;

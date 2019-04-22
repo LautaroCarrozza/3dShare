@@ -3,6 +3,8 @@
 <head>
 
     <link rel="stylesheet" href="css/style.css" />
+
+    <!--Ajax-jquery script-->
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -24,8 +26,16 @@
                         <div>
                             <label for="password">Password:</label><input class="form-control" id="password" type="password" name="password" required>
                         </div>
-                        <input type="submit" class="form-control submitbutton btn btn-info" name="login" value="Login" />
+                        <div>
+                            <input type="submit" class="form-control submitbutton btn btn-info" name="login" value="Login" />
+                        </div>
 
+                    </form>
+
+                    <form class="form-s" id="signup-page" onsubmit="return false">
+                        <div>
+                            <input type="submit" class="form-control submitbutton btn btn-info" name="signup" value="Sign Up" />
+                        </div>
                     </form>
                 </div>
             </div>
@@ -42,8 +52,8 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 <script src="js/login.js"></script>
 </body>
 </html>

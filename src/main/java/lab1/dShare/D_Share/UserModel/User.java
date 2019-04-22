@@ -20,14 +20,12 @@ public class User {
     @Email(message = "Invalid email")
     private String email;
 
-    public String getEmail() {
-        return email;
-    }
 
-    public User(String id, String name, String password) {
-        this.id = id;
+
+    public User(String name, String password, String email) {
         this.name = name;
         this.password = password;
+        this.email = email;
     }
 
     public User() {
@@ -36,6 +34,13 @@ public class User {
 
     public User(User user) {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {
