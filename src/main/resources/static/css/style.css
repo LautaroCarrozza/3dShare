@@ -1,0 +1,13 @@
+#loginFailed {
+    display: none;
+    background-color: orangered;
+    color: black;
+    padding: 8px;
+}
+
+#loginSuccess {
+    display: none;
+    background-color: limegreen;
+    color: white;
+    padding: 8px;
+}
