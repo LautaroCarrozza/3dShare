@@ -14,7 +14,7 @@ public class User {
     private String id;
     private String password;
 
-    @NotNull(message = "Invalid username")
+    @NotNull(message = "Invalid name")
     private String name;
 
     @Email(message = "Invalid email")
