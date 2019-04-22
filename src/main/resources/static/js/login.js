@@ -36,20 +36,20 @@ $('#login-form').on('submit', function (event) {
 
 });
 
-$('#signup-form').on('submit', function (event) {
+$('#signup-page').on('submit', function (event) {
     event.preventDefault();
     location.href = "signup.html";
 });
 
 function updateView() {
     if (submitButton == "login") {
-        $('#signup-form').hide("slow");
+        $('#signup-page').hide("slow");
         $('#login-form').show("slow");
 
     }
     else if (submitButton == "signup") {
         $('#login-form').hide("slow");
-        $('#signup-form').show("slow");
+        $('#signup-page').show("slow");
     }
 }
 

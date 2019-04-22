@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -23,11 +24,13 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public User getUser(String id){
+    public User getUser(Long id){
         return userRepository.findById(id).orElse(null);
     }
 
     public void addUser(User user){
+        if (userRepository.findByName(user.getName()) != null)
+            throw new NoSuchElementException("Username already exists");
         userRepository.save(user);
     }
 
@@ -35,7 +38,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(String id){
+    public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
 

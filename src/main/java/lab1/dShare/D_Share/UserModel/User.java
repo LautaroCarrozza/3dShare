@@ -1,7 +1,5 @@
 package lab1.dShare.D_Share.UserModel;
 
-import lab1.dShare.D_Share.PrinterModel.Printer;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -11,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private String password;
 
     @NotNull(message = "Invalid name")
@@ -43,7 +41,7 @@ public class User {
         this.email = email;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -55,7 +53,7 @@ public class User {
         return password;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -11,14 +11,17 @@ $(function() {
 $('#signup-form').on('submit', function (event) {
     event.preventDefault();
 
-    if (submitButton == "signup") {
-        if($("#password") === $("#confirmPwd")){
-            $.post("/users/add",
-                {
+        if($("#password").val() === $("#confirmPwd").val()){
+            $.post({
+                url: "/api/user",
+                data: JSON.stringify({
                     name: $("#username").val(),
                     password: $("#password").val(),
                     email: $("#email").val()
-                })
+                }),
+                dataType: "text",
+                contentType: "application/json"
+            })
                 .done(function () {
                     console.log("login ok");
                     $('#signupSuccess').show("slow").delay(2000).hide("slow");
@@ -36,8 +39,8 @@ $('#signup-form').on('submit', function (event) {
                         })
                 })
                 .fail(function () {
-                    console.log("login failed");
-                    $('#loginFailed').show( "slow" ).delay(2000).hide( "slow" );
+                    console.log("Sign up failed");
+                    $('#signupFailed').show( "slow" ).delay(2000).hide( "slow" );
                     $("#username").val("");
                     $("#password").val("");
                     $("#username").focus();
@@ -50,13 +53,22 @@ $('#signup-form').on('submit', function (event) {
         else {
             $('#signupFailed').show("slow").delay(2000).hide("slow");
         }
-    }
-    else if (submitButton == "loginpage") {
-        location.href = "login.html"
-    }
+
+});
+
+$('#login-page').on('submit', function (event) {
+    event.preventDefault();
+    location.href = "login.html"
 
 });
 
 function updateView() {
-    $('#signup-form').show("slow");
+    if (submitButton == "loginpage") {
+        $('#signup-form').hide("slow");
+        $('#login-page').show("slow");
+    }
+    else if (submitButton == "signup") {
+        $('#login-page').hide("slow");
+        $('#signup-form').show("slow");
+    }
 }
