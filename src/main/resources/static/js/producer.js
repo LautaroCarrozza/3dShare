@@ -1,21 +1,20 @@
-let submitButton;
-updateView();
+var userId;
+
+getUserId();
 
 $(function() {
     $('.submitbutton').click(function () {
-        submitButton = $(this).attr('name')
-        updateView();
+        $('#printer-form').show();
     });
 
 });
 
 
 $('#printer-form').on('submit', function () {
-    //$('.submitbutton').click(function () {
 
-        //let url = "/users/producer/" + $("#username").val() + "/addPrinter";
+        let url = "/users/producer/" + userId + "/addPrinter";
 
-        $.post("/users/producer/1/addPrinter", {
+        $.post(url, {
             model: $("#printer-model").val()
         })
             .done(function () {
@@ -33,37 +32,16 @@ $('#printer-form').on('submit', function () {
             });
 });
 
-function updateView() {
-    if (submitButton == "loadPrinter") {
-        $('#printer-form').show();
-    }
+function getUserId() {
+    $.ajax({
+        url: "/api/user",
+        type: 'GET',
+        success: function (data) {
+            userId = data;
+        },
+        error: function(error){
+            console.log(error);
+            $('#printer-form').hide();
+        }
+    });
 }
-
-// $('#printer-form').on('submit', function (event) {
-//     event.preventDefault();
-//
-//     let url = "/users/producer/" + $("#username").val() + "/addPrinter";
-//
-//     $.post({
-//         url: url,
-//         data: JSON.stringify({
-//             model: $("#printer-model").val()
-//         }),
-//         dataType: "text",
-//         contentType: "application/json"
-//     })
-//         .done(function () {
-//             console.log("Printer added");
-//             $('#printer-form').hide();
-//
-//         })
-//         .fail(function () {
-//             console.log("Fail to add printer");
-//             $('#printer-form').hide();
-//         })
-//
-//         .always(function () {
-//
-//         });
-//
-// });

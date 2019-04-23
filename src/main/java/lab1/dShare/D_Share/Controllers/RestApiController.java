@@ -7,10 +7,8 @@ import lab1.dShare.D_Share.UserModel.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -43,6 +41,12 @@ public class RestApiController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user")
+    public Long getAuthUserId(Authentication authentication){
+        User user = userService.getUserByName(authentication.getName());
+        return user.getId();
     }
 
 }
