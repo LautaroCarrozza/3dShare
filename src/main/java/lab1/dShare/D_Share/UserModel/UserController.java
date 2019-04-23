@@ -46,19 +46,15 @@ public class UserController {
 
     //Producer part...
     @PostMapping(PRODUCERDIRECTION + "/{id}/addPrinter")
-    public ResponseEntity<Object> addPrinter(@RequestBody Printer printer, Authentication authentication){
+    public ResponseEntity<Object> addPrinter(@PathVariable long id, @RequestParam String model, Authentication authentication){
         if (authentication == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
-        User user;
-        try {
-            user = userService.getUserByName(authentication.getName());
-        }catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
+        User user = userService.getUser(id);
+        if (user == null)
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
 
-        printer.setOwner(user);
+        Printer printer = new Printer(model, user);
         userService.addPrinter(printer, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }

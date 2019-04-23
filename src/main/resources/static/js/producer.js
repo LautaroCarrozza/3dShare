@@ -15,13 +15,8 @@ $('#printer-form').on('submit', function () {
 
         //let url = "/users/producer/" + $("#username").val() + "/addPrinter";
 
-        $.post({
-            url: "/users/producer/1/addPrinter",
-            data: JSON.stringify({
-                model: $("#printer-model").val()
-            }),
-            dataType: "text",
-            contentType: "application/json"
+        $.post("/users/producer/1/addPrinter", {
+            model: $("#printer-model").val()
         })
             .done(function () {
                 console.log("Printer added");

@@ -58,7 +58,7 @@ public class UserService {
     public User getUserByName(String name) {
         User user = userRepository.findByName(name);
         if (user != null)
-            return null;
+            return user;
         throw new NoSuchElementException("Invalid username");
     }
 }
