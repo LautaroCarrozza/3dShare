@@ -12,6 +12,6 @@ function goBack() {
     window.location.href= "home.html"
 }
 
-function showLoadPrinterForm() {
-    $('#printer-form').show()
-}
+// function showLoadPrinterForm() {
+//     $('#printer-form').show()
+// }

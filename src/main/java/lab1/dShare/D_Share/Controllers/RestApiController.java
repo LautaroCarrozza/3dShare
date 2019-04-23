@@ -36,7 +36,7 @@ public class RestApiController {
     }
 
     @PostMapping("/printer")
-    public ResponseEntity<Object> addUser(@RequestBody Printer printer){
+    public ResponseEntity<Object> addPrinter(@RequestBody Printer printer){
         try {
             printerService.addPrinter(printer);
         }catch (NoSuchElementException e) {
