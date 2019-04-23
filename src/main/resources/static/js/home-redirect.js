@@ -11,3 +11,7 @@ function redirectProducer() {
 function goBack() {
     window.location.href= "home.html"
 }
+
+function showLoadPrinterForm() {
+    $('#printer-form').show()
+}

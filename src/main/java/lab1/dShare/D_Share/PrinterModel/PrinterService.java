@@ -18,7 +18,7 @@ public class PrinterService {
                 .collect(Collectors.toList());
     }
 
-    public Printer getPrinter(String id){
+    public Printer getPrinter(Integer id){
         return printerRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class PrinterService {
         printerRepository.save(user);
     }
 
-    public void deletePrinter(String id){
+    public void deletePrinter(Integer id){
         printerRepository.deleteById(id);
     }
 

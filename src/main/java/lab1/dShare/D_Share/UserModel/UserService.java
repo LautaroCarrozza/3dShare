@@ -1,5 +1,7 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.PrinterModel.Printer;
+import lab1.dShare.D_Share.PrinterModel.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PrinterRepository printerRepository;
 
     public List<User> getAllUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
@@ -42,4 +47,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void addPrinter(Printer printer, User user) {
+        printerRepository.save(printer);
+        user.addPrinter(printer);
+
+        //if user already exists, this updates it..
+        userRepository.save(user);
+    }
+
+    public User getUserByName(String name) {
+        User user = userRepository.findByName(name);
+        if (user != null)
+            return null;
+        throw new NoSuchElementException("Invalid username");
+    }
 }

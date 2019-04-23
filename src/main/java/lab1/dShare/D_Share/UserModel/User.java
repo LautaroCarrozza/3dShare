@@ -1,8 +1,12 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.PrinterModel.Printer;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -18,6 +22,8 @@ public class User {
     @Email(message = "Invalid email")
     private String email;
 
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    private Set<Printer> printers;
 
 
     public User(String name, String password, String email) {
@@ -32,6 +38,23 @@ public class User {
 
     public User(User user) {
 
+    }
+
+
+    public Set<Printer> getPrinters() {
+        return printers;
+    }
+
+    public void setPrinters(Set<Printer> printers) {
+        this.printers = printers;
+    }
+
+    public void addPrinter(Printer printer){
+        printers.add(printer);
+    }
+
+    public void deletePrinter(Printer printer){
+        printers.remove(printer);
     }
 
     public String getEmail() {

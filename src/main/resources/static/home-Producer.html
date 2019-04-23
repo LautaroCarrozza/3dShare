@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="css/style.css" />
+
     <meta charset="UTF-8">
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -8,6 +11,7 @@
             crossorigin="anonymous"></script>
 
     <script src="js/home-redirect.js"></script>
+    <script src="js/producer.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,11 +25,23 @@
 
 <h1>Producer Home</h1>
 <button type="button" class="btn btn-primary" onclick="goBack()">Volver</button>
-<button type="button" class="btn btn-primary">Cargar Nueva Impresora</button>
+<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>
 <button type="button" class="btn btn-primary">Cargar Nuevo Material</button>
 <button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
-
+<button type="button" class="btn btn-primary">Ver mis impresoras</button>
 </body>
+
+<form class="printer-form" id="printer-form" onsubmit="true">
+    <div>
+        <label for="printer-model">Printer Model:</label>
+        <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+    </div>
+
+    <div>
+        <button class="btn btn-primary">Load</button>
+    </div>
+
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

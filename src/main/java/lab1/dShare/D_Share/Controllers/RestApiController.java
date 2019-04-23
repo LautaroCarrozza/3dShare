@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.Controllers;
 
+import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterService;
 import lab1.dShare.D_Share.UserModel.User;
 import lab1.dShare.D_Share.UserModel.UserService;
@@ -28,6 +29,16 @@ public class RestApiController {
     public ResponseEntity<Object> addUser(@RequestBody User user){
         try {
             userService.addUser(user);
+        }catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/printer")
+    public ResponseEntity<Object> addUser(@RequestBody Printer printer){
+        try {
+            printerService.addPrinter(printer);
         }catch (NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

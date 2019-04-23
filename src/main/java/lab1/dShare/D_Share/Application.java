@@ -71,10 +71,10 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				//  .antMatchers("/**").hasAuthority("USER")
 				//  .antMatchers("/**").denyAll()
 				.antMatchers("/", "/login.html", "/js/login.js", "/css/style.css").permitAll()
+				.antMatchers("/signup.html", "/js/signup.js").permitAll()
 				.antMatchers("/api/**").permitAll()
 				//.antMatchers("/**").permitAll()
 				//.antMatchers("/rest/**").permitAll()
-				//.antMatchers("/web/games.html").permitAll()
 				.anyRequest().fullyAuthenticated();
 
 		http.formLogin()

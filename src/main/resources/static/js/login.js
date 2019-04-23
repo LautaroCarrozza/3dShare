@@ -27,7 +27,6 @@ $('#login-form').on('submit', function (event) {
             $("#username").val("");
             $("#password").val("");
             $("#username").focus();
-            // $('#loginFailed').hide( "slow" );
         })
 
         .always(function () {

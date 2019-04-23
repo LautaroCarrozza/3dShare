@@ -18,7 +18,7 @@ public class PrinterController {
     }
 
     @GetMapping("{id}")
-    public Printer getPrinter(@PathVariable String id){
+    public Printer getPrinter(@PathVariable Integer id){
         return printerService.getPrinter(id);
     }
 
@@ -33,7 +33,7 @@ public class PrinterController {
     }
 
     @PutMapping("/delete/{id}")
-    public void deletePrinter(@PathVariable String id){
+    public void deletePrinter(@PathVariable Integer id){
         printerService.deletePrinter(id);
     }
 
