@@ -1,17 +1,17 @@
-#loginFailed, #signupFailed {
+#loginFailed, #signupFailed, #LoadFailed {
     display: none;
     background-color: orangered;
     color: black;
     padding: 8px;
 }
 
-#loginSuccess, #signupSucces {
+#loginSuccess, #signupSucces, #LoadSuccess {
     display: none;
     background-color: limegreen;
     color: white;
     padding: 8px;
 }
 
-#printer-form {
+#printer-form, #material-form {
     display: none;
 }

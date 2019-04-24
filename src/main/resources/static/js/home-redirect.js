@@ -15,3 +15,7 @@ function goBack() {
 function showLoadPrinterForm() {
     $('#printer-form').show()
 }
+
+function showLoadMaterialForm() {
+    $('#material-form').show()
+}

@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +59,20 @@ public class UserController {
         userService.addPrinter(printer, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping(PRODUCERDIRECTION + "/{id}/addMaterial")
+    public ResponseEntity<Object> addMaterial(@PathVariable long id, @RequestParam String name, Authentication authentication){
+
+        if (authentication == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        User user = userService.getUser(id);
+        if (user == null)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        Material material = new Material(name, user);
+        userService.addMaterial(material, user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

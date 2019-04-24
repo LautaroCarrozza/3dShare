@@ -1,5 +1,7 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.MaterialModel.Material;
+import lab1.dShare.D_Share.MaterialModel.MaterialRepository;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserService {
 
     @Autowired
     private PrinterRepository printerRepository;
+
+    @Autowired
+    private MaterialRepository materialRepository;
 
     public List<User> getAllUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
@@ -60,5 +65,13 @@ public class UserService {
         if (user != null)
             return user;
         throw new NoSuchElementException("Invalid username");
+    }
+
+    public void addMaterial(Material material, User user) {
+        materialRepository.save(material);
+        user.addMaterial(material);
+
+        //if user already exists, this updates it..
+        userRepository.save(user);
     }
 }

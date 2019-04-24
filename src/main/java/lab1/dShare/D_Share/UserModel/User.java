@@ -46,6 +46,14 @@ public class User {
 
     }
 
+    public void addPrinter(Printer printer){
+        printers.add(printer);
+    }
+
+    public void addMaterial(Material material){
+        materials.add(material);
+    }
+
     public Set<Material> getMaterials() {
         return materials;
     }
@@ -62,9 +70,7 @@ public class User {
         this.printers = printers;
     }
 
-    public void addPrinter(Printer printer){
-        printers.add(printer);
-    }
+
 
     public void deletePrinter(Printer printer){
         printers.remove(printer);
