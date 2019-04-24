@@ -74,7 +74,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/signup.html", "/js/signup.js").permitAll()
 				.antMatchers("/api/**").permitAll()
 				.antMatchers("/**").permitAll()
-				//.antMatchers("/rest/**").permitAll()
 				.anyRequest().fullyAuthenticated();
 
 		http.formLogin()
