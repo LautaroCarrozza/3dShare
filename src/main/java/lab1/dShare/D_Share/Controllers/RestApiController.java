@@ -1,5 +1,7 @@
 package lab1.dShare.D_Share.Controllers;
 
+import lab1.dShare.D_Share.MaterialModel.Material;
+import lab1.dShare.D_Share.MaterialModel.MaterialService;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterService;
 import lab1.dShare.D_Share.UserModel.User;
@@ -22,6 +24,9 @@ public class RestApiController {
 
     @Autowired
     private PrinterService printerService;
+
+    @Autowired
+    private MaterialService materialService;
 
     @PostMapping("/user")
     public ResponseEntity<Object> addUser(@RequestBody User user){
@@ -47,6 +52,16 @@ public class RestApiController {
     public Long getAuthUserId(Authentication authentication){
         User user = userService.getUserByName(authentication.getName());
         return user.getId();
+    }
+
+    @PostMapping("/material")
+    public ResponseEntity<Object> addMaterial(@RequestBody Material material){
+        try {
+            materialService.addMaterial(material);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

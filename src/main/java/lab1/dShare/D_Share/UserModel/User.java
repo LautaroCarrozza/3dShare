@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.UserModel;
 
+import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 
 import javax.persistence.*;
@@ -25,6 +26,11 @@ public class User {
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Printer> printers;
 
+    @OneToMany (mappedBy = "owner", fetch = FetchType.EAGER)
+    private Set<Material> materials;
+
+    //@OneToMany(mappedBy = )
+
 
     public User(String name, String password, String email) {
         this.name = name;
@@ -40,6 +46,13 @@ public class User {
 
     }
 
+    public Set<Material> getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(Set<Material> materials) {
+        this.materials = materials;
+    }
 
     public Set<Printer> getPrinters() {
         return printers;
