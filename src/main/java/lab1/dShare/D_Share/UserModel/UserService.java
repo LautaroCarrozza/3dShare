@@ -14,6 +14,7 @@ import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -73,5 +74,9 @@ public class UserService {
 
         //if user already exists, this updates it..
         userRepository.save(user);
+    }
+
+    public Set<User> getProducersByPrinters(Set<Printer> printers){
+        return userRepository.getUsersByPrinters(printers);
     }
 }

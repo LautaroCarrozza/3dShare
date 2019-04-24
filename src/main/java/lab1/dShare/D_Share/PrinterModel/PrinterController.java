@@ -3,7 +3,7 @@ package lab1.dShare.D_Share.PrinterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/printers")
@@ -13,7 +13,7 @@ public class PrinterController {
     private PrinterService printerService;
 
     @GetMapping()
-    public List<Printer> getAllPrinters(){
+    public Set<Printer> getAllPrinters(){
         return printerService.getAllPrinters();
     }
 

@@ -38,31 +38,11 @@ public class RestApiController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-
-
     @GetMapping("/user")
     public Long getAuthUserId(Authentication authentication){
         User user = userService.getUserByName(authentication.getName());
         return user.getId();
     }
 
-    @PostMapping("/material")
-    public ResponseEntity<Object> addMaterial(@RequestBody Material material){
-        try {
-            materialService.addMaterial(material);
-        }catch (NoSuchElementException e){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 
-    @PostMapping("/printer")
-    public ResponseEntity<Object> addPrinter(@RequestBody Printer printer){
-        try {
-            printerService.addPrinter(printer);
-        }catch (NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
 }

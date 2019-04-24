@@ -6,6 +6,7 @@ import lab1.dShare.D_Share.PrinterModel.Printer;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,16 +55,26 @@ public class User {
         materials.add(material);
     }
 
-    public Set<Material> getMaterials() {
-        return materials;
+    //Get materials by id
+    public Set<Long> getMaterials() {
+        Set<Long> materialsId = new HashSet<>();
+        for (Material material : materials) {
+            materialsId.add(material.getId());
+        }
+        return materialsId;
     }
 
     public void setMaterials(Set<Material> materials) {
         this.materials = materials;
     }
 
-    public Set<Printer> getPrinters() {
-        return printers;
+    //Get printers by Id
+    public Set<Integer> getPrinters() {
+        Set<Integer> printersId = new HashSet<>();
+        for (Printer printer : printers) {
+            printersId.add(printer.getId());
+        }
+        return printersId;
     }
 
     public void setPrinters(Set<Printer> printers) {

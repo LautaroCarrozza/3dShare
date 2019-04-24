@@ -9,8 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/users")
@@ -43,6 +44,16 @@ public class UserController {
         buscar productores
         etc..
      */
+    @GetMapping(COSTUMERDIRECTION + "/getProducers")
+    public Set<User> getProducers(){
+        //return userService.getProducersByPrinters(printerService.getAllPrinters());
+        Set<Printer> printers = printerService.getAllPrinters();
+        Set<User> users = new HashSet<>();
+        for (Printer printer : printers) {
+            users.add(printer.getOwner());
+        }
+        return users;
+    }
 
 
     //Producer part...
