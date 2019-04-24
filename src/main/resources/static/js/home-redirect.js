@@ -31,3 +31,8 @@ function logOut(){
         }
     });
 }
+
+function redirectSearchPage() {
+    window.location.href= "place-order.html"
+
+}
