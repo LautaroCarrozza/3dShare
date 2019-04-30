@@ -32,7 +32,20 @@ function logOut(){
     });
 }
 
-function redirectSearchPage() {
-    window.location.href= "place-order.html"
+function getProducers() {
 
+    $.ajax({
+        type: 'GET',
+        url: '/users/customer/getProducers',
+        data: { get_param: 'value' },
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function(index, element) {
+                $('body').append($('<div>', {
+                    text: "Name: " + element.name
+                        + ", Email: " + element.email
+                }));
+            });
+        }
+    });
 }
