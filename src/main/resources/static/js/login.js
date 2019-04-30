@@ -1,15 +1,4 @@
-let submitButton;
-updateView();
-
-$(function() {
-    $('.submitbutton').click(function () {
-        submitButton = $(this).attr('name')
-    });
-
-});
-
-$('#login-form').on('submit', function (event) {
-    event.preventDefault();
+function logIn(){
 
     $.post("/api/login", {
             name: $("#username").val(),
@@ -32,23 +21,8 @@ $('#login-form').on('submit', function (event) {
         .always(function () {
 
         });
-
-});
-
-$('#signup-page').on('submit', function (event) {
-    event.preventDefault();
-    location.href = "signup.html";
-});
-
-function updateView() {
-    if (submitButton == "login") {
-        $('#signup-page').hide("slow");
-        $('#login-form').show("slow");
-
-    }
-    else if (submitButton == "signup") {
-        $('#login-form').hide("slow");
-        $('#signup-page').show("slow");
-    }
 }
 
+function signUp() {
+    location.href = "signup.html";
+}
