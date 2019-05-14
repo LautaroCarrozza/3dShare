@@ -3,7 +3,7 @@ function redirectCustomer() {
 }
 
 function redirectProducer() {
-    window.location.href= "home-Producer.html"
+    window.location.href= "home.html"
 
 }
 

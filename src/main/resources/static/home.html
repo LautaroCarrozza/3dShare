@@ -1,11 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
+    <link rel="stylesheet" href="css/style.css" />
+
+    <meta charset="UTF-8">
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,20 +17,52 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>3DShare</title>
+    <title>Producer Home</title>
 </head>
 <body>
-<h1>3Dshare</h1>
-<button type="button" class="btn btn-primary" onclick="redirectProducer()">Soy productor</button>
-<button type="button" class="btn btn-primary" onclick="redirectCustomer()">Soy Cliente</button>
-<button type="button" class="btn btn-primary" onclick="logOut()">Log Out</button>
 
+<h1>3DShare Home</h1>
+<button type="button" class="btn btn-primary" onclick="getProducers()">Realizar un nuevo pedido</button>
+<button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
+<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>
+<button type="button" class="btn btn-primary" onclick="showLoadMaterialForm()">Cargar Nuevo Material</button>
+<button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
+<button type="button" class="btn btn-primary">Ver mis impresoras</button>
+<button type="button" class="btn btn-primary"onclick="logOut()">LogOut</button>
+
+
+<form class="printer-form" id="printer-form" onsubmit="return false">
+    <div>
+        <label for="printer-model">Printer Model:</label>
+        <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+    </div>
+
+    <div>
+        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" />
+    </div>
+
+</form>
+
+<form class="material-form" id="material-form" onsubmit="return false">
+    <div>
+        <label for="material-model">Material:</label>
+        <input class="form-control" id="material-model" type="text" name="material-model" required>
+    </div>
+
+    <div>
+        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" />
+    </div>
+
+</form>
+
+<h3 id="LoadSuccess" class="textCenter">Added correctly!</h3>
+<h3 id="LoadFailed" class="textCenter">Added Failed!</h3>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
 <script src="js/home-redirect.js"></script>
+<script src="js/producer.js"></script>
 </body>
 </html>
