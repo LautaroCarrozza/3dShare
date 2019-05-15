@@ -28,7 +28,9 @@ function register() {
                     })
             })
             .fail(function () {
-                console.log("login failed");
+                console.log("registration failed, user already exists");
+                window.alert("registration failed");
+                location.reload();
                 $('#loginFailed').show("slow").delay(2000).hide("slow");
                 $("#username").val("");
                 $("#password").val("");
