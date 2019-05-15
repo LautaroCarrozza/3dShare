@@ -17,7 +17,7 @@ import java.util.Set;
 @RequestMapping("/users")
 public class UserController {
 
-    private static final String COSTUMERDIRECTION = "/customer";
+    private static final String CUSTOMERDIRECTION = "/customer";
     private static final String PRODUCERDIRECTION = "/producer";
 
     @Autowired
@@ -44,7 +44,7 @@ public class UserController {
         buscar productores
         etc..
      */
-    @GetMapping(COSTUMERDIRECTION + "/getProducers")
+    @GetMapping(CUSTOMERDIRECTION + "/getProducers")
     public Set<User> getProducers(){
         //return userService.getProducersByPrinters(printerService.getAllPrinters());
         Set<Printer> printers = printerService.getAllPrinters();
@@ -55,6 +55,10 @@ public class UserController {
         return users;
     }
 
+//    @PostMapping(CUSTOMERDIRECTION + "/rateProducer/{id}")
+//    public ResponseEntity<Object> updateProducerRating(@PathVariable long id, @RequestParam int rating){
+//
+//    }
 
     //Producer part...
     @PostMapping(PRODUCERDIRECTION + "/{id}/addPrinter")
@@ -73,11 +77,11 @@ public class UserController {
 
     @PostMapping(PRODUCERDIRECTION + "/{id}/addMaterial")
     public ResponseEntity<Object> addMaterial(@PathVariable long id, @RequestParam String name, Authentication authentication){
+        User user = userService.getUser(id);
 
         if (authentication == null)
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 
-        User user = userService.getUser(id);
         if (user == null)
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 

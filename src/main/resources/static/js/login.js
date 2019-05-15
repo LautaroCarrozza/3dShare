@@ -24,5 +24,5 @@ function logIn(){
 }
 
 function signUp() {
-    location.href = "signup.html";
+    location.href = "register.html";
 }

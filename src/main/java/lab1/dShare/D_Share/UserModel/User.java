@@ -30,6 +30,14 @@ public class User {
     @OneToMany (mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Material> materials;
 
+    private double customerRating;
+
+    private int totalCustomerRating;
+
+    private double clientRating;
+
+    private int totalClientRating;
+
     //@OneToMany(mappedBy = )
 
 
@@ -37,6 +45,8 @@ public class User {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.totalCustomerRating = 0;
+        this.totalClientRating = 0;
     }
 
     public User() {
@@ -53,6 +63,38 @@ public class User {
 
     public void addMaterial(Material material){
         materials.add(material);
+    }
+
+    public double getCustomerRating() {
+        return customerRating;
+    }
+
+    public int getTotalCustomerRating() {
+        return totalCustomerRating;
+    }
+
+    public double getClientRating() {
+        return clientRating;
+    }
+
+    public int getTotalClientRating() {
+        return totalClientRating;
+    }
+
+    public void setCustomerRating(double customerRating) {
+        this.customerRating = customerRating;
+    }
+
+    public void setTotalCustomerRating(int totalCustomerRating) {
+        this.totalCustomerRating = totalCustomerRating;
+    }
+
+    public void setClientRating(double clientRating) {
+        this.clientRating = clientRating;
+    }
+
+    public void setTotalClientRating(int totalClientRating) {
+        this.totalClientRating = totalClientRating;
     }
 
     //Get materials by id
@@ -90,6 +132,7 @@ public class User {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
