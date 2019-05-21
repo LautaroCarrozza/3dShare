@@ -22,15 +22,27 @@
 </head>
 <body>
 
-<h1>3DShare Home</h1>
-<button type="button" class="btn btn-primary" onclick="getProducers()">Realizar un nuevo pedido</button>
-<button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
-<!--<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>-->
-<button type="button" class="btn btn-primary" onclick="showLoadMaterialForm()">Cargar Nuevo Material</button>
-<button type="button" class="btn btn-primary">Ver materiales</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="loadPrinters()">Ver impresoras</button>
-<button type="button" class="btn btn-primary"onclick="logOut()">LogOut</button>
-
+<div class="container-fluid">
+    <h1>3DShare Home</h1>
+    <div class="row">
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary" onclick="getProducers()">Realizar pedido</button>
+        </div>
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary">Pedidos en progreso</button>
+        </div>
+        <!--<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>-->
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary" onclick="showLoadMaterialForm()">Mis materiales</button>
+        </div>
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Mis impresoras</button>
+        </div>
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-primary"onclick="logOut()">Log Out</button>
+        </div>
+    </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
