@@ -25,15 +25,8 @@ public class PrinterService {
         return printers;
     }
 
-    public Set<Printer> getPrintersForUser(Long id){
-        Set<Printer> printers= new HashSet<>();
-
-        for (Printer printer:printerRepository.findAll()) {
-            if (printer.getOwner().getId().equals(id)){
-                printers.add(printer);
-            }
-        }
-        return printers;
+    public Set<Printer> getPrintersByOwner(Long id){
+        return printerRepository.findAllByOwnerId(id);
     }
 
     public Printer getPrinter(Integer id){

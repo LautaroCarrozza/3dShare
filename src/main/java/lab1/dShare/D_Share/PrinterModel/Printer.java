@@ -1,8 +1,6 @@
 package lab1.dShare.D_Share.PrinterModel;
 
 import lab1.dShare.D_Share.UserModel.User;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 

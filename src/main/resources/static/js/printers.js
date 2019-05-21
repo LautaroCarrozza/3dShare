@@ -1,6 +1,5 @@
 function loadPrinters() {
 
-
 }
 
 $('#printer-form').on('submit', function () {
