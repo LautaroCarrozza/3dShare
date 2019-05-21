@@ -1,4 +1,21 @@
 function loadPrinters() {
+    $.ajax({
+        type: 'GET',
+        url:'/printers/byOwnerId/'+ userId,
+        success: function (data) {
+            $.each(data, function(index, element) {
+
+
+            });
+
+        }
+
+    })
+
+
+
+
+
 
 }
 
