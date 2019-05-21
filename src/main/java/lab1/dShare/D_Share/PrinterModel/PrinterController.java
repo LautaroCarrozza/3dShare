@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.PrinterModel;
 
+import lab1.dShare.D_Share.UserModel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,11 @@ public class PrinterController {
     @PutMapping("/delete/{id}")
     public void deletePrinter(@PathVariable Integer id){
         printerService.deletePrinter(id);
+    }
+
+    @GetMapping("/getById/{id}")
+    public Set<Printer> getPrintersById(@PathVariable Long id){
+         return printerService.getPrintersForUser(id);
     }
 
 }

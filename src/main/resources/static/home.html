@@ -24,24 +24,76 @@
 <h1>3DShare Home</h1>
 <button type="button" class="btn btn-primary" onclick="getProducers()">Realizar un nuevo pedido</button>
 <button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
-<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>
+<!--<button type="button" class="btn btn-primary" onclick="showLoadPrinterForm()">Cargar Nueva Impresora</button>-->
 <button type="button" class="btn btn-primary" onclick="showLoadMaterialForm()">Cargar Nuevo Material</button>
-<button type="button" class="btn btn-primary">Ver pedidos en Progreso</button>
-<button type="button" class="btn btn-primary">Ver mis impresoras</button>
+<button type="button" class="btn btn-primary">Ver materiales</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver impresoras</button>
 <button type="button" class="btn btn-primary"onclick="logOut()">LogOut</button>
 
 
-<form class="printer-form" id="printer-form" onsubmit="return false">
-    <div>
-        <label for="printer-model">Printer Model:</label>
-        <input class="form-control" id="printer-model" type="text" name="printer-model" required>
-    </div>
+<!--<form class="printer-form" id="printer-form" onsubmit="return false">-->
+<!--    <div>-->
+<!--        <label for="printer-model">Printer Model:</label>-->
+<!--        <input class="form-control" id="printer-model" type="text" name="printer-model" required>-->
+<!--    </div>-->
 
-    <div>
-        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" />
-    </div>
+<!--    <div>-->
+<!--        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" />-->
+<!--    </div>-->
 
-</form>
+<!--</form>-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal Header</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Printer Name</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+<!--                    <tr>-->
+<!--                        <th scope="row">1</th>-->
+<!--                        <td>Mark</td>-->
+
+<!--                    </tr>-->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" onclick="showLoadPrinterForm()">Add</button>
+                <form class="printer-form" id="printer-form" onsubmit="return false">
+                    <div>
+                        <label for="printer-model">Printer Model:</label>
+                        <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" onclick="location.reload()"/>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <form class="material-form" id="material-form" onsubmit="return false">
     <div>
@@ -54,6 +106,7 @@
     </div>
 
 </form>
+
 <div class="container-fluid">
     <div id="accordion">
 
