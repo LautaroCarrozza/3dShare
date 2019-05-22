@@ -1,36 +1,27 @@
-
-
-function loadPrinters() {
+function loadMaterials() {
     var rowCOUNT=1;
     $.ajax({
         type: 'GET',
-        url:'/printers/byOwnerId/'+ userId,
+        url:'/materials/byOwnerId/'+ userId,
         success: function (data) {
-            $.each(data, function(index, element) {
+            $.each(data,function (index,element) {
                 var row = $("<tr>");
 
                 row.append($("<td>"+rowCOUNT+"</td>"))
-                    .append($("<td>"+element.model+"</td>"));
+                    .append($("<td>"+element.name+"</td>"));
 
-                $("#table01 tbody").append(row);
+                $("#table02 tbody").append(row);
 
                 rowCOUNT=rowCOUNT+1
 
-            });
-
+            })
         }
-
     })
-
-
-
-
-
 
 }
 
-function clearTable(){
-    var elmtTable = document.getElementById('table01');
+function clearTableMaterials(){
+    var elmtTable = document.getElementById('table02');
     var tableRows = elmtTable.getElementsByTagName('tr');
     var rowCount = tableRows.length;
 

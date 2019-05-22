@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/materials")
@@ -36,6 +37,12 @@ public class MaterialController {
     @PutMapping("/delete/{id}")
     public void deleteMaterial(@PathVariable Integer id){
         materialService.deletePrinter(id);
+    }
+
+    @GetMapping("/byOwnerId/{id}")
+    public Set<Material> getMaterialsByOwnerId(@PathVariable long id){
+        return materialService.getMaterialsByOwner(id);
+
     }
 
 
