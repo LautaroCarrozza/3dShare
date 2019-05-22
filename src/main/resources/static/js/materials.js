@@ -8,7 +8,8 @@ function loadMaterials() {
                 var row = $("<tr>");
 
                 row.append($("<td>"+rowCOUNT+"</td>"))
-                    .append($("<td>"+element.name+"</td>"));
+                    .append($("<td>"+element.name+"</td>"))
+                    .append($("<td>"+element.id+"</td>"))
 
                 $("#table02 tbody").append(row);
 
@@ -20,6 +21,15 @@ function loadMaterials() {
 
 }
 
+function deleteMaterialById(id) {
+    $.ajax({
+        type: 'PUT',
+        url:'materials/delete/' +id
+    });
+    location.reload();
+
+}
+
 function clearTableMaterials(){
     var elmtTable = document.getElementById('table02');
     var tableRows = elmtTable.getElementsByTagName('tr');
@@ -28,4 +38,9 @@ function clearTableMaterials(){
     for (var x=rowCount-1; x>0; x--) {
         elmtTable.deleteRow(x)
     }
+}
+
+function showDeletePrinterForm() {
+    $('#deleteMaterialForm').show()
+
 }

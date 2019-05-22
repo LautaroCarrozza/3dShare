@@ -19,7 +19,7 @@ public class MaterialService {
                 .collect(Collectors.toList());
     }
 
-    public Material getMaterial(Integer id){
+    public Material getMaterial(Long id){
         return materialRepository.findById(id).orElse(null);
     }
 
@@ -35,7 +35,7 @@ public class MaterialService {
         materialRepository.save(material);
     }
 
-    public void deletePrinter(Integer id){
+    public void deleteMaterial(Long id){
         materialRepository.deleteById(id);
     }
 

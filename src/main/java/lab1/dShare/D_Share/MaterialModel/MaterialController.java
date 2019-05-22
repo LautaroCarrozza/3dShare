@@ -1,6 +1,5 @@
 package lab1.dShare.D_Share.MaterialModel;
 
-import lab1.dShare.D_Share.PrinterModel.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ public class MaterialController {
     }
 
     @GetMapping("{id}")
-    public Material getMaterial(@PathVariable Integer id){
+    public Material getMaterial(@PathVariable Long id){
         return materialService.getMaterial(id);
     }
 
@@ -35,8 +34,8 @@ public class MaterialController {
     }
 
     @PutMapping("/delete/{id}")
-    public void deleteMaterial(@PathVariable Integer id){
-        materialService.deletePrinter(id);
+    public void deleteMaterial(@PathVariable Long id){
+        materialService.deleteMaterial(id);
     }
 
     @GetMapping("/byOwnerId/{id}")

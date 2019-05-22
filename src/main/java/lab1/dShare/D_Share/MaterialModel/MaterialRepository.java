@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Set;
 
-public interface MaterialRepository extends CrudRepository<Material,Integer> {
+public interface MaterialRepository extends CrudRepository<Material,Long> {
     Material findByName(String name);
     Material findByOwnerName(String ownerName);
     Set<Material> findAllByOwnerId(long id);

@@ -34,12 +34,12 @@ public class Order {
         return id;
     }
 
-    public User getClient() {
-        return client;
+    public long getClient() {
+        return client.getId();
     }
 
-    public User getProducer() {
-        return producer;
+    public long getProducer() {
+        return producer.getId();
     }
 
     public boolean isInProgress() {

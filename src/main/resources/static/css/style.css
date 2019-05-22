@@ -12,7 +12,7 @@
     padding: 8px;
 }
 
-#printer-form, #material-form {
+#printer-form, #material-form,#deleteMaterialForm {
     display: none;
 }
 
