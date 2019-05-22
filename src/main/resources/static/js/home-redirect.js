@@ -39,7 +39,9 @@ function startOrder(userId, id) {
         url: "/users/addOrder/client/" + userId + "/producer/" + id,
         type: 'POST',
         success: function () {
-            $('#RequestAlert').show();
+            window.alert('Solicitud enviada correctamente');
+            location.reload();
+
 
         },
         error: function (error) {
@@ -57,7 +59,6 @@ function getProducers() {
         success: function (data) {
 
             const div = document.getElementById("accordion");
-            const requestAlert = document.getElementById("RequestAlert").cloneNode(true);
 
             $.each(data, function(index, element) {
             const card = document.createElement("DIV");
@@ -67,8 +68,6 @@ function getProducers() {
             const h = document.createElement("H5");
             const button = document.createElement("BUTTON");
             const orderButton = document.createElement("BUTTON");
-
-            const requestAlert = document.getElementById("RequestAlert").cloneNode(true);
 
             card.className = "card";
 
@@ -80,10 +79,6 @@ function getProducers() {
             button.className = "btn btn-link";
             button.dataset.toggle = "collapse";
             button.dataset.target = "#collapse" + producersCounter;
-            //revisar
-            button.onclick = function () {
-                $('#RequestAlert').alert('dispose');
-            };
 
 
             //aria expanded is false by default
@@ -106,7 +101,6 @@ function getProducers() {
 
             //Link everything
             card_body.append(orderButton);
-            card_body.append(requestAlert);
             collapseDiv.append(card_body);
             h.append(button);
             card_header.append(h);
