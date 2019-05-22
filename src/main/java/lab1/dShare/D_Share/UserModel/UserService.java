@@ -2,6 +2,8 @@ package lab1.dShare.D_Share.UserModel;
 
 import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.MaterialModel.MaterialRepository;
+import lab1.dShare.D_Share.OrderModel.Order;
+import lab1.dShare.D_Share.OrderModel.OrderRepository;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserService {
 
     @Autowired
     private MaterialRepository materialRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     public List<User> getAllUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
@@ -78,5 +83,16 @@ public class UserService {
 
     public Set<User> getProducersByPrinters(Set<Printer> printers){
         return userRepository.getUsersByPrinters(printers);
+    }
+
+    //Orders...
+    public void addOrder(Order order, User clientUser, User producerUser) {
+        orderRepository.save(order);
+        clientUser.addClientOrder(order);
+        producerUser.addProducerOrder(order);
+
+        //if user already exists, this updates it..
+        userRepository.save(clientUser);
+        userRepository.save(producerUser);
     }
 }

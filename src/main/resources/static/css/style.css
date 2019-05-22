@@ -15,3 +15,7 @@
 #printer-form, #material-form {
     display: none;
 }
+
+#RequestAlert {
+    display: none;
+}

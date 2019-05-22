@@ -41,4 +41,9 @@ function register() {
 
             });
     }
+    window.alert("Passwords do not match");
+    location.reload();
+    $("#username").val("");
+    $("#password").val("");
+    $("#username").focus();
 }

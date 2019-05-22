@@ -1,6 +1,7 @@
 package lab1.dShare.D_Share.UserModel;
 
 import lab1.dShare.D_Share.MaterialModel.Material;
+import lab1.dShare.D_Share.OrderModel.Order;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,22 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @PostMapping("/addOrder/client/{clientId}/producer/{producerId}")
+    public ResponseEntity<Object> addOrder(@PathVariable long clientId, @PathVariable long producerId,
+                                           Authentication authentication){
+        User clientUser = userService.getUser(clientId);
+        User producerUser = userService.getUser(producerId);
+
+        if (authentication == null)
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+        if (clientUser == null || producerUser == null)
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        Order order = new Order(clientUser, producerUser);
+        userService.addOrder(order, clientUser, producerUser);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     //Customers part...
     /*
     aca va :

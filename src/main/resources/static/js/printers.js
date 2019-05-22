@@ -1,5 +1,3 @@
-
-
 function loadPrinters() {
     var rowCOUNT=1;
     $.ajax({
@@ -21,11 +19,6 @@ function loadPrinters() {
         }
 
     })
-
-
-
-
-
 
 }
 

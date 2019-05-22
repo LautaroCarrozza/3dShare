@@ -1,13 +1,13 @@
 package lab1.dShare.D_Share.UserModel;
 
 import lab1.dShare.D_Share.MaterialModel.Material;
+import lab1.dShare.D_Share.OrderModel.Order;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,6 +30,12 @@ public class User {
     @OneToMany (mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Material> materials;
 
+    @OneToMany (mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<Order> clientOrders;
+
+    @OneToMany (mappedBy = "producer", fetch = FetchType.EAGER)
+    private Set<Order> producerOrders;
+
     private double customerRating;
 
     private int totalCustomerRating;
@@ -37,8 +43,6 @@ public class User {
     private double clientRating;
 
     private int totalClientRating;
-
-    //@OneToMany(mappedBy = )
 
 
     public User(String name, String password, String email) {
@@ -65,6 +69,33 @@ public class User {
         materials.add(material);
     }
 
+
+    //Orders ...
+
+    public void addClientOrder(Order order){
+        clientOrders.add(order);
+    }
+    public void addProducerOrder(Order order){
+        producerOrders.add(order);
+    }
+
+    public Set<Order> getClientOrders() {
+        return clientOrders;
+    }
+
+    public Set<Order> getProducerOrders() {
+        return producerOrders;
+    }
+
+    public void setClientOrders(Set<Order> clientOrders) {
+        this.clientOrders = clientOrders;
+    }
+
+    public void setProducerOrders(Set<Order> producerOrders) {
+        this.producerOrders = producerOrders;
+    }
+
+    //Ratings..
     public double getCustomerRating() {
         return customerRating;
     }
