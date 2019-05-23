@@ -1,5 +1,18 @@
 var producersCounter = 1;
 
+function checkAuthUser() {
+    document.onload(function (ev) {
+        ev.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/authUser',
+            success: function (data) {
+                if (data.element[0].response === 403)
+                    window.location.href= "login.html"
+            }
+        })
+    })
+}
 function redirectCustomer() {
     window.location.href= "home-customer.html"
 }
@@ -41,8 +54,6 @@ function startOrder(userId, id) {
         success: function () {
             window.alert('Solicitud enviada correctamente');
             location.reload();
-
-
         },
         error: function (error) {
             console.log(error);
@@ -114,4 +125,3 @@ function getProducers() {
         }
     });
 }
-

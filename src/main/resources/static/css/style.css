@@ -15,7 +15,3 @@
 #printer-form, #material-form,#deleteMaterialForm {
     display: none;
 }
-
-#RequestAlert {
-    display: none;
-}

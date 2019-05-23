@@ -3,6 +3,8 @@ package lab1.dShare.D_Share.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 
 @RestController
 @RequestMapping("/orders")
@@ -10,6 +12,16 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @GetMapping("/client/{id}")
+    public Set<Order> getClientOrders(@PathVariable long id){
+        return orderService.getClientOrders(id);
+    }
+
+    @GetMapping("/producer/{id}")
+    public Set<Order> getProducerOrders(@PathVariable long id){
+        return orderService.getProducerOrders(id);
+    }
 
     @GetMapping("{id}")
     public Order getOrder(@PathVariable Long id){
