@@ -79,6 +79,7 @@ function getProducers() {
             const h = document.createElement("H5");
             const button = document.createElement("BUTTON");
             const orderButton = document.createElement("BUTTON");
+            const orderDiv= document.createElement("DIV");
 
             card.className = "card";
 
@@ -106,12 +107,15 @@ function getProducers() {
             //producers extra data
             card_body.innerHTML = element.email;
 
+
+            orderDiv.className = "col align-self-end pl-0";
             orderButton.className = "btn btn-primary";
             orderButton.innerHTML = "Send Request";
             orderButton.onclick = function () {startOrder(userId, element.id)};
 
             //Link everything
-            card_body.append(orderButton);
+            orderDiv.append(orderButton);
+            card_body.append(orderDiv);
             collapseDiv.append(card_body);
             h.append(button);
             card_header.append(h);

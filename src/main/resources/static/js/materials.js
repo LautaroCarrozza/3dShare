@@ -40,7 +40,7 @@ function clearTableMaterials(){
     }
 }
 
-function showDeletePrinterForm() {
+function showDeleteMaterialForm() {
     $('#deleteMaterialForm').show()
 
 }

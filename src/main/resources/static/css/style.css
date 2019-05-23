@@ -12,6 +12,13 @@
     padding: 8px;
 }
 
-#printer-form, #material-form,#deleteMaterialForm {
+#printer-form, #material-form,#deleteMaterialForm ,#deletePrinterForm{
     display: none;
+}
+
+#RequestAlert {
+    display: none;
+}
+.order-button{
+    padding-left: 0;
 }

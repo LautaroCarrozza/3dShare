@@ -8,7 +8,8 @@ function loadPrinters() {
                 var row = $("<tr>");
 
                 row.append($("<td>"+rowCOUNT+"</td>"))
-                    .append($("<td>"+element.model+"</td>"));
+                    .append($("<td>"+element.model+"</td>"))
+                    .append($("<td>"+element.id+"</td>"));
 
                 $("#table01 tbody").append(row);
 
@@ -19,6 +20,23 @@ function loadPrinters() {
         }
 
     })
+
+}
+
+function deletePrinterById(id) {
+    console.log(id);
+    $.ajax({
+        type: 'PUT',
+        url: 'printers/delete/'+id
+
+
+    });
+
+
+
+}
+function showDeletePrinterForm() {
+    $('#deletePrinterForm').show();
 
 }
 
