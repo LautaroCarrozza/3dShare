@@ -47,42 +47,7 @@ function logOut(){
     });
 }
 
-function startOrder(userId, id, material) {
-    $.ajax({
-        url: "/users/addOrder/client/" + userId + "/producer/" + id,
-        type: 'POST',
-        data: material,
-        success: function () {
-            window.alert('Solicitud enviada correctamente');
-            location.reload();
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
-
-//Me falta mandarle el nombre de material a la orden
-function orderForm(userId, id) {
-    $.ajax({
-        type: 'GET',
-        url:'/materials/byOwnerId/'+ id,
-        success: function (data) {
-            $.each(data, function(index, element) {
-                //<option value="...">Nombre del material</option>
-                var option = $('<option value='+id+'>'+element.name+'</option>');
-
-                $("#material-name").append(option);
-            });
-            var requestButton = $('<button onclick="startOrder(userId, id)" id="buttonRequest" type="button" class="btn btn-primary">Send request</button>');
-            $('#orderModal-footer').append(requestButton);
-        }
-    })
-}
-
-
 function getProducers() {
-
     $.ajax({
         type: 'GET',
         url: '/users/customer/getProducers',
