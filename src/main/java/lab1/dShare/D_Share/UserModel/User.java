@@ -36,6 +36,8 @@ public class User {
     @OneToMany (mappedBy = "producer", fetch = FetchType.EAGER)
     private Set<Order> producerOrders;
 
+    private int postalCode;
+
     private double customerRating;
 
     private int totalCustomerRating;
@@ -44,11 +46,11 @@ public class User {
 
     private int totalClientRating;
 
-
-    public User(String name, String password, String email) {
+    public User(String name, String password, String email, int postalCode) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.postalCode = postalCode;
         this.totalCustomerRating = 0;
         this.totalClientRating = 0;
     }
@@ -75,6 +77,7 @@ public class User {
     public void addClientOrder(Order order){
         clientOrders.add(order);
     }
+
     public void addProducerOrder(Order order){
         producerOrders.add(order);
     }
@@ -154,8 +157,6 @@ public class User {
         this.printers = printers;
     }
 
-
-
     public void deletePrinter(Printer printer){
         printers.remove(printer);
     }
@@ -191,5 +192,14 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
 }
+
 

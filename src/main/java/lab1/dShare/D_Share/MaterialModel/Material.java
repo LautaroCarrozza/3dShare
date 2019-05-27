@@ -39,8 +39,8 @@ public class Material {
         return name;
     }
 
-    public User getOwner() {
-        return owner;
+    public long getOwner() {
+        return owner.getId();
     }
 
     public void setId(Long id) {

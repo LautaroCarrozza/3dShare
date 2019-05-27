@@ -6,10 +6,10 @@ getUserId();
 $(function() {
     $('.submitbutton').click(function () {
         submitButton = $(this).attr('name');
-        if (submitButton == "loadPrinter") {
+        if (submitButton === "loadPrinter") {
             $('#printer-form').show();
         }
-        else if (submitButton == "loadMaterial") {
+        else if (submitButton === "loadMaterial") {
             $('#material-form').show();
         }
 

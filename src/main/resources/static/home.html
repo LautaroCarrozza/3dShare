@@ -17,6 +17,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Producer Home</title>
 </head>
 <body>
@@ -51,7 +52,51 @@
     </div>
 </div>
 
-<!-- Modal -->
+<hr>
+
+<!--FALTA METER LAS ORDENES ACA -> PRIMERO TERMINAR EL POST DE LAS ORDENES-->
+<div class="container">
+    <h2 style="text-align: center">Mis pedidos</h2>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producer</th>
+            <th scope="col">Status</th>
+            <th scope="col">Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--Producers accordion-->
+<div class="container">
+    <div id="accordion">
+    </div>
+    <!--</div>-->
+</div>
+<!-- Modals -->
+
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -87,7 +132,7 @@
                     </div>
 
                     <div>
-                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load"onclick="location.reload()">[0--0-
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" onclick="location.reload()">[0--0-
                     </div>
 
                 </form>
@@ -159,7 +204,8 @@
                     </div>
 
                     <div>
-                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" onclick="location.reload()" />
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial"
+                               value="Load" onclick=location.reload()>
                     </div>
 
                 </form>
@@ -174,17 +220,33 @@
     </div>
 </div>
 
-
-
-
-
-<div class="container-fluid">
-    <div id="accordion">
-    </div>
+<div class="modal fade" id="orderModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="material-name" class="col-form-label">Material:</label>
+                        <select name="materials" id="material-name">
+                            <!--<option value="...">Nombre del material</option>-->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="orderModal-footer">
+                <button type="button" class="btn btn-secondary" onclick="clearMatForm()" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
-
-
 
 <h3 id="LoadSuccess" class="textCenter">Added correctly!</h3>
 <h3 id="LoadFailed" class="textCenter">Added Failed!</h3>
@@ -197,5 +259,6 @@
 <script src="js/printers.js"></script>
 <script src="js/producer.js"></script>
 <script src="js/materials.js"></script>
+<script src="js/orders.js"></script>
 </body>
 </html>

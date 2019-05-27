@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.OrderModel;
 
+import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.UserModel.User;
 
 import javax.persistence.*;
@@ -20,14 +21,17 @@ public class Order {
     @JoinColumn(name = "producer_id")
     private User producer;
 
+    private String material;
+
     private boolean inProgress = false;
 
     public Order() {
     }
 
-    public Order(User client, User producer) {
+    public Order(User client, User producer, String material) {
         this.client = client;
         this.producer = producer;
+        this.material = material;
     }
 
     public long getId() {

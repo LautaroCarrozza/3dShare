@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/addOrder/client/{clientId}/producer/{producerId}")
     public ResponseEntity<Object> addOrder(@PathVariable long clientId, @PathVariable long producerId,
-                                           Authentication authentication){
+                                           @RequestParam String materialName, Authentication authentication){
         User clientUser = userService.getUser(clientId);
         User producerUser = userService.getUser(producerId);
 
@@ -50,7 +50,7 @@ public class UserController {
         if (clientUser == null || producerUser == null)
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 
-        Order order = new Order(clientUser, producerUser);
+        Order order = new Order(clientUser, producerUser, materialName);
         userService.addOrder(order, clientUser, producerUser);
         return new ResponseEntity<>(HttpStatus.OK);
     }

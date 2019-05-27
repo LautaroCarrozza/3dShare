@@ -36,3 +36,8 @@ function loadOrdersStatus() {
     })
 }
 
+function clearMatForm() {
+    $('#material-name').find('option').remove();
+    $('#orderModal-footer').remove('#buttonRequest');
+}
+

@@ -8,30 +8,30 @@ function checkAuthUser() {
             url: '/authUser',
             success: function (data) {
                 if (data.element[0].response === 403)
-                    window.location.href= "login.html"
+                    window.location.href= "login.html";
             }
         })
     })
 }
 function redirectCustomer() {
-    window.location.href= "home-customer.html"
+    window.location.href= "home-customer.html";
 }
 
 function redirectProducer() {
-    window.location.href= "home.html"
+    window.location.href= "home.html";
 
 }
 
 function goBack() {
-    window.location.href= "home.html"
+    window.location.href= "home.html";
 }
 
 function showLoadPrinterForm() {
-    $('#printer-form').show()
+    $('#printer-form').show();
 }
 
 function showLoadMaterialForm() {
-    $('#material-form').show()
+    $('#material-form').show();
 }
 
 function logOut(){
@@ -39,7 +39,7 @@ function logOut(){
         url: "/api/logout",
         type: 'POST',
         success: function () {
-            location.href = "login.html"
+            location.href = "login.html";
         },
         error: function (error) {
             console.log(error);
@@ -47,10 +47,11 @@ function logOut(){
     });
 }
 
-function startOrder(userId, id) {
+function startOrder(userId, id, material) {
     $.ajax({
         url: "/users/addOrder/client/" + userId + "/producer/" + id,
         type: 'POST',
+        data: material,
         success: function () {
             window.alert('Solicitud enviada correctamente');
             location.reload();
@@ -61,14 +62,34 @@ function startOrder(userId, id) {
     });
 }
 
+//Me falta mandarle el nombre de material a la orden
+function orderForm(userId, id) {
+    $.ajax({
+        type: 'GET',
+        url:'/materials/byOwnerId/'+ id,
+        success: function (data) {
+            $.each(data, function(index, element) {
+                //<option value="...">Nombre del material</option>
+                var option = $('<option value='+id+'>'+element.name+'</option>');
+
+                $("#material-name").append(option);
+            });
+            var requestButton = $('<button onclick="startOrder(userId, id)" id="buttonRequest" type="button" class="btn btn-primary">Send request</button>');
+            $('#orderModal-footer').append(requestButton);
+        }
+    })
+}
+
+
 function getProducers() {
+
     $.ajax({
         type: 'GET',
         url: '/users/customer/getProducers',
         data: { get_param: 'value' },
         dataType: 'json',
         success: function (data) {
-
+            $('#accordion').find('.card').remove();
             const div = document.getElementById("accordion");
 
             $.each(data, function(index, element) {
@@ -111,7 +132,9 @@ function getProducers() {
             orderDiv.className = "col align-self-end pl-0";
             orderButton.className = "btn btn-primary";
             orderButton.innerHTML = "Send Request";
-            orderButton.onclick = function () {startOrder(userId, element.id)};
+            orderButton.dataset.toggle = "modal";
+            orderButton.dataset.target = "#orderModal";
+            orderButton.onclick = function () {orderForm(userId, element.id)};
 
             //Link everything
             orderDiv.append(orderButton);
