@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/style.css" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -48,7 +49,7 @@
                 <a class="nav-link" href="#">Pedidos en Prgreso <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mis materiales <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#myMaterialsModal" onclick="redirectMaterials()">Mis materiales <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#">Mis Impresoras <span class="sr-only">(current)</span></a>
@@ -102,6 +103,129 @@
         </div>
     </div>
 </main>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Mis Impresoras</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" >
+                <table class="table" id="table01">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Printer Name</th>
+                        <th scope="col">ID</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr>-->
+                    <!--<th scope="row">1</th>-->
+                    <!--<td>Mark</td>-->
+
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" onclick="showLoadPrinterForm()">Add</button>
+                <button type="button" class="btn btn-danger" onclick="showDeletePrinterForm()">Delete</button>
+                <form class="printer-form" id="printer-form" onsubmit="return false">
+                    <div>
+                        <label for="printer-model">Printer Model:</label>
+                        <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" onclick="location.reload()">[0--0-
+                    </div>
+
+                </form>
+
+                <form id="deletePrinterForm">
+                    <div class="form-group" onsubmit="return false">
+                        <label for="formGroupExampleInput"></label>
+                        <input type="text" class="form-control" id="deletePrinterId" placeholder="Printer ID">
+                    </div>
+                    <div>
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" onclick="deletePrinterById(document.getElementById('deletePrinterId').value)" />
+                    </div>
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTable()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myMaterialsModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Mis Materiales</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body" >
+                <table class="table" id="table02">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Material Name</th>
+                        <th scope="col">ID</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--                    <tr>-->
+                    <!--                        <th scope="row">1</th>-->
+                    <!--                        <td>Mark</td>-->
+
+                    <!--                    </tr>-->
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" onclick="showLoadMaterialForm()">Add</button>
+                <button type="button" class="btn btn-danger" onclick="showDeleteMaterialForm()">Delete</button>
+
+                <form id="deleteMaterialForm">
+                    <div class="form-group" onsubmit="return false">
+                        <label for="formGroupExampleInput"></label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Material ID">
+                    </div>
+                    <div>
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" onclick="deleteMaterialById(document.getElementById('formGroupExampleInput').value)" />
+                    </div>
+
+                </form>
+                <form class="material-form" id="material-form" onsubmit="return false">
+                    <div>
+                        <label for="material-model">Material:</label>
+                        <input class="form-control" id="material-model" type="text" name="material-model" required>
+                    </div>
+
+                    <div>
+                        <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial"
+                               value="Load" onclick=location.reload()>
+                    </div>
+
+                </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearTableMaterials()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
 </html>

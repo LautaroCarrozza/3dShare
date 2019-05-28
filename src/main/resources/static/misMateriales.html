@@ -37,7 +37,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-<body>
+<body onload="loadMaterials()">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,52 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
+        <table class="table" id="table02">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Material Name</th>
+                <th scope="col">ID</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <!--                    <tr>-->
+            <!--                        <th scope="row">1</th>-->
+            <!--                        <td>Mark</td>-->
+
+            <!--                    </tr>-->
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-success" onclick="showLoadMaterialForm()">Add</button>
+        <button type="button" class="btn btn-danger" onclick="showDeleteMaterialForm()">Delete</button>
+
+        <form id="deleteMaterialForm">
+            <div class="form-group" onsubmit="return false">
+                <label for="formGroupExampleInput"></label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Material ID">
+            </div>
+            <div>
+                <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" onclick="deleteMaterialById(document.getElementById('formGroupExampleInput').value)" />
+            </div>
+
+        </form>
+        <form class="material-form" id="material-form" onsubmit="return false">
+            <div>
+                <label for="material-model">Material:</label>
+                <input class="form-control" id="material-model" type="text" name="material-model" required>
+            </div>
+
+            <div>
+                <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial"
+                       value="Load" onclick=location.reload()>
+            </div>
+
+        </form>
+
+
+
+
 
     </div>
 </main>

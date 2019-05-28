@@ -1,15 +1,20 @@
 function loadMaterials() {
+    console.log(userId);
+    localStorage.clear();
     var rowCOUNT=1;
+
+    console.log(userId);
+    console.log('coorio el log');
     $.ajax({
         type: 'GET',
-        url:'/materials/byOwnerId/'+ userId,
+        url:'/materials/byOwnerId/'+ userId ,
         success: function (data) {
             $.each(data,function (index,element) {
                 var row = $("<tr>");
 
                 row.append($("<td>"+rowCOUNT+"</td>"))
                     .append($("<td>"+element.name+"</td>"))
-                    .append($("<td>"+element.id+"</td>"))
+                    .append($("<td>"+element.id+"</td>"));
 
                 $("#table02 tbody").append(row);
 

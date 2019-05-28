@@ -117,3 +117,7 @@ function getProducers() {
         }
     });
 }
+
+function redirectMaterials() {
+    window.location.href='misMateriales.html';
+}

@@ -1,4 +1,4 @@
-let userId
+let userId;
 
 function getUserId() {
     $.ajax({
@@ -13,6 +13,7 @@ function getUserId() {
             $('#material-form').hide();
         }
     });
+
 }
 
 

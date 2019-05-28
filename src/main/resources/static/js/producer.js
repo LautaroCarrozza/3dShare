@@ -72,6 +72,7 @@ function getUserId() {
         type: 'GET',
         success: function (data) {
             userId = data;
+
         },
         error: function(error){
             console.log(error);
