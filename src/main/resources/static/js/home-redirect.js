@@ -49,6 +49,7 @@ function getProducerName(producerId) {
 function loadHomePage() {
     console.log(userId);
     var rowCOUNT=1;
+    console.log('antes de la funcion de ajax');
 
     $.ajax({
         type: 'GET',
@@ -58,6 +59,7 @@ function loadHomePage() {
         success: function (data) {
             $.each(data, function(index, element) {
                 //element.producer returns producer id
+                console.log(data);
                 getProducerName(element.producer);
 
                 var status;
@@ -84,6 +86,7 @@ function loadHomePage() {
             console.log(error);
         }
     })
+    console.log('despues de la funcion de ajax');
 }
 
 function goBack() {
@@ -183,5 +186,17 @@ function getProducers() {
 }
 
 function redirectMaterials() {
-    window.location.href='misMateriales.html';
+    window.location.href='mis-materiales.html';
+}
+
+function redirectOrders() {
+    window.location.href='realizar-pedido.html'
+}
+
+function redirectPrinters() {
+    window.location.href='mis-impresoras.html'
+}
+
+function redirectHome() {
+    window.location.href='home.html'
 }

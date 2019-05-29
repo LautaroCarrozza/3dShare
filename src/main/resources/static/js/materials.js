@@ -1,10 +1,16 @@
+
 function loadMaterials() {
     console.log(userId);
     localStorage.clear();
-    var rowCOUNT=1;
-
     console.log(userId);
-    console.log('coorio el log');
+
+    if (userId===undefined){
+        console.log('corrio el if');
+        getUserId();
+
+
+    }
+    var rowCOUNT=1;
     $.ajax({
         type: 'GET',
         url:'/materials/byOwnerId/'+ userId ,
@@ -27,6 +33,7 @@ function loadMaterials() {
 }
 
 function deleteMaterialById(id) {
+    localStorage.clear();
     $.ajax({
         type: 'PUT',
         url:'materials/delete/' +id
