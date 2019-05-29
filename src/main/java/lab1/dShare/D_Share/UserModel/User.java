@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String password;
 
     @NotNull(message = "Invalid name")
@@ -82,12 +82,22 @@ public class User {
         producerOrders.add(order);
     }
 
-    public Set<Order> getClientOrders() {
-        return clientOrders;
+    //Get Orders by Id
+    public Set<Long> getClientOrders() {
+        Set<Long> ordersId = new HashSet<>();
+        for (Order order : clientOrders) {
+            ordersId.add(order.getId());
+        }
+        return ordersId;
     }
 
-    public Set<Order> getProducerOrders() {
-        return producerOrders;
+    //Get Orders by Id
+    public Set<Long> getProducerOrders() {
+        Set<Long> ordersId = new HashSet<>();
+        for (Order order : producerOrders) {
+            ordersId.add(order.getId());
+        }
+        return ordersId;
     }
 
     public void setClientOrders(Set<Order> clientOrders) {
@@ -169,7 +179,7 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -181,7 +191,7 @@ public class User {
         return password;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -24,12 +24,7 @@ public class OrderService {
     }
 
     public Set<Order> getClientOrders(long id) {
-        Set<Order> orders = orderRepository.getByClientId(id);
-        for (Order order : orders) {
-            if (!order.isInProgress())
-                orders.remove(order);
-        }
-        return orders;
+        return orderRepository.findAllByClientIdAndInProgressTrue(id);
     }
 
     public Set<Order> getProducerOrders(long id) {

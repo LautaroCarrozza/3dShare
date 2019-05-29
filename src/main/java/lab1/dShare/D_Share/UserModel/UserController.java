@@ -38,6 +38,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/getName/{id}")
+    public String getUserName(@PathVariable Long id){
+        return userService.getUser(id).getName();
+    }
+
     @PostMapping("/addOrder/client/{clientId}/producer/{producerId}")
     public ResponseEntity<Object> addOrder(@PathVariable long clientId, @PathVariable long producerId,
                                            @RequestParam String materialName, Authentication authentication){

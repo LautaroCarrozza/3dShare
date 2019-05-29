@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @NotNull(message = "Invalid material name")
     private String name;
@@ -31,7 +31,7 @@ public class Material {
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -43,7 +43,7 @@ public class Material {
         return owner.getId();
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

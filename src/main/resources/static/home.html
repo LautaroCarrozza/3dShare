@@ -20,6 +20,7 @@
 
     <title>Producer Home</title>
 </head>
+
 <body>
 
 <div class="container-fluid">
@@ -47,7 +48,7 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="loadPrinters()">Mis impresoras</button>
         </div>
         <div class="col-md-auto">
-            <button type="button" class="btn btn-primary"onclick="logOut()">Log Out</button>
+            <button type="button" class="btn btn-primary" onclick="logOut()">Log Out</button>
         </div>
     </div>
 </div>
@@ -55,39 +56,26 @@
 <hr>
 
 <!--FALTA METER LAS ORDENES ACA -> PRIMERO TERMINAR EL POST DE LAS ORDENES-->
-<div class="container">
-    <h2 style="text-align: center">Mis pedidos</h2>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producer</th>
-            <th scope="col">Status</th>
-            <th scope="col">Id</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<main role="main" class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h2 style="text-align: center">Mis pedidos</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producer</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Id</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyOfMyOrders">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
 <!--Producers accordion-->
 <div class="container">

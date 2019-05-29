@@ -1,7 +1,4 @@
-var userId;
 var submitButton;
-
-getUserId();
 
 $(function() {
     $('.submitbutton').click(function () {
@@ -66,18 +63,3 @@ $('#material-form').on('submit', function () {
         });
 });
 
-function getUserId() {
-    $.ajax({
-        url: "/api/user",
-        type: 'GET',
-        success: function (data) {
-            userId = data;
-
-        },
-        error: function(error){
-            console.log(error);
-            $('#printer-form').hide();
-            $('#material-form').hide();
-        }
-    });
-}

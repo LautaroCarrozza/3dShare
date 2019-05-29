@@ -16,7 +16,6 @@ function getUserId() {
 
 }
 
-
 function getListItems() {
     $.ajax({
         url:"/users/customer/getProducers",

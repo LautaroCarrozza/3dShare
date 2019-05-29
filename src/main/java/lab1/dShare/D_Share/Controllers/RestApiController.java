@@ -39,7 +39,7 @@ public class RestApiController {
     }
 
     @GetMapping("/user")
-    public Long getAuthUserId(Authentication authentication){
+    public long getAuthUserId(Authentication authentication){
         User user = userService.getUserByName(authentication.getName());
         return user.getId();
     }
