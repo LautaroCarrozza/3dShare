@@ -1,5 +1,5 @@
 var producersCounter = 1;
-var currentProducerName;
+var currentUserName;
 var userId;
 
 $.when(getUserId()).then(loadHomePage());
@@ -22,22 +22,13 @@ function getUserId() {
     });
 }
 
-function redirectCustomer() {
-    window.location.href= "home-customer.html";
-}
-
-function redirectProducer() {
-    window.location.href= "home.html";
-
-}
-
-function getProducerName(producerId) {
+function getUserName(user) {
     $.ajax({
         type: 'GET',
-        url:'/users/getName/'+ producerId,
+        url:'/users/getName/'+ user,
         async: false,
         success: function (data) {
-            currentProducerName = data;
+            currentUserName = data;
         },
         error: function (error) {
             console.log(error);
@@ -58,18 +49,18 @@ function loadHomePage() {
             $.each(data, function(index, element) {
                 //element.producer returns producer id
                 console.log(data);
-                getProducerName(element.producer);
+                getUserName(element.producer);
 
                 var status;
                 if (element.inProgress === true)
                     status = "En progreso";
-                else status = "Comunicarse con productor";
+                else status = "Pendiente de aceptacion";
 
                 var row = $("<tr>");
 
                 row.append($(
                     "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
-                    "            <td>"+currentProducerName+"</td>\n" +
+                    "            <td>"+currentUserName+"</td>\n" +
                     "            <td>"+status+"</td>\n" +
                     "            <td>"+element.id+"</td>\n"
                 ));
@@ -180,6 +171,14 @@ function getProducers() {
             });
         }
     });
+}
+
+function redirectProducer() {
+    window.location.href= "pedidos-productor.html";
+}
+
+function redirectClient() {
+    window.location.href= "home.html";
 }
 
 function redirectMaterials() {

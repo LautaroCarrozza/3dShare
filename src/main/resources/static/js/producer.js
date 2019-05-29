@@ -1,4 +1,5 @@
 var submitButton;
+loadProducerPage();
 
 $(function() {
     $('.submitbutton').click(function () {
@@ -62,4 +63,72 @@ $('#material-form').on('submit', function () {
 
         });
 });
+
+
+function loadProducerPage() {
+    var rowOrdersCount = 1;
+    var rowPendingReqCount = 1;
+    $.ajax({
+        type: 'GET',
+        url:'/orders/producer/'+ userId,
+        data: { get_param: 'value' },
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function(index, element) {
+                //element.client returns client id
+                console.log(data);
+                getUserName(element.client);
+
+                var status;
+                var row = $("<tr>");
+                if (element.inProgress === true){
+                    row.append($(
+                        "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
+                        "            <td>"+currentUserName+"</td>\n" +
+                        "            <td>en proceso</td>\n" +
+                        "            <td>"+element.id+"</td>\n" +
+                        "            <td>" +
+                        "               <button type=\"button\" class=\"btn btn-success\">/</button>" +
+                        "               <button type=\"button\" class=\"btn btn-danger\">X</button>" +
+                        "            </td>\n"
+
+                    ));
+                    // <button type="button" class="btn btn-success">Success</button>
+                    // <button type="button" class="btn btn-danger">Danger</button>
+
+                    $('#tbodyProdOrders').append(row);
+                    rowOrdersCount=rowOrdersCount+1;
+                }
+
+                else{
+                    row.append($(
+                        "            <th scope=\"row\">" + rowPendingReqCount + "</th>\n" +
+                        "            <td>"+currentUserName+"</td>\n" +
+                        "            <td>Esperando respuesta</td>\n" +
+                        "            <td>"+element.id+"</td>\n" +
+                        "            <td>" +
+                        "               <button type=\"button\" class=\"btn btn-success\">/</button>" +
+                        "               <button type=\"button\" class=\"btn btn-danger\">X</button>" +
+                        "            </td>\n"
+
+                    ));
+
+                    $('#tbodyReqProdOrders').append(row);
+                    rowPendingReqCount=rowPendingReqCount+1;
+                }
+
+
+
+
+
+
+            });
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+
+}
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Producer Home</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
 
     <meta charset="UTF-8">
     <script
@@ -10,7 +10,6 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="css/searchList.css"/>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -60,7 +59,7 @@
                 <a class="nav-link" href="#" onclick="redirectMaterials()">Mis materiales <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="redirectMaterials()">Mis impresoras <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectPrinters()">Mis impresoras <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#" onclick="logOut()">Log Out <span class="sr-only">(current)</span></a>
@@ -76,20 +75,6 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
-        <ul id="myUL">
-            <li><a href="#">Adele</a></li>
-            <li><a href="#">Agnes</a></li>
-
-            <li><a href="#">Billy</a></li>
-            <li><a href="#">Bob</a></li>
-
-            <li><a href="#">Calvin</a></li>
-            <li><a href="#">Christina</a></li>
-            <li><a href="#">Cindy</a></li>
-        </ul>
-
 
     </div>
 </main>
@@ -99,11 +84,10 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/home-redirect.js"></script>
-<script src="js/printers.js"></script>
-<script src="js/producer.js"></script>
-<script src="js/materials.js"></script>
-<script src="js/orders.js"></script>
-<script src="js/search-bar.js"></script>
+<script src="../static/js/home-redirect.js"></script>
+<script src="../static/js/printers.js"></script>
+<script src="../static/js/producer.js"></script>
+<script src="../static/js/materials.js"></script>
+<script src="../static/js/orders.js"></script>
 </body>
 </html>

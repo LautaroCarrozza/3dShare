@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Producer Home</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
 
     <meta charset="UTF-8">
     <script
@@ -37,6 +37,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
+
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
@@ -46,16 +47,20 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="redirectOrders()">Realizar Pedido <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectOrders()">Realizar pedido <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="redirectHome()">Pedidos en Progreso <span class="sr-only">(current)</span></a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos en Progreso</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#" onclick="redirectClient()">Pedidos cliente</a>
+                    <a class="dropdown-item" href="#" onclick="redirectProducer()">Pedidos productor</a>
+                </div>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#" onclick="redirectMaterials()">Mis materiales <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#" onclick="redirectPrinters()">Mis Impresoras <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectPrinters()">Mis impresoras <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#" onclick="logOut()">Log Out <span class="sr-only">(current)</span></a>
@@ -71,7 +76,42 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
+        <div class="container">
+            <h2 style="text-align: center">Pedidos a imprimir</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Id</th>
+                </tr>
+                </thead>
+                <tbody id="tbodyProdOrders">
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h2 style="text-align: center">Solicitud de pedidos</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Id</th>
+                    <!--<th scope="col"></th>-->
+                </tr>
+                </thead>
+                <tbody id="tbodyReqProdOrders">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 
@@ -81,9 +121,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/home-redirect.js"></script>
-<script src="js/printers.js"></script>
 <script src="js/producer.js"></script>
-<script src="js/materials.js"></script>
-<script src="js/orders.js"></script>
+
 </body>
 </html>

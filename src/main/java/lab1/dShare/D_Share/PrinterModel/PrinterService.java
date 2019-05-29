@@ -46,11 +46,10 @@ public class PrinterService {
     }
 
     public Set<String> getUniquePrinters() {
-        Set<String> returnSet= new HashSet<>();
-        Set<Printer> printers= getAllPrinters();
-        for (Printer p:printers) {
-            returnSet.add(p.getModel());
+        Set<String> uPrinters = new HashSet<>();
+        for (Printer printer : printerRepository.findAll()) {
+            uPrinters.add(printer.getModel());
         }
-        return returnSet;
+        return uPrinters;
     }
 }

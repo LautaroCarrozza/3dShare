@@ -11,4 +11,5 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
     Set<Order> findAllByClientId(long id);
     Set<Order> findAllByClientIdAndInProgressTrue(long id);
 
+    Set<Order> findAllByClientIdAndInProgressFalse(long id);
 }

@@ -50,6 +50,7 @@
     <link href="navbar-top.css" rel="stylesheet">
 </head>
 <body>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,9 +64,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pedidos en Progreso</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Pedidos Cliente</a>
-                    <a class="dropdown-item" href="#">Pedidos Productor</a>
-
+                    <a class="dropdown-item" href="#" onclick="redirectClient()">Pedidos cliente</a>
+                    <a class="dropdown-item" href="#" onclick="redirectProducer()">Pedidos productor</a>
                 </div>
             </li>
             <li class="nav-item active">
@@ -113,7 +113,7 @@
 <script src="js/home-redirect.js"></script>
 <script src="js/printers.js"></script>
 <script src="js/producer.js"></script>
-<script src="js/materials.js"></script>
+<!--<script src="js/materials.js"></script>-->
 <script src="js/orders.js"></script>
 </body>
 </html>

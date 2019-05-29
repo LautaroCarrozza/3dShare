@@ -1,6 +1,5 @@
 
 function loadMaterials() {
-    getUserId();
     var rowCOUNT=1;
     $.ajax({
         type: 'GET',

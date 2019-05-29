@@ -3,7 +3,7 @@ package lab1.dShare.D_Share.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -24,7 +24,7 @@ public class OrderService {
     }
 
     public Set<Order> getClientOrders(long id) {
-        return orderRepository.findAllByClientIdAndInProgressTrue(id);
+        return orderRepository.findAllByClientId(id);
     }
 
     public Set<Order> getProducerOrders(long id) {
