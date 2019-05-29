@@ -47,9 +47,7 @@ function getProducerName(producerId) {
 
 
 function loadHomePage() {
-    console.log(userId);
     var rowCOUNT=1;
-    console.log('antes de la funcion de ajax');
 
     $.ajax({
         type: 'GET',
@@ -85,8 +83,7 @@ function loadHomePage() {
         error: function (error) {
             console.log(error);
         }
-    })
-    console.log('despues de la funcion de ajax');
+    });
 }
 
 function goBack() {

@@ -1,15 +1,6 @@
 
 function loadMaterials() {
-    console.log(userId);
-    localStorage.clear();
-    console.log(userId);
-
-    if (userId===undefined){
-        console.log('corrio el if');
-        getUserId();
-
-
-    }
+    getUserId();
     var rowCOUNT=1;
     $.ajax({
         type: 'GET',
