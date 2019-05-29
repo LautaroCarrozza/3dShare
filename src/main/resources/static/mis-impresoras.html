@@ -37,7 +37,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-<body>
+<body onload="loadPrinters()">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,19 +46,19 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Realizar Pedido <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectOrders()">Realizar Pedido <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Pedidos en Prgreso <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectHome()">Pedidos en Progreso <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mis materiales <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectMaterials()">Mis materiales <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mis Impresoras <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="redirectPrinters()">Mis Impresoras <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Log Out <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#" onclick="logOut()">Log Out <span class="sr-only">(current)</span></a>
             </li>
 
         </ul>
@@ -71,6 +71,48 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
+        <table class="table" id="table01">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Printer Name</th>
+                <th scope="col">ID</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr>-->
+            <!--<th scope="row">1</th>-->
+            <!--<td>Mark</td>-->
+
+            <!--</tr>-->
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-success" onclick="showLoadPrinterForm()">Add</button>
+        <button type="button" class="btn btn-danger" onclick="showDeletePrinterForm()">Delete</button>
+        <form class="printer-form" id="printer-form" onsubmit="return false">
+            <div>
+                <label for="printer-model">Printer Model:</label>
+                <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+            </div>
+
+            <div>
+                <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" onclick="location.reload()">
+            </div>
+
+        </form>
+
+        <form id="deletePrinterForm">
+            <div class="form-group" onsubmit="return false">
+                <input type="text" class="form-control" id="deletePrinterId" placeholder="Printer ID">
+            </div>
+            <div>
+                <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial" value="Load" onclick="deletePrinterById(document.getElementById('deletePrinterId').value)" />
+            </div>
+
+        </form>
+
+
 
     </div>
 </main>

@@ -7,7 +7,7 @@ function loadPrinters() {
             $.each(data, function(index, element) {
                 var row = $("<tr>");
 
-                row.append($("<td>"+rowCOUNT+"</td>"))
+                row.append($("<td>"+rowCOUNT+")"+"</td>"))
                     .append($("<td>"+element.model+"</td>"))
                     .append($("<td>"+element.id+"</td>"));
 

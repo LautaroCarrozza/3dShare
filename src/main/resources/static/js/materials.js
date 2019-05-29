@@ -9,7 +9,7 @@ function loadMaterials() {
             $.each(data,function (index,element) {
                 var row = $("<tr>");
 
-                row.append($("<td>"+rowCOUNT+"</td>"))
+                row.append($("<td>"+rowCOUNT+")"+"</td>"))
                     .append($("<td>"+element.name+"</td>"))
                     .append($("<td>"+element.id+"</td>"));
 
