@@ -42,4 +42,9 @@ public class PrinterController {
          return printerService.getPrintersByOwner(id);
     }
 
+    @GetMapping("/unique")
+    public Set<String> getUniquePrinters(){
+        return printerService.getUniquePrinters();
+    }
+
 }

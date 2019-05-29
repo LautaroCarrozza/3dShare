@@ -45,4 +45,12 @@ public class PrinterService {
         printerRepository.deleteById(id);
     }
 
+    public Set<String> getUniquePrinters() {
+        Set<String> returnSet= new HashSet<>();
+        Set<Printer> printers= getAllPrinters();
+        for (Printer p:printers) {
+            returnSet.add(p.getModel());
+        }
+        return returnSet;
+    }
 }

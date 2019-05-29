@@ -10,6 +10,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="css/searchList.css"/>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -71,6 +72,20 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+        <ul id="myUL">
+            <li><a href="#">Adele</a></li>
+            <li><a href="#">Agnes</a></li>
+
+            <li><a href="#">Billy</a></li>
+            <li><a href="#">Bob</a></li>
+
+            <li><a href="#">Calvin</a></li>
+            <li><a href="#">Christina</a></li>
+            <li><a href="#">Cindy</a></li>
+        </ul>
+
 
     </div>
 </main>
@@ -85,5 +100,6 @@
 <script src="js/producer.js"></script>
 <script src="js/materials.js"></script>
 <script src="js/orders.js"></script>
+<script src="js/search-bar.js"></script>
 </body>
 </html>
