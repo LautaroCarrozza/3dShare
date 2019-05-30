@@ -38,4 +38,14 @@ public class OrderController {
         orderService.deleteOrder(id);
     }
 
+    @PostMapping("/request/accept/{id}")
+    public void acceptRequest(@PathVariable long id){
+        orderService.acceptRequest(id);
+    }
+
+    @PostMapping("/request/reject/{id}")
+    public void rejectRequest(@PathVariable long id){
+        orderService.deleteOrder(id);
+    }
+
 }

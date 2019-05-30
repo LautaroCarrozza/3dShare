@@ -1,4 +1,5 @@
 var submitButton;
+var idList;
 loadProducerPage();
 
 $(function() {
@@ -64,6 +65,31 @@ $('#material-form').on('submit', function () {
         });
 });
 
+function acceptRequest(orderId) {
+    $.ajax({
+        type: 'POST',
+        url: '/orders/request/accept/' + orderId,
+        success: function () {
+            console.log('request aceptada')
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}
+
+function rejectRequest(orderId) {
+    $.ajax({
+        type: 'POST',
+        url: '/orders/request/reject/' + orderId,
+        success: function () {
+            console.log('request rechazada')
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
+}
 
 function loadProducerPage() {
     var rowOrdersCount = 1;
@@ -85,11 +111,11 @@ function loadProducerPage() {
                     row.append($(
                         "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +
-                        "            <td>en proceso</td>\n" +
+                        "            <td>En proceso</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
-                        "            <td>" +
-                        "               <button type=\"button\" class=\"btn btn-success\">/</button>" +
-                        "               <button type=\"button\" class=\"btn btn-danger\">X</button>" +
+                        "            <td style='text-align: right'>" +
+                        "               <button type=\"button\" class=\"btn btn-success\" onclick=''>/</button>" +
+                        "               <button type=\"button\" class=\"btn btn-danger\" onclick=''>X</button>" +
                         "            </td>\n"
 
                     ));
@@ -106,9 +132,9 @@ function loadProducerPage() {
                         "            <td>"+currentUserName+"</td>\n" +
                         "            <td>Esperando respuesta</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
-                        "            <td>" +
-                        "               <button type=\"button\" class=\"btn btn-success\">/</button>" +
-                        "               <button type=\"button\" class=\"btn btn-danger\">X</button>" +
+                        "            <td style='text-align: right'>" +
+                        "               <button type=\"button\" class=\"btn btn-success\" onclick='acceptRequest()'>/</button>" +
+                        "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest()'>X</button>" +
                         "            </td>\n"
 
                     ));
@@ -116,11 +142,6 @@ function loadProducerPage() {
                     $('#tbodyReqProdOrders').append(row);
                     rowPendingReqCount=rowPendingReqCount+1;
                 }
-
-
-
-
-
 
             });
 

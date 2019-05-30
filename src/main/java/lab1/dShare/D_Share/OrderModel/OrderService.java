@@ -30,4 +30,14 @@ public class OrderService {
     public Set<Order> getProducerOrders(long id) {
         return orderRepository.getByProducerId(id);
     }
+
+    public void acceptRequest(long id) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order!= null) {
+            order.setInProgress(true);
+            //updates it
+            orderRepository.save(order);
+        }
+        else throw new NoSuchElementException("Order is null");
+    }
 }
