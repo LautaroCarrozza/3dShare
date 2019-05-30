@@ -1,7 +1,28 @@
 function loadProducersWithPrinter() {
-    var id=getQueryVariable(window.location.href);
-    $.ajax(
-        type:'GET';
+    var printerName=getQueryVariable(window.location.href);
+    $.ajax({
+        type:'GET',
+        url:'/printers',
+        async: false,
+        success: function (data) {
+            $.each(data,function (index,element) {
+                if (printerName===element.model){
+                    console.log(element.owner.id);
+                    var li=$('<li><a data-toggle="modal" href="#details-modal">'+element.owner.name+'</a></li>');
+                    li.attr('onClick','loadModal("'+element.owner.id+'")');
+                    $("#my2ndUL").append(li);
+
+
+                }
+                
+            })
+            
+
+        }
+
+
+
+        }
     )
 
 }
@@ -14,4 +35,27 @@ function getQueryVariable(variable) {
         return pair[1];
     }
     return (false);
+}
+
+function loadModal(ownerID) {
+    console.log(ownerID);
+    $.ajax({
+        type:'GET',
+        dataType: "json",
+        url:'/materials/byOwnerId/'+ownerID,
+        success: function (data) {
+            $.each(data,function (index,element) {
+                var option= $('<option><a href="#">'+element.name+'</a></option>');
+                $("#exampleFormControlSelect1").append(option);
+
+            })
+
+        }
+    })
+
+
+}
+
+function clearModal() {
+    $("#exampleFormControlSelect1").empty();
 }
