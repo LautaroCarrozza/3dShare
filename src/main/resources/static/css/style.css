@@ -22,3 +22,7 @@
 .order-button{
     padding-left: 0;
 }
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
