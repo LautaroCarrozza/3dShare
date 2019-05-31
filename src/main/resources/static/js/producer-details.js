@@ -1,3 +1,19 @@
+function getUserId2() {
+    $.ajax({
+        url: "/api/user",
+        type: 'GET',
+        async: false,
+        success: function (data) {
+            userId = data;
+
+        },
+        error: function(error){
+            console.log(error);
+            $('#printer-form').hide();
+            $('#material-form').hide();
+        }
+    });
+}
 function loadProducersWithPrinter() {
     var printerName=getQueryVariable(window.location.href);
     $.ajax({
@@ -40,36 +56,45 @@ function getQueryVariable(variable) {
 function loadModal(ownerID,ownerName) {
     console.log(ownerID);
     console.log(ownerName);
-    var button=$('<input type="submit" class="form-control submitbutton btn btn-success" onclick="realizarPedido()" id="submitOrderButton">');
-    button.attr('onClick','realizarPedido("'+ownerID+')"');
-    $.("#addButtonDiv").append(button);
     $.ajax({
         type:'GET',
         dataType: "json",
         url:'/materials/byOwnerId/'+ownerID,
         async:false,
         success: function (data) {
-            // var nameh4= $('<p class="modal-title" id="producer-name">'+ownerName+'</p>');
-            // var idh4= $('<p class="modal-title" id="producer-id">'+ownerID+'</p>');
-            //
-            //
-            // $("#modal-body").append(nameh4).append(idh4);
 
 
             $.each(data,function (index,element) {
+                console.log(element);
                 var option= $('<option><a href="#">'+element.name+'</a></option>');
-                $("#exampleFormControlSelect1").append(option);
+                jQuery("#materialSelect").append(option);
 
             });
+            var button2= $('<button type="button" class="btn btn-success">Realizar Pedido</button>');
+            // var button=$('<input type="submit" class="form-control submitbutton btn btn-success"  id="submitOrderButton">');
+            button2.attr('onClick','realizarPedido('+ownerID+')');
+            jQuery("#inner").append(button2);
 
 
         }
+
     })
 
 
 }
 
 function realizarPedido(producerID) {
+    getUserId2();
+    $.post("/users/addOrder/client/" + userId + "/producer/" + producerID,{
+        materialName: $('#materialSelect').val()
+    })
+        .done(function () {
+            window.alert('Solicitud enviada correctamente');
+            location.href="home.html";
+        })
+        .fail(function (error) {
+            console.log(error);
+        });
 
 
     
@@ -78,4 +103,5 @@ function realizarPedido(producerID) {
 function clearModal() {
     $("#exampleFormControlSelect1").empty();
     $("#ownerData").empty();
+    $("#inner").empty();
 }

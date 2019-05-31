@@ -1,4 +1,4 @@
-let userId;
+//let userId;
 
 // function getUserId() {
 //     $.ajax({
