@@ -14,33 +14,29 @@ function getUserId2() {
         }
     });
 }
+
 function loadProducersWithPrinter() {
     var printerName=getQueryVariable(window.location.href);
     $.ajax({
-        type:'GET',
-        url:'/printers',
+        type: 'GET',
+        url: '/printers',
         async: false,
         success: function (data) {
-            $.each(data,function (index,element) {
-                if (printerName===element.model){
+            $.each(data, function (index, element) {
+                if (printerName === element.model) {
                     console.log(element.owner.id);
-                    var li=$('<li><a data-toggle="modal" href="#details-modal">'+element.owner.name+'</a></li>');
-                    li.attr('onClick','loadModal("'+element.owner.id+'","'+element.owner.name+'")');
+                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
+                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
                     $("#my2ndUL").append(li);
 
 
                 }
-                
+
             })
-            
 
         }
 
-
-
-        }
-    )
-
+    })
 }
 
 function getQueryVariable(variable) {

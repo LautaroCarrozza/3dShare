@@ -116,6 +116,54 @@
     </div>
 </main>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Order-details-modal">
+    Launch demo modal
+</button>
+
+<div class="modal fade" id="Order-details-modal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">
+                <h4 class="modal-title">Detalles del pedido</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="clearModal()">&times;</button>
+
+            </div>
+
+            <div class="modal-body" id="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <address id="clientDetails">
+                                <strong>Datos cliente</strong>
+                                <!--<br>-->
+                                <!--"-->
+                                <!--text here-->
+                                <!--<br>-->
+                                <!--"text here-->
+
+                            </address>
+                        </div>
+                        <div class="col-md-6">
+                            <address id="printerAndMaterialDetails">
+                                <strong>Impresora y material</strong>
+                                <!--<br>-->
+                                <!--"-->
+                                <!--text here-->
+                                <!--<br>-->
+                                <!--"text here-->
+
+                            </address>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearModal()" >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

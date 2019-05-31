@@ -39,7 +39,9 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
+
 <body onload="loadProducersWithPrinter()">
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +79,8 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
-        <input type="text" id="myInput" onkeyup="filterRealTime()" placeholder="Buseque por productor...">
+        <h2 style="text-align: center">Seleccione un productor</h2>
+        <input type="text" id="myInput" onkeyup="filterRealTime()" placeholder="Busqueda por nombre...">
 
         <ul id="my2ndUL">
         </ul>

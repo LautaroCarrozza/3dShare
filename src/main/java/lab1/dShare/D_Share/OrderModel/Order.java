@@ -1,6 +1,7 @@
 package lab1.dShare.D_Share.OrderModel;
 
 import lab1.dShare.D_Share.MaterialModel.Material;
+import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.UserModel.User;
 
 import javax.persistence.*;
@@ -23,12 +24,14 @@ public class Order {
 
     private String material;
 
+    private String printer;
+
     private boolean inProgress = false;
 
     public Order() {
     }
 
-    public Order(User client, User producer, String material) {
+    public Order(User client, User producer, String material, String printer) {
         this.client = client;
         this.producer = producer;
         this.material = material;
@@ -64,5 +67,13 @@ public class Order {
 
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
     }
 }

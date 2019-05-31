@@ -70,12 +70,14 @@ function acceptRequest(orderId) {
         type: 'POST',
         url: '/orders/request/accept/' + orderId,
         success: function () {
-            console.log('request aceptada')
+            console.log('request aceptada');
+            location.reload();
         },
         error: function (error) {
             console.log(error);
         }
-    })
+    });
+
 }
 
 function rejectRequest(orderId) {
@@ -83,12 +85,42 @@ function rejectRequest(orderId) {
         type: 'POST',
         url: '/orders/request/reject/' + orderId,
         success: function () {
-            console.log('request rechazada')
+            console.log('request rechazada');
+            location.reload();
         },
         error: function (error) {
             console.log(error);
         }
     })
+}
+
+function loadOrderDetails(orderId, printerName, materialName, clientId){
+    $.ajax({
+        type: 'GET',
+        url:'/users/'+ clientId,
+        async: false,
+        success: function (data) {
+            $.each(data, function(index, element) {
+                $('#clientDetails').append($("<br>\n" +
+                    "                                \"\n" +
+                    "                                "+element.name+"\n" +
+                    "                                <br>\n" +
+                    "                                \""+element.email+"\n" +
+                    "                                \""+element.postalCode+"\n"
+
+                ));
+                $('#printerAndMaterialDetails').append($("<br>\n" +
+                    "                                \"\n" +
+                    "                                "+printerName+"\n" +
+                    "                                <br>\n" +
+                    "                                \""+materialName+"\n"
+                ));
+            })
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 }
 
 function loadProducerPage() {
@@ -114,8 +146,8 @@ function loadProducerPage() {
                         "            <td>En proceso</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-success\" onclick=''>/</button>" +
-                        "               <button type=\"button\" class=\"btn btn-danger\" onclick=''>X</button>" +
+                        "               <button type=\"button\" class=\"btn btn-secondary\" " +
+                        "                   onclick='loadOrderDetails("+element.id+", "+element.printer+","+element.material+", "+element.client+")'>Detalles</button>" +
                         "            </td>\n"
 
                     ));
@@ -133,8 +165,8 @@ function loadProducerPage() {
                         "            <td>Esperando respuesta</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-success\" onclick='acceptRequest()'>/</button>" +
-                        "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest()'>X</button>" +
+                        "               <button type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+")'>/</button>" +
+                        "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>X</button>" +
                         "            </td>\n"
 
                     ));
