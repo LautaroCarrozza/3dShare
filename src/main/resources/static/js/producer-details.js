@@ -9,7 +9,7 @@ function loadProducersWithPrinter() {
                 if (printerName===element.model){
                     console.log(element.owner.id);
                     var li=$('<li><a data-toggle="modal" href="#details-modal">'+element.owner.name+'</a></li>');
-                    li.attr('onClick','loadModal("'+element.owner.id+'")');
+                    li.attr('onClick','loadModal("'+element.owner.id+'","'+element.owner.name+'")');
                     $("#my2ndUL").append(li);
 
 
@@ -37,18 +37,31 @@ function getQueryVariable(variable) {
     return (false);
 }
 
-function loadModal(ownerID) {
+function loadModal(ownerID,ownerName) {
     console.log(ownerID);
+    console.log(ownerName);
+    var button=$('<input type="submit" class="form-control submitbutton btn btn-success" onclick="realizarPedido()" id="submitOrderButton">');
+    button.attr('onClick','realizarPedido("'+ownerID+')"');
+    $.("#addButtonDiv").append(button);
     $.ajax({
         type:'GET',
         dataType: "json",
         url:'/materials/byOwnerId/'+ownerID,
+        async:false,
         success: function (data) {
+            // var nameh4= $('<p class="modal-title" id="producer-name">'+ownerName+'</p>');
+            // var idh4= $('<p class="modal-title" id="producer-id">'+ownerID+'</p>');
+            //
+            //
+            // $("#modal-body").append(nameh4).append(idh4);
+
+
             $.each(data,function (index,element) {
                 var option= $('<option><a href="#">'+element.name+'</a></option>');
                 $("#exampleFormControlSelect1").append(option);
 
-            })
+            });
+
 
         }
     })
@@ -56,6 +69,13 @@ function loadModal(ownerID) {
 
 }
 
+function realizarPedido(producerID) {
+
+
+    
+}
+
 function clearModal() {
     $("#exampleFormControlSelect1").empty();
+    $("#ownerData").empty();
 }

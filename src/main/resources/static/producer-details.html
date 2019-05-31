@@ -90,12 +90,15 @@
 <div class="modal fade" id="details-modal" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Mis Impresoras</h4>
+            <div class="modal-header" id="modal-header">
+                <h4 class="modal-title">Detalles productor</h4>
                 <button type="button" class="close" data-dismiss="modal" onclick="clearModal()">&times;</button>
 
             </div>
-            <div class="modal-body" >
+            <div class="modal-body" id="modal-body">
+                <ul class="list-group list-group-horizontal " id="ownerData">
+
+                </ul>
                 <form>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Contact email</label>
@@ -106,6 +109,9 @@
                         <select class="form-control" id="exampleFormControlSelect1">
 
                         </select>
+                    </div>
+                    <div id="addButtonDiv">
+
                     </div>
                 </form>
 
