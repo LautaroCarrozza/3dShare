@@ -1,4 +1,3 @@
-var producersCounter = 1;
 var currentUserName;
 var userId;
 
@@ -36,6 +35,20 @@ function getUserName(user) {
     });
 }
 
+function loadOrderDetails(orderId, printerName, materialName, prodId){
+    $.ajax({
+        type: 'GET',
+        url:'/users/'+ prodId,
+        success: function (data) {
+            $('#producerDetails').append($("<br>" +data.name+ "</br>" + "\n" +data.email+"</br>" + "\n" +data.postalCode+ "</br>"));
+            $('#home-printerAndMaterialDetails').append($("<br>" +printerName+ "</br>" + "\n" +materialName+"</br>"));
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
 
 function loadHomePage() {
     var rowCOUNT=1;
@@ -62,7 +75,11 @@ function loadHomePage() {
                     "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
                     "            <td>"+currentUserName+"</td>\n" +
                     "            <td>"+status+"</td>\n" +
-                    "            <td>"+element.id+"</td>\n"
+                    "            <td>"+element.id+"</td>\n" +
+                    "            <td style='text-align: right'>" +
+                    "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
+                    "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.producer+")'>Detalles</button>" +
+                    "            </td>\n"
                 ));
 
                 rowCOUNT=rowCOUNT+1;
@@ -124,4 +141,12 @@ function redirectPrinters() {
 
 function redirectHome() {
     window.location.href='home.html'
+}
+
+function clearModal() {
+    $("#producerDetails br").remove();
+    $("#producerDetails").html('');
+    $("#producerDetails").append("<strong>Datos cliente</strong>");
+    $("#home-printerAndMaterialDetails").html('');
+    $("#home-printerAndMaterialDetails").append("<strong>Impresora y material</strong>")
 }

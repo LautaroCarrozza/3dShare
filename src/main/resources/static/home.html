@@ -103,6 +103,7 @@
                     <th scope="col">Producer</th>
                     <th scope="col">Status</th>
                     <th scope="col">Id</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody id="tbodyOfMyOrders">
@@ -113,12 +114,51 @@
     </div>
 </main>
 
+<!--Order details modal-->
+<div class="modal fade" id="Client-Order-details-modal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">
+                <h4 class="modal-title">Detalles del pedido</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="clearModal()">&times;</button>
+            </div>
+
+            <div class="modal-body" id="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <address id="producerDetails">
+                                <strong>Datos productor</strong>
+                                <!--<br>-->
+                                <!--"-->
+                                <!--text here-->
+                                <!--<br>-->
+                                <!--"text here-->
+
+                            </address>
+                        </div>
+                        <div class="col-md-6">
+                            <address id="home-printerAndMaterialDetails">
+                                <strong>Impresora y material</strong>
+
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearModal()" >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/home-redirect.js"></script>
 <script src="js/printers.js"></script>
-<script src="js/producer.js"></script>
+<!--<script src="js/producer.js"></script>-->
 <!--<script src="js/materials.js"></script>-->
 <script src="js/orders.js"></script>
 </body>

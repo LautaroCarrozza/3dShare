@@ -1,5 +1,4 @@
 var submitButton;
-var idList;
 loadProducerPage();
 
 $(function() {
@@ -94,28 +93,15 @@ function rejectRequest(orderId) {
     })
 }
 
+//Shows Order details in producers Orders
 function loadOrderDetails(orderId, printerName, materialName, clientId){
     $.ajax({
         type: 'GET',
         url:'/users/'+ clientId,
-        async: false,
         success: function (data) {
-            $.each(data, function(index, element) {
-                $('#clientDetails').append($("<br>\n" +
-                    "                                \"\n" +
-                    "                                "+element.name+"\n" +
-                    "                                <br>\n" +
-                    "                                \""+element.email+"\n" +
-                    "                                \""+element.postalCode+"\n"
+            $('#clientDetails').append($("<br>" +data.name+ "</br>" + "\n" +data.email+"</br>" + "\n" +data.postalCode+ "</br>"));
+            $('#printerAndMaterialDetails').append($("<br>" +printerName+ "</br>" + "\n" +materialName+"</br>"));
 
-                ));
-                $('#printerAndMaterialDetails').append($("<br>\n" +
-                    "                                \"\n" +
-                    "                                "+printerName+"\n" +
-                    "                                <br>\n" +
-                    "                                \""+materialName+"\n"
-                ));
-            })
         },
         error: function (error) {
             console.log(error);
@@ -123,6 +109,7 @@ function loadOrderDetails(orderId, printerName, materialName, clientId){
     });
 }
 
+//Loads producer orders and requests
 function loadProducerPage() {
     var rowOrdersCount = 1;
     var rowPendingReqCount = 1;
@@ -136,7 +123,8 @@ function loadProducerPage() {
                 //element.client returns client id
                 console.log(data);
                 getUserName(element.client);
-
+                console.log(element.printer);
+                console.log(element.material);
                 var status;
                 var row = $("<tr>");
                 if (element.inProgress === true){
@@ -146,11 +134,14 @@ function loadProducerPage() {
                         "            <td>En proceso</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-secondary\" " +
-                        "                   onclick='loadOrderDetails("+element.id+", "+element.printer+","+element.material+", "+element.client+")'>Detalles</button>" +
+                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
+                        "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>" +
                         "            </td>\n"
 
                     ));
+                    //<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Order-details-modal">
+                    //     Launch demo modal
+                    // </button>
                     // <button type="button" class="btn btn-success">Success</button>
                     // <button type="button" class="btn btn-danger">Danger</button>
 
@@ -165,7 +156,7 @@ function loadProducerPage() {
                         "            <td>Esperando respuesta</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+")'>/</button>" +
+                        "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+")'>/</button>" +
                         "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>X</button>" +
                         "            </td>\n"
 
@@ -183,5 +174,13 @@ function loadProducerPage() {
         }
     });
 
+}
+
+function clearModal() {
+    $("#clientDetails br").remove();
+    $("#clientDetails").html('');
+    $("#clientDetails").append("<strong>Datos cliente</strong>");
+    $("#printerAndMaterialDetails").html('');
+    $("#printerAndMaterialDetails").append("<strong>Impresora y material</strong>")
 }
 

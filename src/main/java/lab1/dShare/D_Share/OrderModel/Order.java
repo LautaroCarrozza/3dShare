@@ -76,4 +76,12 @@ public class Order {
     public void setMaterial(String material) {
         this.material = material;
     }
+
+    public String getPrinter() {
+        return printer;
+    }
+
+    public void setPrinter(String printer) {
+        this.printer = printer;
+    }
 }
