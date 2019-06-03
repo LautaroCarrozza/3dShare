@@ -35,6 +35,7 @@ public class Order {
         this.client = client;
         this.producer = producer;
         this.material = material;
+        this.printer = printer;
     }
 
     public long getId() {

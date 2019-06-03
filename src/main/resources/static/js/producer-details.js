@@ -20,7 +20,6 @@ function loadProducersWithPrinter() {
     $.ajax({
         type: 'GET',
         url: '/printers',
-        async: false,
         success: function (data) {
             $.each(data, function (index, element) {
                 if (printerName === element.model) {
@@ -66,9 +65,8 @@ function loadModal(ownerID,ownerName) {
                 jQuery("#materialSelect").append(option);
 
             });
-            var button2= $('<button type="button" class="btn btn-success">Realizar Pedido</button>');
+            var button2= $("<button type=\"button\" class=\"btn btn-success\" onclick='realizarPedido("+ownerID+")'>Realizar Pedido</button>");
             // var button=$('<input type="submit" class="form-control submitbutton btn btn-success"  id="submitOrderButton">');
-            button2.attr('onClick','realizarPedido('+ownerID+')');
             jQuery("#inner").append(button2);
 
 
@@ -81,10 +79,10 @@ function loadModal(ownerID,ownerName) {
 
 function realizarPedido(producerID) {
     var printername = getQueryVariable(window.location.href);
-    getUserId2();
+    //getUserId2();
+
     $.post("/users/addOrder/client/" + userId + "/producer/" + producerID,{
         materialName: $('#materialSelect').val(),
-
         printerName: printername
     })
         .done(function () {
