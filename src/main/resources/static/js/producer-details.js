@@ -80,9 +80,12 @@ function loadModal(ownerID,ownerName) {
 }
 
 function realizarPedido(producerID) {
+    var printername = getQueryVariable(window.location.href);
     getUserId2();
     $.post("/users/addOrder/client/" + userId + "/producer/" + producerID,{
-        materialName: $('#materialSelect').val()
+        materialName: $('#materialSelect').val(),
+
+        printerName: printername
     })
         .done(function () {
             window.alert('Solicitud enviada correctamente');
