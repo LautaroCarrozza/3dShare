@@ -109,6 +109,21 @@ function loadOrderDetails(orderId, printerName, materialName, clientId){
     });
 }
 
+function updateStatus(orderId, status) {
+
+    $.post("/orders/status/"+ orderId,{
+        status: status
+    })
+        .done(function () {
+            window.alert('Estado actualizado');
+            location.href="pedidos-productor.html";
+        })
+        .fail(function (error) {
+            console.log(error);
+        });
+
+}
+
 //Loads producer orders and requests
 function loadProducerPage() {
     var rowOrdersCount = 1;
@@ -131,20 +146,21 @@ function loadProducerPage() {
                     row.append($(
                         "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +
-                        "            <td>En proceso</td>\n" +
+                        "            <td>"+element.status+"</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
-                        "            <td style='text-align: right'>" +
+                        "            <td style='text-align: right' class='dropdown'>\n"+
+                        "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
+                        "                   Status</button>" +
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
                         "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>" +
-                        "            </td>\n"
-
+                        "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1)' class=\"dropdown-item\">En proceso</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2)' class=\"dropdown-item\">En produccion</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 3)' class=\"dropdown-item\">En trafico</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 4)' class=\"dropdown-item\">Entregado</a></li>\n"+
+                        "               </ul>"+
+                        "            </td>"
                     ));
-                    //<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Order-details-modal">
-                    //     Launch demo modal
-                    // </button>
-                    // <button type="button" class="btn btn-success">Success</button>
-                    // <button type="button" class="btn btn-danger">Danger</button>
-
                     $('#tbodyProdOrders').append(row);
                     rowOrdersCount=rowOrdersCount+1;
                 }
@@ -153,9 +169,11 @@ function loadProducerPage() {
                     row.append($(
                         "            <th scope=\"row\">" + rowPendingReqCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +
-                        "            <td>Esperando respuesta</td>\n" +
+                        "            <td>"+element.status+"</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
+                        "            <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
+                        "            onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>\n" +
                         "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+")'>/</button>" +
                         "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>X</button>" +
                         "            </td>\n"

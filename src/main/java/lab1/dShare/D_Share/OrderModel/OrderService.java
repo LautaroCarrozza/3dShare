@@ -8,6 +8,8 @@ import java.util.*;
 @Service
 public class OrderService {
 
+    public static final String[] EVERYSTATUS = {"Pendiente de aceptacion", "En proceso", "En produccion", "En trafico", "Entregado"};
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -35,9 +37,19 @@ public class OrderService {
         Order order = orderRepository.findById(id).orElse(null);
         if (order!= null) {
             order.setInProgress(true);
+            order.setStatus(EVERYSTATUS[1]);
             //updates it
             orderRepository.save(order);
         }
         else throw new NoSuchElementException("Order is null");
+    }
+
+    public void updateStatus(long id, int status) {
+        Order order = orderRepository.findById(id).orElse(null);
+        if (order == null) throw new NoSuchElementException("Order is null");
+
+        order.setStatus(EVERYSTATUS[status]);
+        //updates it
+        orderRepository.save(order);
     }
 }

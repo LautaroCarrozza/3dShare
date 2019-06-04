@@ -66,7 +66,7 @@ function loadModal(ownerID,ownerName) {
 
             });
             var button2= $("<button type=\"button\" class=\"btn btn-success\" onclick='realizarPedido("+ownerID+")'>Realizar Pedido</button>");
-            // var button=$('<input type="submit" class="form-control submitbutton btn btn-success"  id="submitOrderButton">');
+
             jQuery("#inner").append(button2);
 
 

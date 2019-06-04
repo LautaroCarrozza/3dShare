@@ -28,6 +28,8 @@ public class Order {
 
     private boolean inProgress = false;
 
+    private String status = "";
+
     public Order() {
     }
 
@@ -84,5 +86,13 @@ public class Order {
 
     public void setPrinter(String printer) {
         this.printer = printer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

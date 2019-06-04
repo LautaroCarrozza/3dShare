@@ -1,8 +1,7 @@
 //TO DO'S
-    Redireccionar desde realizar pedido en adelante
+
     Filtrar productor
-    Agregar printers a ordenes
-    Filtrar Resultados
+
     Refresh sin loc.reload() despues de acciones
     Calificar
     Reever actualizar estado de produccion

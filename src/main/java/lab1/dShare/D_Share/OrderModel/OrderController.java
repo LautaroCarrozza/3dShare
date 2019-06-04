@@ -48,4 +48,8 @@ public class OrderController {
         orderService.deleteOrder(id);
     }
 
+    @PostMapping("/status/{id}")
+    public void updateStatus(@PathVariable long id, @RequestParam int status){
+        orderService.updateStatus(id, status);
+    }
 }

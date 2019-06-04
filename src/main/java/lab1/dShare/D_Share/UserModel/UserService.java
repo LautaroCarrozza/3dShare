@@ -4,6 +4,7 @@ import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.MaterialModel.MaterialRepository;
 import lab1.dShare.D_Share.OrderModel.Order;
 import lab1.dShare.D_Share.OrderModel.OrderRepository;
+import lab1.dShare.D_Share.OrderModel.OrderService;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +88,10 @@ public class UserService {
 
     //Orders...
     public void addOrder(Order order, User clientUser, User producerUser) {
+        if (!order.isInProgress()){
+            order.setStatus(OrderService.EVERYSTATUS[0]);
+        }
+
         orderRepository.save(order);
         clientUser.addClientOrder(order);
         producerUser.addProducerOrder(order);
