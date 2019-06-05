@@ -64,17 +64,12 @@ function loadHomePage() {
                 console.log(data);
                 getUserName(element.producer);
 
-                var status;
-                if (element.inProgress === true)
-                    status = "En progreso";
-                else status = "Pendiente de aceptacion";
-
                 var row = $("<tr>");
 
                 row.append($(
                     "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
                     "            <td>"+currentUserName+"</td>\n" +
-                    "            <td>"+status+"</td>\n" +
+                    "            <td>"+element.status+"</td>\n" +
                     "            <td>"+element.id+"</td>\n" +
                     "            <td style='text-align: right'>" +
                     "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
