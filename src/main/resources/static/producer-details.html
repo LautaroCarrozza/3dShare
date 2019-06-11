@@ -35,6 +35,9 @@
                 font-size: 3.5rem;
             }
         }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
@@ -80,7 +83,7 @@
 <main role="main" class="container">
     <div class="jumbotron">
         <h2 style="text-align: center">Seleccione un productor</h2>
-        <input type="text" id="myInput" onkeyup="filterRealTime()" placeholder="Busqueda por nombre...">
+        <input type="text" id="myInput" onkeyup="filterRealTimeProducers()" placeholder="Busqueda por nombre...">
 
         <ul id="my2ndUL">
         </ul>
@@ -138,6 +141,7 @@
 <script src="../static/js/producer.js"></script>
 <script src="../static/js/materials.js"></script>
 <script src="../static/js/orders.js"></script>
+<script src="js/search-bar.js"></script>
 <script src="js/producer-details.js"></script>
 </body>
 </html>

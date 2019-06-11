@@ -42,9 +42,9 @@ public class User {
 
     private int totalCustomerRating;
 
-    private double clientRating;
+    private double producerRating;
 
-    private int totalClientRating;
+    private int totalProducerRating;
 
     public User(String name, String password, String email, int postalCode) {
         this.name = name;
@@ -52,7 +52,7 @@ public class User {
         this.email = email;
         this.postalCode = postalCode;
         this.totalCustomerRating = 0;
-        this.totalClientRating = 0;
+        this.totalProducerRating = 0;
     }
 
     public User() {
@@ -117,12 +117,12 @@ public class User {
         return totalCustomerRating;
     }
 
-    public double getClientRating() {
-        return clientRating;
+    public double getProducerRating() {
+        return producerRating;
     }
 
-    public int getTotalClientRating() {
-        return totalClientRating;
+    public int getTotalProducerRating() {
+        return totalProducerRating;
     }
 
     public void setCustomerRating(double customerRating) {
@@ -133,12 +133,12 @@ public class User {
         this.totalCustomerRating = totalCustomerRating;
     }
 
-    public void setClientRating(double clientRating) {
-        this.clientRating = clientRating;
+    public void setProducerRating(double producerRating) {
+        this.producerRating = producerRating;
     }
 
-    public void setTotalClientRating(int totalClientRating) {
-        this.totalClientRating = totalClientRating;
+    public void setTotalProducerRating(int totalProducerRating) {
+        this.totalProducerRating = totalProducerRating;
     }
 
     //Get materials by id
@@ -210,6 +210,16 @@ public class User {
     public void setPostalCode(int postalCode) {
         this.postalCode = postalCode;
     }
+
+    public void addRatingCustomer(){
+        totalCustomerRating= totalCustomerRating+1;
+
+    }
+
+    public void addRatingProducer(){
+        totalProducerRating=totalProducerRating+1;
+    }
+
 }
 
 

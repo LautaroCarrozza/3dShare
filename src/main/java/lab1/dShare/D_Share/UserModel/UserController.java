@@ -113,4 +113,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping (PRODUCERDIRECTION+"{id}/addCustomerRating")
+    public ResponseEntity<Object> addCustomerRating(@PathVariable long id,@RequestParam double rating){
+        userService.addRatingCustomer(rating,id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(PRODUCERDIRECTION+"{id}/addProducerRating")
+    public ResponseEntity<Object> addProducerRating(@PathVariable long id, @RequestParam double rating){
+        userService.addRatingProducer(rating,id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+
 }

@@ -6,7 +6,8 @@ function register() {
             data: JSON.stringify({
                 name: $("#username").val(),
                 password: $("#password").val(),
-                email: $("#email").val()
+                email: $("#email").val(),
+                postalCode: $("#postalCode").val()
             }),
             dataType: "text",
             contentType: "application/json"
@@ -28,8 +29,7 @@ function register() {
                     })
             })
             .fail(function () {
-                console.log("registration failed, user already exists");
-                window.alert("registration failed");
+                window.alert("Nombre de usuario no disponible");
                 location.reload();
                 $('#loginFailed').show("slow").delay(2000).hide("slow");
                 $("#username").val("");
@@ -44,7 +44,7 @@ function register() {
     else {
 
 
-        window.alert("Passwords do not match");
+        window.alert("Ingrese la misma contraseña");
         location.reload();
         $("#username").val("");
         $("#password").val("");

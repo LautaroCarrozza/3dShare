@@ -11,7 +11,7 @@ function loadMaterials() {
                 row.append($("<td>"+rowCOUNT+")"+"</td>"))
                     .append($("<td>"+element.name+"</td>"))
                     .append($("<td>"+element.id+"</td>"))
-                    .append($('<button type="button" class="btn btn-danger" onclick="deleteMaterialById('+element.id+')">x</button>'));
+                    .append($('<button  style="text-align: right" type="button" class="btn btn-danger" onclick="deleteMaterialById('+element.id+')">x</button>'));
 
 
 

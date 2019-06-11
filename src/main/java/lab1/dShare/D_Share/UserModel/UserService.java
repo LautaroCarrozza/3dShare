@@ -8,15 +8,10 @@ import lab1.dShare.D_Share.OrderModel.OrderService;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -99,5 +94,31 @@ public class UserService {
         //if user already exists, this updates it..
         userRepository.save(clientUser);
         userRepository.save(producerUser);
+    }
+
+    public void addRatingCustomer(Double rating, Long userID){
+        User customer= getUser(userID);
+        double clientRating= customer.getCustomerRating();
+        int totalClientRatingCount= customer.getTotalCustomerRating();
+        double totalRating= clientRating * totalClientRatingCount;
+        totalRating=totalRating+rating;
+        double finalAverage= (double) totalRating /(totalClientRatingCount+1);
+        customer.setCustomerRating(finalAverage);
+        customer.addRatingCustomer();
+
+
+
+    }
+
+    public void addRatingProducer(Double rating,long userID){
+        User producer= getUser(userID);
+        double producerRating= producer.getProducerRating();
+        int totalProducerRating = producer.getTotalProducerRating();
+        double totalRating= producerRating*totalProducerRating;
+        totalRating=totalRating+totalRating;
+        double finalAverage= (double) totalRating/(totalProducerRating+1);
+        producer.setProducerRating(finalAverage);
+        producer.addRatingProducer();
+
     }
 }
