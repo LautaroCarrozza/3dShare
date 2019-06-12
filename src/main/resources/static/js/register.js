@@ -7,7 +7,8 @@ function register() {
                 name: $("#username").val(),
                 password: $("#password").val(),
                 email: $("#email").val(),
-                postalCode: $("#postalCode").val()
+                postalCode: $("#postalCode").val(),
+                city: $("#city").val()
             }),
             dataType: "text",
             contentType: "application/json"

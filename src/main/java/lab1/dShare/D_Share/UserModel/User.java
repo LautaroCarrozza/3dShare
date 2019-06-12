@@ -18,6 +18,8 @@ public class User {
     private long id;
     private String password;
 
+    private String city;
+
     @NotNull(message = "Invalid name")
     private String name;
 
@@ -46,11 +48,12 @@ public class User {
 
     private int totalProducerRating;
 
-    public User(String name, String password, String email, int postalCode) {
+    public User(String name, String password, String email, int postalCode, String city) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.postalCode = postalCode;
+        this.city = city;
         this.totalCustomerRating = 0;
         this.totalProducerRating = 0;
     }
@@ -220,6 +223,13 @@ public class User {
         totalProducerRating=totalProducerRating+1;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }
 
 
