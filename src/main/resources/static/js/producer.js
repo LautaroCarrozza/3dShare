@@ -124,10 +124,30 @@ function updateStatus(orderId, status) {
 
 }
 
+function rateClient(orderId, clientId){
+    $.post("users/producer/" + clientId + "/order/" + orderId, {
+        rate: parseInt(document.querySelector('.stars').getAttribute('data-rating'))
+    })
+        .done(function () {
+            location.reload()
+
+        })
+        .fail(function () {
+            console.log("la cagaste gioba")
+
+        })
+}
+
+function confirmClientRating(orderId, clientId) {
+    var button= $('<button  type="button" class="btn btn-success" onclick="rateClient('+orderId+ ','+clientId+')">Confirmar</button>');
+    $('#rateClientModalFooter').append(button)
+}
+
 //Loads producer orders and requests
 function loadProducerPage() {
     var rowOrdersCount = 1;
     var rowPendingReqCount = 1;
+    var rowFinishedOrdersCount = 1;
     $.ajax({
         type: 'GET',
         url:'/orders/producer/'+ userId,
@@ -142,9 +162,9 @@ function loadProducerPage() {
                 console.log(element.material);
                 var status;
                 var row = $("<tr>");
-                if (element.inProgress === true){
+                if (element.inProgress === true && element.status !== "Finalizado"){
                     row.append($(
-                        "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
+                        "            <th scope=\"row\">" + rowFinishedOrdersCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +
                         "            <td>"+element.status+"</td>\n" +
                         "            <td>"+element.id+"</td>\n" +
@@ -162,6 +182,19 @@ function loadProducerPage() {
                         "            </td>"
                     ));
                     $('#tbodyProdOrders').append(row);
+                    rowFinishedOrdersCount=rowFinishedOrdersCount+1;
+                }
+                else if (element.status === "Finalizado") {
+                    row.append($(
+                        "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
+                        "            <td>"+currentUserName+"</td>\n" +
+                        "            <td>"+element.status+"</td>\n" +
+                        "            <td>"+element.id+"</td>\n" +
+                        "            <td style='text-align: right'>"+
+                        "               <button type=\"button\" class=\"btn btn-success\" data-toggle='modal' data-target='#rateClientModal' onclick='confirmClientRating("+element.id+","+element.client+")'>Rate Client</button>\n" +
+                        "            </td>"
+                    ));
+                    $('#tbodyPedFin').append(row);
                     rowOrdersCount=rowOrdersCount+1;
                 }
 
@@ -193,6 +226,7 @@ function loadProducerPage() {
     });
 
 }
+
 
 function clearModal() {
     $("#clientDetails br").remove();

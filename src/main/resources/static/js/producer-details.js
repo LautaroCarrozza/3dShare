@@ -63,7 +63,8 @@ function loadModal(ownerID,ownerName) {
                url: '/users/' +ownerID,
                success: function (user) {
                    $('#producerDetailsOrder').append($("<br> <strong> Nombre: </strong>" +user.name+ "</br><strong>Email: </strong>" + "\n" +user.email+"</br> <strong> CP: </strong>" + "\n" +user.postalCode+ "</br>"));
-                   $('#home-printerAndMaterialDetails').append($("<br> <strong>Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
+                   $('#producerDetailsOrder').append($("<br><strong>Calificacion: "+user.producerRating+"/5</strong></br>"));
+
                    $.each(data,function (index,element) {
                        console.log(element);
                        var option= $('<option><a href="#">'+element.name+'</a></option>');
@@ -83,6 +84,10 @@ function loadModal(ownerID,ownerName) {
     })
 
 
+}
+
+function sortByRating() {
+    
 }
 
 function realizarPedido(producerID) {

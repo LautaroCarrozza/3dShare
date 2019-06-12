@@ -29,3 +29,28 @@
 
     document.querySelector('.stars').setAttribute('data-rating', num);
 }
+
+function testFunction() {
+        console.log(parseInt(document.querySelector('.stars').getAttribute('data-rating')))
+
+
+}
+
+function rateProducer(orderID,producerID) {
+        console.log('llega aca');
+        console.log(orderID);
+        console.log(producerID);
+        $.post("users/customer/" + producerID + "/order/" + orderID, {
+            rate: parseInt(document.querySelector('.stars').getAttribute('data-rating'))
+        })
+            .done(function () {
+            location.reload()
+
+        })
+            .fail(function () {
+                console.log("la cagaste gioba")
+
+            })
+
+}
+

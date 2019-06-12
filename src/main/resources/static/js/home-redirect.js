@@ -60,9 +60,10 @@ function loadHomePage() {
         dataType: 'json',
         success: function (data) {
             $.each(data, function(index, element) {
+
+
                 //element.producer returns producer id
-                if (element.status!== "Entregado") {
-                    console.log(data);
+                if (element.status!== "Entregado" & element.status!== "Finalizado") {
                     getUserName(element.producer);
 
                     var row = $("<tr>");
@@ -84,7 +85,6 @@ function loadHomePage() {
                 }
 
                 if (element.status=== "Entregado") {
-                    console.log(data);
                     getUserName(element.producer);
 
                     var row = $("<tr>");
@@ -96,7 +96,8 @@ function loadHomePage() {
                         "            <td>" + element.id + "</td>\n" +
                         "            <td style='text-align: right'>" +
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
-                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button> <button type=\"button\" class=\"btn btn-success\" data-toggle='modal' data-target='#rateModal'>Confirmar</button>" +
+                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button> " +
+                        "               <button type=\"button\" class=\"btn btn-success\" data-toggle='modal' data-target='#rateModal' onclick='confirmRatingButton("+element.id+","+element.producer+")'>Confirmar</button>" +
                         "            </td>\n"
 
                     ));
@@ -169,4 +170,10 @@ function clearModal() {
     $("#producerDetails").append("<strong>Datos cliente</strong>");
     $("#home-printerAndMaterialDetails").html('');
     $("#home-printerAndMaterialDetails").append("<strong>Impresora y material</strong>")
+}
+
+function confirmRatingButton(orderID, producerID) {
+    var button= $('<button  type="button" class="btn btn-success" onclick="rateProducer('+orderID+','+producerID+')">Confirmar</button>')
+    $('#rateModalFooter').append(button);
+
 }

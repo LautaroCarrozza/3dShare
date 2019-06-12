@@ -96,7 +96,7 @@ public class UserController {
         user.setTotalProducerRating(newTotalRating);
 
         //updates it..
-        userService.addUser(user);
+        userService.updateUser(user);
 
         Order order = orderService.getOrder(orderId);
         order.setStatus(OrderService.EVERYSTATUS[5]);
@@ -110,6 +110,7 @@ public class UserController {
 //    public ResponseEntity<Object> updateProducerRating(@PathVariable long id, @RequestParam int rating){
 //
 //    }
+
 
     //Producer part...
     @PostMapping(PRODUCERDIRECTION + "/{id}/addPrinter")
@@ -151,6 +152,27 @@ public class UserController {
     public ResponseEntity<Object> addProducerRating(@PathVariable long id, @RequestParam double rating){
         userService.addRatingProducer(rating,id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(PRODUCERDIRECTION + "/{clientId}/order/{orderId}")
+    public void rateClient(@PathVariable long clientId, @PathVariable long orderId, @RequestParam int rate){
+
+        int totalRating = userService.getUser(clientId).getTotalCustomerRating();
+        double actualRating = userService.getUser(clientId).getCustomerRating();
+        int newTotalRating = totalRating + 1;
+
+        double newRating = ((actualRating * totalRating) + rate)/newTotalRating;
+
+        User user = userService.getUser(clientId);
+        user.setCustomerRating(newRating);
+        user.setTotalCustomerRating(newTotalRating);
+
+        //updates it..
+        userService.updateUser(user);
+
+        Order order = orderService.getOrder(orderId);
+        orderService.deleteOrder(orderId);
+
     }
 
 

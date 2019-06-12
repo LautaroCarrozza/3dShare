@@ -3,6 +3,8 @@ package lab1.dShare.D_Share.PrinterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -15,6 +17,16 @@ public class PrinterController {
     @GetMapping()
     public Set<Printer> getAllPrinters(){
         return printerService.getAllPrinters();
+    }
+
+    @GetMapping("/byRating")
+    public Set<Printer> getPrintersByRating{
+        List<Printer> printerList = new ArrayList<>();
+
+        Set<Printer> allPrinters= printerService.getAllPrinters();
+        for (Printer p: allPrinters) {
+            printerList.add(p);
+        }
     }
 
     @GetMapping("{id}")
