@@ -3,9 +3,7 @@ package lab1.dShare.D_Share.PrinterModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/printers")
@@ -20,13 +18,21 @@ public class PrinterController {
     }
 
     @GetMapping("/byRating")
-    public Set<Printer> getPrintersByRating{
+    public List<Printer> getPrintersByRating(){
         List<Printer> printerList = new ArrayList<>();
 
         Set<Printer> allPrinters= printerService.getAllPrinters();
         for (Printer p: allPrinters) {
             printerList.add(p);
         }
+
+        printerList.sort(new Comparator<Printer>() {
+            @Override
+            public int compare(Printer o1, Printer o2) {
+               return Double.compare(o2.getOwner().getProducerRating(), o1.getOwner().getProducerRating());
+            }
+        });
+        return printerList;
     }
 
     @GetMapping("{id}")
@@ -58,4 +64,6 @@ public class PrinterController {
     public Set<String> getUniquePrinters(){
         return printerService.getUniquePrinters();
     }
+
+
 }

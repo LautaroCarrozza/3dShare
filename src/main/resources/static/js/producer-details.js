@@ -1,3 +1,4 @@
+var userCity;
 function getUserId2() {
     $.ajax({
         url: "/api/user",
@@ -86,7 +87,28 @@ function loadModal(ownerID,ownerName) {
 
 }
 
+
 function sortByRating() {
+    clearLI();
+    var printerName=getQueryVariable(window.location.href);
+    $.ajax({
+        type: 'GET',
+        url: '/printers/byRating',
+        success: function (data) {
+            $.each(data, function (index, element) {
+                if (printerName === element.model) {
+                    console.log(element.owner.id);
+                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
+                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
+                    $("#my2ndUL").append(li);
+
+                }
+
+            })
+
+        }
+
+    })
     
 }
 
@@ -115,4 +137,49 @@ function clearModal() {
     $("#exampleFormControlSelect1").empty();
     $("#ownerData").empty();
     $("#inner").empty();
+}
+
+function clearLI() {
+    $('#my2ndUL').empty();
+
+}
+
+function sortByCity() {
+    clearLI();
+    getUserCity();
+    console.log(userCity);
+    var printerName=getQueryVariable(window.location.href);
+    $.ajax({
+        type: 'GET',
+        url: '/printers',
+        success: function (data) {
+            $.each(data, function (index, element) {
+                if (printerName === element.model && element.owner.city=== userCity) {
+                    console.log(element.owner.id);
+                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
+                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
+                    $("#my2ndUL").append(li);
+
+                }
+
+            })
+
+        }
+
+    })
+}
+
+function getUserCity() {
+    console.log('user id:'+ userId);
+    $.ajax({
+        type:'GET',
+        url:'/users/'+userId,
+        asyc: false,
+        success:function (data) {
+            console.log('aca corre' + data.city);
+            userCity= data.city;
+
+        }
+    })
+
 }
