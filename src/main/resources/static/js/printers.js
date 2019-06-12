@@ -10,7 +10,7 @@ function loadPrinters() {
                 row.append($("<td>"+rowCOUNT+")"+"</td>"))
                     .append($("<td>"+element.model+"</td>"))
                     .append($("<td>"+element.id+"</td>"))
-                    .append($('<button type="button" class="btn btn-danger" onclick="deletePrinterById('+element.id+')">x</button>'));
+                    .append($('<td style="text-align: right" <button type="button" class="btn btn-danger" onclick="deletePrinterById('+element.id+')">X</button></td>'));
 
                 $("#table01 tbody").append(row);
 

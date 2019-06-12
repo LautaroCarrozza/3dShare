@@ -8,7 +8,7 @@ import java.util.*;
 @Service
 public class OrderService {
 
-    public static final String[] EVERYSTATUS = {"Pendiente de aceptacion", "En proceso", "En produccion", "En trafico", "Entregado"};
+    public static final String[] EVERYSTATUS = {"Pendiente de aceptacion", "En proceso", "En produccion", "En trafico", "Entregado", "Finalizado"};
 
     @Autowired
     private OrderRepository orderRepository;
@@ -52,4 +52,5 @@ public class OrderService {
         //updates it
         orderRepository.save(order);
     }
+
 }

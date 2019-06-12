@@ -1,7 +1,5 @@
 package lab1.dShare.D_Share.OrderModel;
 
-import lab1.dShare.D_Share.MaterialModel.Material;
-import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.UserModel.User;
 
 import javax.persistence.*;

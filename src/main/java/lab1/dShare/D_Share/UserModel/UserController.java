@@ -2,6 +2,7 @@ package lab1.dShare.D_Share.UserModel;
 
 import lab1.dShare.D_Share.MaterialModel.Material;
 import lab1.dShare.D_Share.OrderModel.Order;
+import lab1.dShare.D_Share.OrderModel.OrderService;
 import lab1.dShare.D_Share.PrinterModel.Printer;
 import lab1.dShare.D_Share.PrinterModel.PrinterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private PrinterService printerService;
+
+    @Autowired
+    private OrderService orderService;
 
     //All..
     @GetMapping()
@@ -78,6 +82,30 @@ public class UserController {
         return users;
     }
 
+    @PostMapping(CUSTOMERDIRECTION + "/{producerId}/order/{orderId}")
+    public void rateProducer(@PathVariable long producerId, @PathVariable long orderId, @RequestParam int rate){
+
+        int totalRating = userService.getUser(producerId).getTotalProducerRating();
+        double actualRating = userService.getUser(producerId).getProducerRating();
+        int newTotalRating = totalRating + 1;
+
+        double newRating = ((actualRating * totalRating) + rate)/newTotalRating;
+
+        User user = userService.getUser(producerId);
+        user.setProducerRating(newRating);
+        user.setTotalProducerRating(newTotalRating);
+
+        //updates it..
+        userService.addUser(user);
+
+        Order order = orderService.getOrder(orderId);
+        order.setStatus(OrderService.EVERYSTATUS[5]);
+
+        //updates it..
+        orderService.addOrder(order);
+
+    }
+
 //    @PostMapping(CUSTOMERDIRECTION + "/rateProducer/{id}")
 //    public ResponseEntity<Object> updateProducerRating(@PathVariable long id, @RequestParam int rating){
 //
@@ -124,7 +152,6 @@ public class UserController {
         userService.addRatingProducer(rating,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
 }

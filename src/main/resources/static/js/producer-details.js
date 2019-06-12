@@ -28,7 +28,6 @@ function loadProducersWithPrinter() {
                     li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
                     $("#my2ndUL").append(li);
 
-
                 }
 
             })
@@ -58,16 +57,25 @@ function loadModal(ownerID,ownerName) {
         async:false,
         success: function (data) {
 
+            $.ajax({
+               type: 'GET',
+               dataType: 'json',
+               url: '/users/' +ownerID,
+               success: function (user) {
+                   $('#producerDetailsOrder').append($("<br> <strong> Nombre: </strong>" +user.name+ "</br><strong>Email: </strong>" + "\n" +user.email+"</br> <strong> CP: </strong>" + "\n" +user.postalCode+ "</br>"));
+                   $('#home-printerAndMaterialDetails').append($("<br> <strong>Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
+                   $.each(data,function (index,element) {
+                       console.log(element);
+                       var option= $('<option><a href="#">'+element.name+'</a></option>');
+                       jQuery("#materialSelect").append(option);
 
-            $.each(data,function (index,element) {
-                console.log(element);
-                var option= $('<option><a href="#">'+element.name+'</a></option>');
-                jQuery("#materialSelect").append(option);
+                   });
+                   var button2= $("<button type=\"button\" class=\"btn btn-success\" onclick='realizarPedido("+ownerID+")'>Realizar Pedido</button>");
 
+                   jQuery("#inner").append(button2);
+                }
             });
-            var button2= $("<button type=\"button\" class=\"btn btn-success\" onclick='realizarPedido("+ownerID+")'>Realizar Pedido</button>");
 
-            jQuery("#inner").append(button2);
 
 
         }
@@ -98,6 +106,7 @@ function realizarPedido(producerID) {
 }
 
 function clearModal() {
+    $("#producerDetailsOrder").empty();
     $("#exampleFormControlSelect1").empty();
     $("#ownerData").empty();
     $("#inner").empty();
