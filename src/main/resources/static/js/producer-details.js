@@ -93,7 +93,7 @@ function realizarPedido(producerID) {
         materialName: $('#materialSelect').val(),
         printerName: printername
     })
-        .done(function () {
+        .done(function () {1
             window.alert('Solicitud enviada correctamente');
             location.href="home.html";
         })

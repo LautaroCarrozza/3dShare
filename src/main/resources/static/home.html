@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stars.css">
 
     <meta charset="UTF-8">
     <script
@@ -111,6 +112,24 @@
                 </tbody>
             </table>
     </div>
+        <div class="container">
+            <h2 style="text-align: center">Pedidos Entregados</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Producer</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Id</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody id="tbodyCompletedOrders">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 
@@ -127,25 +146,20 @@
                 <div class="container-fluid">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <address id="producerDetails">
-                                <strong>Datos productor</strong>
-                                <!--<br>-->
-                                <!--"-->
-                                <!--text here-->
-                                <!--<br>-->
-                                <!--"text here-->
-
-                            </address>
-                        </div>
-                        <div class="col-md-6">
-                            <address id="home-printerAndMaterialDetails">
-                                <strong>Impresora y material</strong>
-
+                                <strong><u>Datos productor</u></strong>
                             </address>
                         </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                        <address id="home-printerAndMaterialDetails">
+                            <strong><u>Impresora y material</u></strong>
+                        </address>
+                    </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearModal()" >Close</button>
@@ -153,11 +167,40 @@
         </div>
     </div>
 </div>
+</div>
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rateModalID">Valorar Productor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="rateModalBody">
+                    <h1>Star Rating System</h1>
+                    <div class="stars" data-rating="3">
+                        <span class="star">&nbsp;</span>
+                        <span class="star">&nbsp;</span>
+                        <span class="star">&nbsp;</span>
+                        <span class="star">&nbsp;</span>
+                        <span class="star">&nbsp;</span>
+                    </div>
+                    <p>The number shown after the CSS is generated with a CSS counter.</p>
 
+
+                </div>
+                <div class="modal-footer" id="rateModalFooter">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/home-redirect.js"></script>
 <script src="js/printers.js"></script>
+<script src="js/stars.js"></script>
 <!--<script src="js/producer.js"></script>-->
 <!--<script src="js/materials.js"></script>-->
 <script src="js/orders.js"></script>

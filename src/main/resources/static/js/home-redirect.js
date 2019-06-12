@@ -40,8 +40,8 @@ function loadOrderDetails(orderId, printerName, materialName, prodId){
         type: 'GET',
         url:'/users/'+ prodId,
         success: function (data) {
-            $('#producerDetails').append($("<br>" +data.name+ "</br>" + "\n" +data.email+"</br>" + "\n" +data.postalCode+ "</br>"));
-            $('#home-printerAndMaterialDetails').append($("<br>" +printerName+ "</br>" + "\n" +materialName+"</br>"));
+            $('#producerDetails').append($("<br> <strong> Nombre Usuario: </strong>" +data.name+ "</br><strong>Email: </strong>" + "\n" +data.email+"</br> <strong> CP: </strong>" + "\n" +data.postalCode+ "</br>"));
+            $('#home-printerAndMaterialDetails').append($("<br> <strong>Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
 
         },
         error: function (error) {
@@ -61,25 +61,50 @@ function loadHomePage() {
         success: function (data) {
             $.each(data, function(index, element) {
                 //element.producer returns producer id
-                console.log(data);
-                getUserName(element.producer);
+                if (element.status!== "Entregado") {
+                    console.log(data);
+                    getUserName(element.producer);
 
-                var row = $("<tr>");
+                    var row = $("<tr>");
 
-                row.append($(
-                    "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
-                    "            <td>"+currentUserName+"</td>\n" +
-                    "            <td>"+element.status+"</td>\n" +
-                    "            <td>"+element.id+"</td>\n" +
-                    "            <td style='text-align: right'>" +
-                    "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
-                    "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.producer+")'>Detalles</button>" +
-                    "            </td>\n"
-                ));
+                    row.append($(
+                        "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
+                        "            <td>" + currentUserName + "</td>\n" +
+                        "            <td>" + element.status + "</td>\n" +
+                        "            <td>" + element.id + "</td>\n" +
+                        "            <td style='text-align: right'>" +
+                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
+                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button>" +
+                        "            </td>\n"
+                    ));
 
-                rowCOUNT=rowCOUNT+1;
+                    rowCOUNT = rowCOUNT + 1;
 
-                $('#tbodyOfMyOrders').append(row)
+                    $('#tbodyOfMyOrders').append(row)
+                }
+
+                if (element.status=== "Entregado") {
+                    console.log(data);
+                    getUserName(element.producer);
+
+                    var row = $("<tr>");
+
+                    row.append($(
+                        "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
+                        "            <td>" + currentUserName + "</td>\n" +
+                        "            <td>" + element.status + "</td>\n" +
+                        "            <td>" + element.id + "</td>\n" +
+                        "            <td style='text-align: right'>" +
+                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
+                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button> <button type=\"button\" class=\"btn btn-success\" data-toggle='modal' data-target='#rateModal'>Confirmar</button>" +
+                        "            </td>\n"
+
+                    ));
+
+                    rowCOUNT = rowCOUNT + 1;
+
+                    $('#tbodyCompletedOrders').append(row)
+                }
             });
 
         },
