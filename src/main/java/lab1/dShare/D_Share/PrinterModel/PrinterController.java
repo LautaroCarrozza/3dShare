@@ -64,6 +64,4 @@ public class PrinterController {
     public Set<String> getUniquePrinters(){
         return printerService.getUniquePrinters();
     }
-
-
 }

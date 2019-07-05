@@ -44,5 +44,9 @@ public class MaterialController {
 
     }
 
+    @GetMapping("/byName")
+    public Material getMaterialByName(@RequestParam String name){
+        return materialService.getMaterialByName(name);
+    }
 
 }

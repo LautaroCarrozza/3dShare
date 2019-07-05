@@ -40,7 +40,7 @@ function loadOrderDetails(orderId, printerName, materialName, prodId){
         type: 'GET',
         url:'/users/'+ prodId,
         success: function (data) {
-            $('#producerDetails').append($("<br> <strong> Nombre Usuario: </strong>" +data.name+ "</br><strong>Email: </strong>" + "\n" +data.email+"</br> <strong> CP: </strong>" + "\n" +data.postalCode+ "</br>"));
+            $('#producerDetails').append($("<br><strong> Nombre Usuario: </strong>" +data.name+ "</br><strong>Email: </strong>" + "\n" +data.email+"</br><strong> CP: </strong>" + "\n" +data.postalCode+ "</br>"));
             $('#home-printerAndMaterialDetails').append($("<br> <strong>Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
 
         },
@@ -167,9 +167,9 @@ function redirectHome() {
 function clearModal() {
     $("#producerDetails br").remove();
     $("#producerDetails").html('');
-    $("#producerDetails").append("<strong>Datos cliente</strong>");
+    $("#producerDetails").append("<strong><u>Datos productor</u></strong>");
     $("#home-printerAndMaterialDetails").html('');
-    $("#home-printerAndMaterialDetails").append("<strong>Impresora y material</strong>")
+    $("#home-printerAndMaterialDetails").append("<strong><u>Impresora y material</u></strong>")
 }
 
 function confirmRatingButton(orderID, producerID) {

@@ -216,7 +216,6 @@ public class User {
 
     public void addRatingCustomer(){
         totalCustomerRating= totalCustomerRating+1;
-
     }
 
     public void addRatingProducer(){

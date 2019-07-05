@@ -1,4 +1,5 @@
 var submitButton;
+var lastRow = 0;
 loadProducerPage();
 
 $(function() {
@@ -40,37 +41,40 @@ $('#printer-form').on('submit', function () {
             });
 });
 
-$('#material-form').on('submit', function () {
 
-    let url = "/users/producer/" + userId + "/addMaterial";
+function acceptRequest(orderId, printer, material, client) {
 
-    $.post(url, {
-        name: $("#material-model").val()
-    })
-        .done(function () {
-            console.log("Material added");
-            $('#material-form').hide();
-            $('#LoadSuccess').show( "slow" ).delay(2000).hide( "slow" );
-
-        })
-        .fail(function () {
-            console.log("Fail to add printer");
-            $('#material-form').hide();
-            $('#LoadFailed').show( "slow" ).delay(2000).hide( "slow" );
-        })
-
-        .always(function () {
-
-        });
-});
-
-function acceptRequest(orderId) {
     $.ajax({
         type: 'POST',
         url: '/orders/request/accept/' + orderId,
         success: function () {
             console.log('request aceptada');
-            location.reload();
+            var idRow = document.getElementById(orderId);
+            idRow.remove();
+
+            var row = $("<tr id= "+orderId+">");
+            lastRow = lastRow +1;
+
+            row.append($(
+                "            <th scope=\"row\">" + lastRow + "</th>\n" +
+                "            <td>"+currentUserName+"</td>\n" +
+                "            <td>En proceso</td>\n" +
+                "            <td>"+orderId+"</td>\n" +
+                "            <td style='text-align: right' class='dropdown'>\n"+
+                "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
+                "                   Status</button>" +
+                "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
+                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+")'>Detalles</button>" +
+                "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1, lastRow,"+printer+","+material+","+client+")' class=\"dropdown-item\">En proceso</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2, lastRow,"+printer+", "+material+","+client+")' class=\"dropdown-item\">En produccion</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3, lastRow,"+printer+","+material+","+client+")' class=\"dropdown-item\">En trafico</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4, lastRow,"+printer+","+material+","+client+")' class=\"dropdown-item\">Entregado</a></li>\n"+
+                "               </ul>"+
+                "            </td>"
+            ));
+            $('#tbodyProdOrders').append(row);
+
         },
         error: function (error) {
             console.log(error);
@@ -85,12 +89,14 @@ function rejectRequest(orderId) {
         url: '/orders/request/reject/' + orderId,
         success: function () {
             console.log('request rechazada');
-            location.reload();
+            var idRow = document.getElementById(orderId);
+            idRow.remove();
         },
         error: function (error) {
             console.log(error);
         }
-    })
+    });
+
 }
 
 //Shows Order details in producers Orders
@@ -109,14 +115,49 @@ function loadOrderDetails(orderId, printerName, materialName, clientId){
     });
 }
 
-function updateStatus(orderId, status) {
+function updateStatus(orderId, status, row, printer, material, client) {
 
     $.post("/orders/status/"+ orderId,{
         status: status
     })
         .done(function () {
-            window.alert('Estado actualizado');
-            location.href="pedidos-productor.html";
+            var newStatus;
+            switch (status) {
+                case 1:
+                    newStatus = "En proceso";
+                    break;
+                case 2:
+                    newStatus = "En produccion";
+                    break;
+                case 3:
+                    newStatus = "En trafico";
+                    break;
+                case 4:
+                    newStatus = "Entregado";
+                    break;
+                default:
+                    newStatus = status;
+                    break;
+            }
+
+            var rowId = document.getElementById(orderId);
+            rowId.innerHTML =
+                "            <th scope=\"row\">" + row + "</th>\n" +
+                "            <td>"+currentUserName+"</td>\n" +
+                "            <td>"+newStatus+"</td>\n" +
+                "            <td>"+orderId+"</td>\n" +
+                "            <td style='text-align: right' class='dropdown'>\n"+
+                "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
+                "                   Status</button>" +
+                "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
+                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+")'>Detalles</button>" +
+                "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1,"+row+","+printer+","+material+","+client+")' class=\"dropdown-item\">En proceso</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2,"+row+","+printer+","+material+","+client+")' class=\"dropdown-item\">En produccion</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3,"+row+","+printer+","+material+","+client+")' class=\"dropdown-item\">En trafico</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4,"+row+","+printer+","+material+","+client+")' class=\"dropdown-item\">Entregado</a></li>\n"+
+                "               </ul>"+
+                "            </td>"
         })
         .fail(function (error) {
             console.log(error);
@@ -161,7 +202,7 @@ function loadProducerPage() {
                 console.log(element.printer);
                 console.log(element.material);
                 var status;
-                var row = $("<tr>");
+                var row = $("<tr id= "+element.id+">");
                 if (element.inProgress === true && element.status !== "Finalizado"){
                     row.append($(
                         "            <th scope=\"row\">" + rowFinishedOrdersCount + "</th>\n" +
@@ -174,15 +215,16 @@ function loadProducerPage() {
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
                         "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>" +
                         "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1)' class=\"dropdown-item\">En proceso</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2)' class=\"dropdown-item\">En produccion</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 3)' class=\"dropdown-item\">En trafico</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 4)' class=\"dropdown-item\">Entregado</a></li>\n"+
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">En proceso</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">En produccion</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 3, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">En trafico</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 4, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">Entregado</a></li>\n"+
                         "               </ul>"+
                         "            </td>"
                     ));
                     $('#tbodyProdOrders').append(row);
                     rowFinishedOrdersCount=rowFinishedOrdersCount+1;
+                    lastRow = rowFinishedOrdersCount;
                 }
                 else if (element.status === "Finalizado") {
                     row.append($(
@@ -207,7 +249,7 @@ function loadProducerPage() {
                         "            <td style='text-align: right'>" +
                         "            <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
                         "            onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>\n" +
-                        "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+")'>✓</button>" +
+                        "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+","+ "\""+ element.printer+"\""+"," +"\""+element.material+"\""+","+element.client+")'>✓</button>" +
                         "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>✕</button>" +
                         "            </td>\n"
 
@@ -231,8 +273,8 @@ function loadProducerPage() {
 function clearModal() {
     $("#clientDetails br").remove();
     $("#clientDetails").html('');
-    $("#clientDetails").append("<strong>Datos cliente</strong>");
+    $("#clientDetails").append("<strong><u>Datos cliente</u></strong>");
     $("#printerAndMaterialDetails").html('');
-    $("#printerAndMaterialDetails").append("<strong>Impresora y material</strong>")
+    $("#printerAndMaterialDetails").append("<strong><u>Impresora y material</u></strong>")
 }
 

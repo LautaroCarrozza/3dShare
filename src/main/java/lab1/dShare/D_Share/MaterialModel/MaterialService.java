@@ -40,6 +40,7 @@ public class MaterialService {
     }
 
 
-
-
+    public Material getMaterialByName(String name) {
+        return materialRepository.findByName(name);
+    }
 }

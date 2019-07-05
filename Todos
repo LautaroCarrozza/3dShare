@@ -1,7 +1,8 @@
 //TO DO'S
-    Filtrar productor // ubicacion/ rating
-    Calificar
-    Agregar valoracion y ubicacion en todos los details de usuarios
-    valorar cliente :
-                        *productor valora cliente despues de que cliente valora productor
-                        *le tiene que apparecer al productor en una tabla los pedidos que estan listos para valorar (o en una tabla ya xistente)
+    Sacar todas las alertas
+    Historial de pedidos
+    Admin agrega impresoras y materiales
+    Mapa en realizar pedido
+    Mapa en registrar para marcar mi ubicacion
+
+
