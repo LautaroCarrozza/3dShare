@@ -28,13 +28,15 @@ function register() {
                         $("#password").val("");
                         location.href = "home.html"
                     })
+                    .fail(function (error) {
+                        console.log(error);
+                        window.alert("login failed");
+                    })
             })
             .fail(function () {
                 window.alert("Nombre de usuario no disponible");
-                location.reload();
                 $('#loginFailed').show("slow").delay(2000).hide("slow");
                 $("#username").val("");
-                $("#password").val("");
                 $("#username").focus();
             })
 
@@ -44,10 +46,7 @@ function register() {
     }
     else {
 
-
         window.alert("Ingrese la misma contraseña");
-        location.reload();
-        $("#username").val("");
         $("#password").val("");
         $("#username").focus();
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Producer Home</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
 
     <meta charset="UTF-8">
     <script
@@ -17,6 +17,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+            crossorigin=""></script>
 
     <style>
         .bd-placeholder-img {
@@ -33,19 +41,13 @@
                 font-size: 3.5rem;
             }
         }
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-        }
-        .btn-info {
-            color: #fff;
-            background-color: #343a40;
-            border-color: #343a40;
-        }
+
+        #mapid { height: 180px; }
     </style>
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-<body onload="loadMaterials()">
+<body onload="initializeMap()">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,40 +80,22 @@
 </nav>
 
 <main role="main" class="container">
-    <div class="jumbotron" id="mtable">
-        <h2 style="text-align: center">Mis Materiales</h2>
-        <table class="table" id="table02">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Material Name</th>
-                <th scope="col">ID</th>
-                <th scope="col"></th>
+    <div class="jumbotron">
+        <div id="mapid" style="width: 1000px; height: 550px; position: relative;"></div>
+        <script>
 
-            </tr>
-            </thead>
-            <tbody>
-            <!--                    <tr>-->
-            <!--                        <th scope="row">1</th>-->
-            <!--                        <td>Mark</td>-->
+            var mymap = L.map('mapid').setView([31.84, 63.879], 10);
 
-            <!--                    </tr>-->
-            </tbody>
-        </table>
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox.streets'
+            }).addTo(mymap);
 
-        <button type="button" class="btn btn-success" onclick="showLoadMaterialForm()">Add</button>
+        </script>
 
-        <form class="material-form" id="material-form" onsubmit="return false">
-            <div>
-                <label for="material-model">Material:</label>
-                <input class="form-control" id="material-model" type="text" name="material-model" required>
-            </div>
-
-            <div>
-                <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial"
-                       value="Load" onclick=location.reload()>
-            </div>
-        </form>
 
     </div>
 </main>
@@ -121,10 +105,11 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/home-redirect.js"></script>
-<script src="js/printers.js"></script>
-<script src="js/producer.js"></script>
-<script src="js/materials.js"></script>
-<script src="js/orders.js"></script>
+<script src="../static/js/home-redirect.js"></script>
+<script src="../static/js/printers.js"></script>
+<script src="../static/js/producer.js"></script>
+<script src="../static/js/materials.js"></script>
+<script src="../static/js/orders.js"></script>
+<script src="js/mapJS.js"></script>
 </body>
 </html>
