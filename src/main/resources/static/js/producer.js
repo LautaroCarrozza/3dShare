@@ -105,7 +105,7 @@ function loadOrderDetails(orderId, printerName, materialName, clientId){
         type: 'GET',
         url:'/users/'+ clientId,
         success: function (data) {
-            $('#clientDetails').append($("<br><strong>Username: </strong>" +data.name+ "</br><strong> Mail: </strong>" + "\n" +data.email+"</br><strong>CP: </strong>" + "\n" +data.postalCode+ "</br><strong>Calificiacion cliente: </strong>"+ data.customerRating+ "</br> <strong>Total calificaciones: </strong>"+data.totalCustomerRating+"</br><strong>Ciudad: </strong>"+"\n"+data.city+"</br>"));
+            $('#clientDetails').append($("<br><strong>Username: </strong>" +data.name+ "</br><strong> Mail: </strong>" + "\n" +data.email+"</br><strong>CP: </strong>" + "\n" +data.postalCode+ "</br><strong>Calificiacion cliente: </strong>"+ data.customerRating.toFixed(2)+ "</br> <strong>Total calificaciones: </strong>"+data.totalCustomerRating+"</br><strong>Ciudad: </strong>"+"\n"+data.city+"</br>"));
             $('#printerAndMaterialDetails').append($("<br><strong> Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
 
         },

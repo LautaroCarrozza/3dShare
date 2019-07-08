@@ -47,7 +47,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-<body onload="initializeMap()">
+<body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,7 @@
         <div id="mapid" style="width: 1000px; height: 550px; position: relative;"></div>
         <script>
 
-            var mymap = L.map('mapid').setView([31.84, 63.879], 10);
+            var mymap = L.map('mapid').setView([-34.47, -58.92], 14);
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                 maxZoom: 18,

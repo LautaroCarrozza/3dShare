@@ -64,7 +64,7 @@ function loadModal(ownerID,ownerName) {
                url: '/users/' +ownerID,
                success: function (user) {
                    $('#producerDetailsOrder').append($("<br> <strong> Nombre: </strong>" +user.name+ "</br><strong>Email: </strong>" + "\n" +user.email+"</br> <strong> CP: </strong>" + "\n" +user.postalCode+ "</br><strong> Ciudad: </strong>"+"\n"+user.city+"</br>"));
-                   $('#producerDetailsOrder').append($("<br><strong>Calificacion: "+user.producerRating+"/5</strong></br>"));
+                   $('#producerDetailsOrder').append($("<br><strong>Calificacion: "+user.producerRating.toFixed(2)+"/5</strong></br>"));
 
                    $.each(data,function (index,element) {
                        console.log(element);

@@ -103,7 +103,8 @@ public class UserService {
         double totalRating= clientRating * totalClientRatingCount;
         totalRating=totalRating+rating;
         double finalAverage= (double) totalRating /(totalClientRatingCount+1);
-        customer.setCustomerRating(finalAverage);
+        double roundOff = finalAverage;
+        customer.setCustomerRating(roundOff);
         customer.addRatingCustomer();
 
 
@@ -115,9 +116,11 @@ public class UserService {
         double producerRating= producer.getProducerRating();
         int totalProducerRating = producer.getTotalProducerRating();
         double totalRating= producerRating*totalProducerRating;
-        totalRating=totalRating+totalRating;
+        totalRating=totalRating+rating;
         double finalAverage= (double) totalRating/(totalProducerRating+1);
-        producer.setProducerRating(finalAverage);
+//        double roundOff = (double) Math.round(finalAverage * 100) / 100;
+        double roundOff = Double.parseDouble(String.format("%.2f", finalAverage));
+        producer.setProducerRating(roundOff);
         producer.addRatingProducer();
 
     }
