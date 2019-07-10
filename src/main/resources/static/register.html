@@ -9,7 +9,30 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Leaflet scripts and links-->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
+
+<!-- load esri-->
+<script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
+        integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
+        crossorigin=""></script>
+
+<!-- Esri geocoding -->
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.css"
+      integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
+      crossorigin="">
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.js"
+        integrity="sha512-uK5jVwR81KVTGe8KpJa1QIN4n60TsSV8+DPbL5wWlYQvb0/nYNgSOg9dZG6ViQhwx/gaMszuWllTemL+K+IXjg=="
+        crossorigin=""></script>
+
 <style type="text/css">
 	body{
 		color: #fff;
@@ -98,7 +121,16 @@
 	.signup-form form a:hover{
 		text-decoration: underline;
 	}
+
+    #map {
+        height: 250px;
+    }
+    #lat, #lng{
+        display: none;
+    }
+
 </style>
+
 </head>
 <body>
 <div class="signup-form">
@@ -118,6 +150,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group">
         	<input id="email" type="email" class="form-control" name="email" placeholder="Email" required="required">
         </div>
@@ -127,6 +160,69 @@
 		<div class="form-group">
             <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
         </div>
+
+        <div class="form-group" style="text-align: center">
+
+            <h4>Marque su ubicacion: </h4>
+            <div id="map"></div>
+            <p id="lat"></p>
+            <p id="lng"></p>
+
+            <script>
+
+                //Para saber si ya se agrego un marcador o no
+                var click = 0;
+                var map = L.map('map').setView([-34.47, -58.92], 14);
+
+                L.esri.basemapLayer('Topographic').addTo(map);
+
+                var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+                var results = L.layerGroup().addTo(map);
+
+                //Agrega marcador por busqueda o actualiza si ya hay
+                searchControl.on('results', function(data){
+                    results.clearLayers();
+                    for (var i = data.results.length - 1; i >= 0; i--) {
+                        if (click === 0) {
+                            click++;
+                            myMarker = L.marker(data.results[i].latlng, {draggable: true})
+                                .on('dragend', function (e) {
+                                    $('#lat').html(''+e.target._latlng.lat+'');
+                                    $('#lng').html(''+e.target._latlng.lng+'');
+                            });
+                            $('#lat').html(''+data.results[i].latlng.lat+'');
+                            $('#lng').html(''+data.results[i].latlng.lng+'');
+                            results.addLayer(myMarker);
+
+                        }
+                        else {
+                            myMarker.setLatLng(data.results[i].latlng);
+                            $('#lat').html(''+data.results[i].latlng.lat+'');
+                            $('#lng').html(''+data.results[i].latlng.lng+'');
+                        }
+                    }
+                });
+
+                //Agrega marcador cuando clickeas por primera vez
+                map.on('click', function (data) {
+                    if (click === 0) {
+                        click++;
+                        myMarker = L.marker(data.latlng, {draggable: true}).addTo(map)
+                            .on('dragend', function (dragedData) {
+                                $('#lat').html(''+dragedData.target._latlng.lat+'');
+                                $('#lng').html(''+dragedData.target._latlng.lng+'');
+                            });
+                        $('#lat').html(''+data.latlng.lat+'');
+                        $('#lng').html(''+data.latlng.lng+'');
+                    }
+
+                });
+
+            </script>
+
+        </div>
+
 		<div class="form-group">
             <button
                     id="registerButton" type="button" class="btn btn-success btn-lg btn-block" onclick="register()">Register Now
@@ -134,6 +230,7 @@
         </div>
         <p class="hint-text">Create your account. It's free and only takes a minute.</p>
     </form>
+
 </div>
 <script src="js/register.js"></script>
 </body>

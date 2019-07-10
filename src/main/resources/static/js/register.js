@@ -1,5 +1,9 @@
 function register() {
-
+    $('#locationModal').on('show.bs.modal', function(){
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 10);
+    });
     if($("#password").val() === $("#confirm_password").val()) {
         $.post({
             url: "/api/user",
@@ -7,7 +11,8 @@ function register() {
                 name: $("#username").val(),
                 password: $("#password").val(),
                 email: $("#email").val(),
-                postalCode: $("#postalCode").val(),
+                latitude: $("#lat").html(),
+                longitude: $("#lng").html(),
                 city: $("#city").val()
             }),
             dataType: "text",
