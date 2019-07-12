@@ -17,7 +17,22 @@ function getUserId2() {
 }
 
 function loadProducersWithPrinter() {
+
     var printerName=getQueryVariable(window.location.href);
+    var map = L.map('prodMap').setView([-34.47, -58.92], 14);
+    L.esri.basemapLayer('Topographic').addTo(map);
+    var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+    var results = L.layerGroup().addTo(map);
+
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+        }
+    });
+
+    map.locate({setView: true});
+
     $.ajax({
         type: 'GET',
         url: '/printers',
@@ -29,13 +44,22 @@ function loadProducersWithPrinter() {
                     li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
                     $("#my2ndUL").append(li);
 
+                    var popUpContent = "<h4 style='text-align: center'>"+element.owner.name+"</h4>"+
+                        "<p><strong>Email: </strong>" + "\n" +element.owner.email+"</br>" +
+                        "<strong> Ciudad: </strong>"+"\n"+element.owner.city+"</br>" +
+                        "<strong>Calificacion: "+element.owner.producerRating.toFixed(2)+"/5</strong></p>" +
+                        "<button type='button' class='btn btn-success' data-toggle='modal' data-target='#details-modal' onclick='loadModal("+element.owner.id+","+"\""+element.owner.name+"\""+")'>More</button>";
+
+                    var marker = L.marker([element.owner.latitude, element.owner.longitude]).addTo(map);
+                    marker.bindPopup(popUpContent);
                 }
 
             })
 
         }
 
-    })
+    });
+
 }
 
 function getQueryVariable(variable) {
