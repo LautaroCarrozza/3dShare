@@ -1,4 +1,8 @@
+var markers = [];
+var producers = [];
+
 var userCity;
+
 function getUserId2() {
     $.ajax({
         url: "/api/user",
@@ -37,12 +41,9 @@ function loadProducersWithPrinter() {
         type: 'GET',
         url: '/printers',
         success: function (data) {
+            var markersCounter = 0;
             $.each(data, function (index, element) {
                 if (printerName === element.model) {
-                    console.log(element.owner.id);
-                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
-                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
-                    $("#my2ndUL").append(li);
 
                     var popUpContent = "<h4 style='text-align: center'>"+element.owner.name+"</h4>"+
                         "<p><strong>Email: </strong>" + "\n" +element.owner.email+"</br>" +
@@ -52,6 +53,13 @@ function loadProducersWithPrinter() {
 
                     var marker = L.marker([element.owner.latitude, element.owner.longitude]).addTo(map);
                     marker.bindPopup(popUpContent);
+
+                    producers.push(element.owner.name);
+                    markers.push(marker);
+
+                    var li = $('<li><a href="#" onclick="openPopUp('+markersCounter+');return false;">' + element.owner.name + '</a></li>');
+                    $("#my2ndUL").append(li);
+                    markersCounter ++;
                 }
 
             })
@@ -60,6 +68,10 @@ function loadProducersWithPrinter() {
 
     });
 
+}
+
+function openPopUp(marker) {
+    markers[marker].openPopup();
 }
 
 function getQueryVariable(variable) {
@@ -73,8 +85,7 @@ function getQueryVariable(variable) {
 }
 
 function loadModal(ownerID,ownerName) {
-    console.log(ownerID);
-    console.log(ownerName);
+
     $.ajax({
         type:'GET',
         dataType: "json",
@@ -111,6 +122,14 @@ function loadModal(ownerID,ownerName) {
 
 }
 
+function getMarkerIndex(producerName) {
+    for (var i = 0; i < producers.length; i++) {
+        if (producers[i] === producerName) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 function sortByRating() {
     clearLI();
@@ -119,12 +138,16 @@ function sortByRating() {
         type: 'GET',
         url: '/printers/byRating',
         success: function (data) {
+
             $.each(data, function (index, element) {
+
                 if (printerName === element.model) {
-                    console.log(element.owner.id);
-                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
-                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
-                    $("#my2ndUL").append(li);
+
+                    var markerIndex = getMarkerIndex(element.owner.name);
+                    if (markerIndex !== -1) {
+                        var li = $('<li><a href="#" onclick="openPopUp('+markerIndex+');return false;">' + element.owner.name + '</a></li>');
+                        $("#my2ndUL").append(li);
+                    }
 
                 }
 
@@ -144,7 +167,7 @@ function realizarPedido(producerID) {
         materialName: $('#materialSelect').val(),
         printerName: printername
     })
-        .done(function () {1
+        .done(function () {
             window.alert('Solicitud enviada correctamente');
             location.href="home.html";
         })
@@ -171,7 +194,7 @@ function clearLI() {
 function sortByCity() {
     clearLI();
     getUserCity();
-    console.log(userCity);
+
     var printerName=getQueryVariable(window.location.href);
     $.ajax({
         type: 'GET',
@@ -179,10 +202,12 @@ function sortByCity() {
         success: function (data) {
             $.each(data, function (index, element) {
                 if (printerName === element.model && element.owner.city=== userCity) {
-                    console.log(element.owner.id);
-                    var li = $('<li><a data-toggle="modal" href="#details-modal">' + element.owner.name + '</a></li>');
-                    li.attr('onClick', 'loadModal("' + element.owner.id + '","' + element.owner.name + '")');
-                    $("#my2ndUL").append(li);
+
+                    var markerIndex = getMarkerIndex(element.owner.name);
+                    if (markerIndex !== -1) {
+                        var li = $('<li><a href="#" onclick="openPopUp('+markerIndex+');return false;">' + element.owner.name + '</a></li>');
+                        $("#my2ndUL").append(li);
+                    }
 
                 }
 
