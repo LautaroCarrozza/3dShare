@@ -24,6 +24,8 @@ public class Order {
 
     private String printer;
 
+    private String fileDirectory;
+
     private boolean inProgress = false;
 
     private String status = "";
@@ -31,11 +33,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(User client, User producer, String material, String printer) {
+    public Order(User client, User producer, String material, String printer, String fileDirectory) {
         this.client = client;
         this.producer = producer;
         this.material = material;
         this.printer = printer;
+        this.fileDirectory= fileDirectory;
     }
 
     public long getId() {
@@ -92,5 +95,13 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFileDirectory() {
+        return fileDirectory;
+    }
+
+    public void setFileDirectory(String fileDirectory) {
+        this.fileDirectory = fileDirectory;
     }
 }

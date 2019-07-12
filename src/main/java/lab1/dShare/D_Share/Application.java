@@ -1,11 +1,13 @@
 package lab1.dShare.D_Share;
 
+import lab1.dShare.D_Share.FileModel.FileStorageProperties;
 import lab1.dShare.D_Share.Service.customUserDetailsService;
 import lab1.dShare.D_Share.UserModel.User;
 import lab1.dShare.D_Share.UserModel.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,6 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @SpringBootApplication
+
+@EnableConfigurationProperties({
+		FileStorageProperties.class
+})
 public class Application {
 
 	public static void main(String[] args) {
