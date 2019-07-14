@@ -35,13 +35,14 @@ function getUserName(user) {
     });
 }
 
-function loadOrderDetails(orderId, printerName, materialName, prodId){
+function loadOrderDetails(orderId, printerName, materialName, prodId, filename){
     $.ajax({
         type: 'GET',
         url:'/users/'+ prodId,
         success: function (data) {
             $('#producerDetails').append($("<br><strong> Nombre Usuario: </strong>" +data.name+ "</br><strong>Email: </strong>" + "\n" +data.email+"</br><strong> CP: </strong>" + "\n" +data.postalCode+ "</br>"));
             $('#home-printerAndMaterialDetails').append($("<br> <strong>Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
+            $('#file-details').append($("<p><a href='localhost:8080/downloadFile/"+filename+"' target='_blank'>localhost:8080/downloadFile/"+filename+"</a></p>" ))
 
         },
         error: function (error) {
@@ -66,6 +67,8 @@ function loadHomePage() {
                 if (element.status!== "Entregado" & element.status!== "Finalizado") {
                     getUserName(element.producer);
 
+                    console.log(element.filedirectory);
+
                     var row = $("<tr>");
 
                     row.append($(
@@ -75,7 +78,7 @@ function loadHomePage() {
                         "            <td>" + element.id + "</td>\n" +
                         "            <td style='text-align: right'>" +
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
-                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button>" +
+                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + "," + "\"" + element.fileDirectory + "\"" + ")'>Detalles</button>" +
                         "            </td>\n"
                     ));
 
@@ -177,3 +180,5 @@ function confirmRatingButton(orderID, producerID) {
     $('#rateModalFooter').append(button);
 
 }
+
+
