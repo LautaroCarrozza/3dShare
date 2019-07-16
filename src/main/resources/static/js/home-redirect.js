@@ -67,8 +67,6 @@ function loadHomePage() {
                 if (element.status!== "Entregado" & element.status!== "Finalizado") {
                     getUserName(element.producer);
 
-                    console.log(element.filedirectory);
-
                     var row = $("<tr>");
 
                     row.append($(
@@ -173,6 +171,10 @@ function clearModal() {
     $("#producerDetails").append("<strong><u>Datos productor</u></strong>");
     $("#home-printerAndMaterialDetails").html('');
     $("#home-printerAndMaterialDetails").append("<strong><u>Impresora y material</u></strong>")
+    $("#file-details").html('')
+    $("#file-details").append("<strong><u>Diseño:</u></strong>")
+
+
 }
 
 function confirmRatingButton(orderID, producerID) {

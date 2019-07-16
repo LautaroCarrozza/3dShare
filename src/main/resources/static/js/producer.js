@@ -77,7 +77,6 @@ function acceptRequest(orderId, printer, material, client) {
 
         },
         error: function (error) {
-            console.log(error);
         }
     });
 
@@ -93,24 +92,26 @@ function rejectRequest(orderId) {
             idRow.remove();
         },
         error: function (error) {
-            console.log(error);
+
         }
     });
 
 }
 
 //Shows Order details in producers Orders
-function loadOrderDetails(orderId, printerName, materialName, clientId){
+function loadOrderDetails(orderId, printerName, materialName, clientId,fileDirectory2){
     $.ajax({
         type: 'GET',
         url:'/users/'+ clientId,
         success: function (data) {
             $('#clientDetails').append($("<br><strong>Username: </strong>" +data.name+ "</br><strong> Mail: </strong>" + "\n" +data.email+"</br><strong>CP: </strong>" + "\n" +data.postalCode+ "</br><strong>Calificiacion cliente: </strong>"+ data.customerRating.toFixed(2)+ "</br> <strong>Total calificaciones: </strong>"+data.totalCustomerRating+"</br><strong>Ciudad: </strong>"+"\n"+data.city+"</br>"));
             $('#printerAndMaterialDetails').append($("<br><strong> Impresora: </strong>" +printerName+ "</br><strong>Material: </strong>" + "\n" +materialName+"</br>"));
+            $('#file-Details').append($("<p><a href='localhost:8080/downloadFile/"+fileDirectory2+"' target='_blank'>localhost:8080/downloadFile/"+fileDirectory2+"</a></p>" ))
+
+
 
         },
         error: function (error) {
-            console.log(error);
         }
     });
 }
@@ -213,7 +214,7 @@ function loadProducerPage() {
                         "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
                         "                   Status</button>" +
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                        "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>" +
+                        "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>" +
                         "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
                         "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">En proceso</a></li>\n" +
                         "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")' class=\"dropdown-item\">En produccion</a></li>\n" +
@@ -248,7 +249,7 @@ function loadProducerPage() {
                         "            <td>"+element.id+"</td>\n" +
                         "            <td style='text-align: right'>" +
                         "            <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                        "            onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+")'>Detalles</button>\n" +
+                        "            onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>\n" +
                         "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+","+ "\""+ element.printer+"\""+"," +"\""+element.material+"\""+","+element.client+")'>✓</button>" +
                         "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>✕</button>" +
                         "            </td>\n"
@@ -270,11 +271,16 @@ function loadProducerPage() {
 }
 
 
+
+
 function clearModal() {
     $("#clientDetails br").remove();
     $("#clientDetails").html('');
     $("#clientDetails").append("<strong><u>Datos cliente</u></strong>");
     $("#printerAndMaterialDetails").html('');
     $("#printerAndMaterialDetails").append("<strong><u>Impresora y material</u></strong>")
+    $("#file-Details").html('');
+    $('#file-Details').append("<strong><u>Diseño:</u></strong>");
+
 }
 

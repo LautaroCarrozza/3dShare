@@ -176,8 +176,20 @@ function realizarPedido(producerID) {
         fileDirectory: filePath.slice(12)
     })
         .done(function () {
-            window.alert('Solicitud enviada correctamente');
-            location.href="home.html";
+            Swal.fire({
+                type: 'success',
+                title: 'Pedido creado correctamente',
+                text: 'redireccionando en 10s',
+                timer: 10000
+
+            }
+                // 'Good job!',
+                // 'You clicked the button!',
+                // 'success'
+            ).then(function (value) {
+                location.href="home.html";
+            });
+
         })
         .fail(function (error) {
             console.log(error);
