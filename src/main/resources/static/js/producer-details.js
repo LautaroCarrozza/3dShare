@@ -3,7 +3,9 @@ var producers = [];
 
 var userCity;
 
+var singleUploadForm = document.querySelector('#singleUploadForm');
 var singleFileUploadInput = document.querySelector('#singleFileUploadInput');
+
 function getUserId2() {
     $.ajax({
         url: "/api/user",
@@ -162,12 +164,14 @@ function sortByRating() {
 
 function realizarPedido(producerID) {
     var printername = getQueryVariable(window.location.href);
+
     var filePath= $('#singleFileUploadInput').val();
     var files = singleFileUploadInput.files;
-    if(files.length === 0) {
-        singleFileUploadError.innerHTML = "Please select a file";
-        singleFileUploadError.style.display = "block";
-    }
+
+    // if(files.length === 0) {
+    //     singleFileUploadError.innerHTML = "Please select a file";
+    //     singleFileUploadError.style.display = "block";
+    // }
     uploadSingleFile(files[0]);
 
     $.post("/users/addOrder/client/" + userId + "/producer/" + producerID,{
@@ -194,8 +198,6 @@ function realizarPedido(producerID) {
         .fail(function (error) {
             console.log(error);
         });
-
-
     
 }
 
@@ -275,3 +277,13 @@ function uploadSingleFile(file) {
 
     xhr.send(formData);
 }
+
+singleUploadForm.addEventListener('submit', function(event){
+    var files = singleFileUploadInput.files;
+    if(files.length === 0) {
+        singleFileUploadError.innerHTML = "Please select a file";
+        singleFileUploadError.style.display = "block";
+    }
+    uploadSingleFile(files[0]);
+    event.preventDefault();
+}, true);

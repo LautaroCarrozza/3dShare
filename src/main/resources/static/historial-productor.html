@@ -18,28 +18,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-          crossorigin=""/>
-
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-            crossorigin=""></script>
-
-    <!-- load esri-->
-    <script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
-            integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
-            crossorigin=""></script>
-
-    <!-- Esri geocoding -->
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.css"
-          integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
-          crossorigin="">
-
-    <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.js"
-            integrity="sha512-uK5jVwR81KVTGe8KpJa1QIN4n60TsSV8+DPbL5wWlYQvb0/nYNgSOg9dZG6ViQhwx/gaMszuWllTemL+K+IXjg=="
-            crossorigin=""></script>
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -55,19 +33,15 @@
                 font-size: 3.5rem;
             }
         }
+
         .navbar-dark .navbar-nav .nav-link {
             color: #fff;
         }
-
-
-        #map { height: 180px; }
-
     </style>
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +62,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Historial</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" onclick="redirectsClientHistory()">De Pedidos Cliente</a>
+                    <a class="dropdown-item" href="#" onclick="redirectsClientHistory()">De Pedidos</a>
                     <a class="dropdown-item" href="#" onclick="redirectProducerHistory()">De Produccion</a>
                 </div>
             </li>
@@ -108,47 +82,22 @@
 
 <main role="main" class="container">
     <div class="jumbotron">
-        <div id="map" style="width: 1000px; height: 550px; position: relative;"></div>
-        <script>
-            //Para saber si ya se agrego un marcador o no
-            var click = 0;
+        <h2 style="text-align: center">Historial de Produccion</h2>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Id</th>
+                <th scope="col">Impresora</th>
+                <th scope="col">Material</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody id="tbodyProdHistory">
 
-            var map = L.map('map').setView([-34.47, -58.92], 14);
-
-            L.esri.basemapLayer('Streets').addTo(map);
-
-            var searchControl = L.esri.Geocoding.geosearch().addTo(map);
-
-            var results = L.layerGroup().addTo(map);
-
-            //Agrega marcador por busqueda o actualiza si ya hay
-            searchControl.on('results', function(data){
-                results.clearLayers();
-                for (var i = data.results.length - 1; i >= 0; i--) {
-                    if (click === 0) {
-                        myMarker = L.marker(data.results[i].latlng, {draggable: true});
-                        results.addLayer(myMarker);
-                        click++;
-                    }
-                    else {
-                        myMarker.setLatLng(data.results[i].latlng);
-                    }
-                }
-            });
-
-            var myMarker;
-
-            //Agrega marcador cuando clickeas por primera vez
-            map.on('click', function (data) {
-                if (click === 0) {
-                    myMarker = L.marker(data.latlng, {draggable: true}).addTo(map);
-                    click++;
-                }
-                console.log(myMarker._latlng);
-            });
-
-        </script>
-
+            </tbody>
+        </table>
     </div>
 </main>
 
@@ -157,11 +106,10 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../static/js/home-redirect.js"></script>
-<script src="../static/js/printers.js"></script>
-<script src="../static/js/producer.js"></script>
-<script src="../static/js/materials.js"></script>
-<script src="../static/js/orders.js"></script>
-<script src="js/mapJS.js"></script>
+<script src="js/home-redirect.js"></script>
+<script src="js/printers.js"></script>
+<script src="js/producer.js"></script>
+<script src="js/materials.js"></script>
+<script src="js/orders.js"></script>
 </body>
 </html>

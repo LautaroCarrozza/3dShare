@@ -106,13 +106,11 @@ public class UserController {
 
     }
 
-//    @PostMapping(CUSTOMERDIRECTION + "/rateProducer/{id}")
-//    public ResponseEntity<Object> updateProducerRating(@PathVariable long id, @RequestParam int rating){
-//
-//    }
 
 
     //Producer part...
+
+
     @PostMapping(PRODUCERDIRECTION + "/{id}/addPrinter")
     public ResponseEntity<Object> addPrinter(@PathVariable long id, @RequestParam String model, Authentication authentication){
         if (authentication == null)
@@ -171,7 +169,8 @@ public class UserController {
         userService.updateUser(user);
 
         Order order = orderService.getOrder(orderId);
-        orderService.deleteOrder(orderId);
+        order.setInProgress(false);
+        orderService.addOrder(order);
 
     }
 

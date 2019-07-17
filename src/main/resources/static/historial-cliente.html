@@ -3,9 +3,6 @@
 <head>
     <title>Producer Home</title>
     <link rel="stylesheet" href="../static/css/style.css" />
-    <link rel="stylesheet" href="css/stars.css">
-
-    <script src="https://kit.fontawesome.com/2e25f153c5.js"></script>
 
     <meta charset="UTF-8">
     <script
@@ -36,6 +33,7 @@
                 font-size: 3.5rem;
             }
         }
+
         .navbar-dark .navbar-nav .nav-link {
             color: #fff;
         }
@@ -43,7 +41,6 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
@@ -86,58 +83,19 @@
 <main role="main" class="container">
     <div class="jumbotron">
         <div class="container">
-            <h2 style="text-align: center">Pedidos a imprimir</h2>
+            <h2 style="text-align: center">Historial de Pedidos</h2>
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Producer</th>
                     <th scope="col">Id</th>
+                    <th scope="col">Impresora</th>
+                    <th scope="col">Material</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody id="tbodyProdOrders">
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="jumbotron">
-        <div class="container">
-            <h2 style="text-align: center">Solicitud de pedidos</h2>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Id</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody id="tbodyReqProdOrders">
-
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="jumbotron">
-        <div class="container">
-            <h2 style="text-align: center">Pedidos Finalizados</h2>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cliente</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Id</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody id="tbodyPedFin">
-
+                <tbody id="tbodyClientHistory">
 
                 </tbody>
             </table>
@@ -145,88 +103,14 @@
     </div>
 </main>
 
-<div class="modal fade" id="Order-details-modal" role="dialog">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header" id="modal-header">
-                <h4 class="modal-title">Detalles del pedido</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="clearModal()">&times;</button>
-            </div>
-
-            <div class="modal-body" id="modal-body">
-                <div class="container-fluid">
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <address id="clientDetails">
-                                <strong><u>Datos cliente</u></strong>
-
-                            </address>
-                        </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-12">
-                        <address id="printerAndMaterialDetails">
-                            <strong><u>Impresora y material</u></strong>
-
-                        </address>
-                    </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <address id="file-Details">
-                                <strong><u>Diseño:</u></strong>
-                            </address>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearModal()" >Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="statusDropdownsLinks">
-
-</div>
-
-<div class="modal fade" id="rateClientModal" tabindex="-1" role="dialog" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Valorar Cliente</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body" id="rateClientModalBody">
-            <div class="stars" data-rating="3">
-                <span class="star">&nbsp;</span>
-                <span class="star">&nbsp;</span>
-                <span class="star">&nbsp;</span>
-                <span class="star">&nbsp;</span>
-                <span class="star">&nbsp;</span>
-            </div>
-
-
-
-        </div>
-        <div class="modal-footer" id="rateClientModalFooter">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            <!--                    <button  type="button" class="btn btn-success" onclick="testFunction()">Confirmar</button>-->
-        </div>
-    </div>
-</div>
-</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/home-redirect.js"></script>
-<script src="js/producer.js"></script>
-<script src="js/stars.js"></script>
+<script src="js/printers.js"></script>
+<script src="js/materials.js"></script>
+<script src="js/orders.js"></script>
 </body>
 </html>

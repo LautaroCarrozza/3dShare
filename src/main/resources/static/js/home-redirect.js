@@ -53,6 +53,7 @@ function loadOrderDetails(orderId, printerName, materialName, prodId, filename){
 
 function loadHomePage() {
     var rowCOUNT=1;
+    var historyCount = 1;
 
     $.ajax({
         type: 'GET',
@@ -61,13 +62,10 @@ function loadHomePage() {
         dataType: 'json',
         success: function (data) {
             $.each(data, function(index, element) {
-
-
+                getUserName(element.producer);
+                var row = $("<tr>");
                 //element.producer returns producer id
                 if (element.status!== "Entregado" & element.status!== "Finalizado") {
-                    getUserName(element.producer);
-
-                    var row = $("<tr>");
 
                     row.append($(
                         "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
@@ -84,11 +82,24 @@ function loadHomePage() {
 
                     $('#tbodyOfMyOrders').append(row)
                 }
+                else if (element.inProgress === false && element.status === "Finalizado") {
+                    row.append($(
+                        "            <th scope=\"row\">" + historyCount + "</th>\n" +
+                        "            <td>" + currentUserName + "</td>\n" +
+                        "            <td>" + element.id + "</td>\n" +
+                        "            <td>" + element.printer + "</td>\n" +
+                        "            <td>" + element.material + "</td>\n" +
+                        "            <td style='text-align: right'>" +
+                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
+                        "               onclick='loadOrderDetails("+element.id + ","+ "\"" + element.printer + "\"" + "," + "\"" + element.material  + "\"" + ","  +element.producer+ "," + "\"" + element.fileDirectory + "\"" + ")'>Detalles</button>" +
+                        "            </td>"
+                    ));
+                    $('#tbodyClientHistory').append(row);
+                    historyCount = historyCount + 1;
+                }
 
-                if (element.status=== "Entregado") {
+                else if (element.status=== "Entregado") {
                     getUserName(element.producer);
-
-                    var row = $("<tr>");
 
                     row.append($(
                         "            <th scope=\"row\">" + rowCOUNT + "</th>\n" +
@@ -97,7 +108,7 @@ function loadHomePage() {
                         "            <td>" + element.id + "</td>\n" +
                         "            <td style='text-align: right'>" +
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Client-Order-details-modal\"" +
-                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer + ")'>Detalles</button> " +
+                        "               onclick='loadOrderDetails(" + element.id + "," + "\"" + element.printer + "\"" + "," + "\"" + element.material + "\"" + "," + element.producer +"," + "\""+ element.fileDirectory+"\""+")'>Detalles</button> " +
                         "               <button type=\"button\" class=\"btn btn-success\" data-toggle='modal' data-target='#rateModal' onclick='confirmRatingButton("+element.id+","+element.producer+")'>Confirmar</button>" +
                         "            </td>\n"
 
@@ -147,6 +158,14 @@ function redirectProducer() {
 
 function redirectClient() {
     window.location.href= "home.html";
+}
+
+function redirectsClientHistory() {
+    window.location.href= "historial-cliente.html";
+}
+
+function redirectProducerHistory() {
+    window.location.href= "historial-productor.html";
 }
 
 function redirectMaterials() {
