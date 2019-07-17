@@ -41,6 +41,19 @@ function showDeletePrinterForm() {
 
 }
 
+function addPrinter() {
+    var printer = $('#PrinterCatalogSelect').val();
+    let url = "/users/producer/" + userId + "/addPrinter"
+    $.post(url,{
+        model: printer
+    })
+        .done(function () {
+            location.reload();
+
+        });
+
+}
+
 function clearTable(){
     var elmtTable = document.getElementById('table01');
     var tableRows = elmtTable.getElementsByTagName('tr');
@@ -70,4 +83,24 @@ function redirectOrders() {
 
 function redirectHome() {
     window.location.href='home.html'
+}
+
+function loadPrinterSelectForm(){
+
+    $.ajax({
+        type: 'GET',
+        url: "/printers/catalogo",
+        success: function (data) {
+            $.each(data, function (index,element) {
+                $('#PrinterCatalogSelect').append("<option>"+element.model+"</option>");
+
+            })
+
+        }
+    })
+}
+
+function clearSelectFormPrinter() {
+    $('#PrinterCatalogSelect').empty();
+
 }

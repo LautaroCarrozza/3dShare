@@ -14,9 +14,17 @@ public class PrinterController {
     @Autowired
     private PrinterService printerService;
 
+    @Autowired
+    private CPrinterService cPrinterService;
+
     @GetMapping()
     public Set<Printer> getAllPrinters(){
         return printerService.getAllPrinters();
+    }
+
+    @GetMapping("/catalogo")
+    public List<CatalogPrinter> getCPrinters(){
+        return cPrinterService.getAllPrinters();
     }
 
 

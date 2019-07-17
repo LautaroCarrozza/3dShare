@@ -41,7 +41,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 </head>
-<body>
+<body onload="loadPageProducer()">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,6 +101,50 @@
     </div>
 </main>
 
+<div class="modal fade" id="Client-Order-details-modal-history" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">
+                <h4 class="modal-title">Detalles del pedido</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="clearModalProducerHistory()">&times;</button>
+            </div>
+
+            <div class="modal-body" id="modal-body">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <address id="clientDetails-producerHistory">
+
+                            </address>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <address id="printerAndMaterialDetails-producerHistory">
+
+                            </address>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <address id="file-Details-producerHistor">
+
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearModalProducerHistory()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -111,5 +155,6 @@
 <script src="js/producer.js"></script>
 <script src="js/materials.js"></script>
 <script src="js/orders.js"></script>
+<script src="js/producer-history.js"></script>
 </body>
 </html>

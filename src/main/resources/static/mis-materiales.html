@@ -106,22 +106,39 @@
             </tbody>
         </table>
 
-        <button type="button" class="btn btn-success" onclick="showLoadMaterialForm()">Add</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMaterialModal" onclick="loadMaterialSelectForm()">Add</button>
 
-        <form class="material-form" id="material-form" onsubmit="return false">
-            <div>
-                <label for="material-model">Material:</label>
-                <input class="form-control" id="material-model" type="text" name="material-model" required>
-            </div>
-
-            <div>
-                <input type="submit" class="form-control submitbutton btn btn-info" name="loadMaterial"
-                       value="Load" onclick=location.reload()>
-            </div>
-        </form>
 
     </div>
+    <div class="modal fade" id="addMaterialModal"  role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cargar Material</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearSelectFormMaterial()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <strong>Seleccion Material del Catalogo:</strong>
+                    <div class="form-group">
+                        <select class="form-control" id="MaterialCatalogSelectInput">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addMaterial()">Agregar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
+
+
+
+
 
 
 <!-- Optional JavaScript -->

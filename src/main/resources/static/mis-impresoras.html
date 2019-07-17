@@ -106,21 +106,35 @@
             <!--</tr>-->
             </tbody>
         </table>
-        <button type="button" class="btn btn-success" onclick="showLoadPrinterForm()">Add</button>
-            <form class="printer-form" id="printer-form" onsubmit="return false">
-                <div>
-                    <label for="printer-model">Printer Model:</label>
-                    <input class="form-control" id="printer-model" type="text" name="printer-model" required>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPrinterModal"  onclick="loadPrinterSelectForm()">Add</button>
+
+
+    </div>
+
+    <div class="modal fade" id="addPrinterModal"  role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cargar Impresora</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearSelectFormPrinter()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <strong>Seleccion Impresora del Catalogo:</strong>
+                    <div class="form-group">
+                        <select class="form-control" id="PrinterCatalogSelect">
+
+                        </select>
+                    </div>
                 </div>
 
-                <div>
-                    <input type="submit" class="form-control submitbutton btn btn-info" name="loadPrinter" value="Load" onclick="location.reload()">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addPrinter()">Agregar</button>
+
                 </div>
-
-        </form>
-
-
-
+            </div>
+        </div>
     </div>
 </main>
 

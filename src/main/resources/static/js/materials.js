@@ -40,6 +40,22 @@ function deleteMaterialById(id) {
 
 }
 
+function addMaterial(){
+    var material= $('#MaterialCatalogSelectInput').val();
+    let url = "/users/producer/" + userId + "/addMaterial";
+     $.post(url,{
+         name: material
+     })
+         .done(function () {
+             location.reload();
+
+         });
+
+
+
+}
+
+
 $('#material-form').on('submit', function () {
 
     let url = "/users/producer/" + userId + "/addMaterial";
@@ -78,5 +94,24 @@ function clearTableMaterials(){
 
 function showDeleteMaterialForm() {
     $('#deleteMaterialForm').show()
+
+}
+
+function loadMaterialSelectForm(){
+
+    $.ajax({
+        type: 'GET',
+        url: "/materials/catalogo",
+        success: function (data) {
+            $.each(data, function (index,element) {
+                $('#MaterialCatalogSelectInput').append("<option>"+element.name+"</option>");
+
+            })
+
+        }
+    })
+}
+function clearSelectFormMaterial() {
+    $('#MaterialCatalogSelectInput').empty();
 
 }

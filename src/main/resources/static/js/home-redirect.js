@@ -82,21 +82,6 @@ function loadHomePage() {
 
                     $('#tbodyOfMyOrders').append(row)
                 }
-                else if (element.inProgress === false && element.status === "Finalizado") {
-                    row.append($(
-                        "            <th scope=\"row\">" + historyCount + "</th>\n" +
-                        "            <td>" + currentUserName + "</td>\n" +
-                        "            <td>" + element.id + "</td>\n" +
-                        "            <td>" + element.printer + "</td>\n" +
-                        "            <td>" + element.material + "</td>\n" +
-                        "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                        "               onclick='loadOrderDetails("+element.id + ","+ "\"" + element.printer + "\"" + "," + "\"" + element.material  + "\"" + ","  +element.producer+ "," + "\"" + element.fileDirectory + "\"" + ")'>Detalles</button>" +
-                        "            </td>"
-                    ));
-                    $('#tbodyClientHistory').append(row);
-                    historyCount = historyCount + 1;
-                }
 
                 else if (element.status=== "Entregado") {
                     getUserName(element.producer);

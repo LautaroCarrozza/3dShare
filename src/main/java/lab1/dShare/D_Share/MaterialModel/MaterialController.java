@@ -1,6 +1,8 @@
 package lab1.dShare.D_Share.MaterialModel;
 
+import lab1.dShare.D_Share.Catalogos.CMaterialService;
 import lab1.dShare.D_Share.Catalogos.CatalogMaterial;
+import lab1.dShare.D_Share.Catalogos.CatalogPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +16,18 @@ public class MaterialController {
     @Autowired
     private MaterialService materialService;
 
+    @Autowired
+    private CMaterialService cMaterialService;
+
     @GetMapping()
     public List<Material> getAllMaterials(){
         return materialService.getAllMaterials();
+    }
+
+
+    @GetMapping("/catalogo")
+    public List<CatalogMaterial> getCPrinters(){
+        return cMaterialService.getAllMaterials();
     }
 
     @GetMapping("{id}")

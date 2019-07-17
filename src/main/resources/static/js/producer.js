@@ -181,8 +181,12 @@ function rateClient(orderId, clientId){
 }
 
 function confirmClientRating(orderId, clientId) {
-    var button= $('<button  type="button" class="btn btn-success" onclick="rateClient('+orderId+ ','+clientId+')">Confirmar</button>');
-    $('#rateClientModalFooter').append(button)
+    // var button= $('<button  type="button" class="btn btn-success" onclick="rateClient('+orderId+ ','+clientId+')">Confirmar</button>');
+    $('#confirmButtonRating').attr("onclick","rateClient("+orderId+ ","+clientId+")");
+}
+
+function clearRatingModal() {
+
 }
 
 //Loads producer orders and requests
@@ -199,10 +203,7 @@ function loadProducerPage() {
         success: function (data) {
             $.each(data, function(index, element) {
                 //element.client returns client id
-                console.log(data);
                 getUserName(element.client);
-                console.log(element.printer);
-                console.log(element.material);
                 var status;
                 var row = $("<tr id= "+element.id+">");
                 if (element.inProgress === true && element.status !== "Finalizado"){
@@ -229,23 +230,9 @@ function loadProducerPage() {
                     lastRow = rowFinishedOrdersCount;
                 }
 
-                else if (element.inProgress === false && element.status === "Finalizado") {
-                    row.append($(
-                        "            <th scope=\"row\">" + historyRows + "</th>\n" +
-                        "            <td>" + currentUserName + "</td>\n" +
-                        "            <td>" + element.id + "</td>\n" +
-                        "            <td>" + element.printer + "</td>\n" +
-                        "            <td>" + element.material + "</td>\n" +
-                        "            <td style='text-align: right'>" +
-                        "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                        "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>" +
-                        "            </td>"
-                    ));
-                    $('#tbodyProdHistory').append(row);
-                    historyRows = historyRows + 1;
-                }
 
-                else if (element.status === "Finalizado") {
+
+                else if (element.status === "Finalizado" & element.inProgress=== true) {
                     row.append($(
                         "            <th scope=\"row\">" + rowOrdersCount + "</th>\n" +
                         "            <td>" + currentUserName + "</td>\n" +
@@ -260,7 +247,7 @@ function loadProducerPage() {
 
                 }
 
-                else if (element.inProgress === false & element.status !== "Finalizado") {
+                else if (element.status !== "Finalizado" & element.inProgress === false ) {
                     row.append($(
                         "            <th scope=\"row\">" + rowPendingReqCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +

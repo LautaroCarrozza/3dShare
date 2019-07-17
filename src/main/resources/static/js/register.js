@@ -34,12 +34,32 @@ function register() {
                         location.href = "home.html"
                     })
                     .fail(function (error) {
-                        console.log(error);
-                        window.alert("login failed");
+                        Swal.fire({
+                                type: 'error',
+                                title: 'Credenciales Incorrectas',
+                                text: 'redireccionando en 10s',
+                                timer: 10000
+
+                            }
+
+                        ).then(function (value) {
+                            location.reload();
+                        });
                     })
             })
             .fail(function () {
-                window.alert("Nombre de usuario no disponible");
+                Swal.fire({
+                        type: 'error',
+                        title: 'Nombre de usuario no disponible',
+                        text: 'redireccionando en 10s',
+                        timer: 10000
+
+                    }
+
+                ).then(function (value) {
+                    location.reload();
+                });
+
                 $('#loginFailed').show("slow").delay(2000).hide("slow");
                 $("#username").val("");
                 $("#username").focus();
@@ -51,7 +71,17 @@ function register() {
     }
     else {
 
-        window.alert("Ingrese la misma contraseña");
+        Swal.fire({
+                type: 'error',
+                title: 'Ingrese la misma contraseña',
+                text: 'redireccionando en 10s',
+                timer: 10000
+
+            }
+
+        ).then(function (value) {
+            location.reload();
+        });
         $("#password").val("");
         $("#username").focus();
     }
