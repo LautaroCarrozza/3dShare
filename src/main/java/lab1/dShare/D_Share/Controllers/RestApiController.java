@@ -44,5 +44,10 @@ public class RestApiController {
         return user.getId();
     }
 
+    @GetMapping("/user/admin")
+    public boolean getUserRole(Authentication authentication){
+        return userService.getUserByName(authentication.getName()).isAdmin();
+    }
+
 
 }

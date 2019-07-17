@@ -1,3 +1,20 @@
+function checkAdminOrNot() {
+    $.ajax({
+        url: '/api/user/admin',
+        type: 'GET',
+        async : false,
+
+        success: function (data) {
+            if (data){
+                location.href = "home-admin.html"
+            }
+            else {
+                location.href = "home.html"
+            }
+        }
+    })
+}
+
 function logIn(){
 
     $.post("/api/login", {
@@ -8,7 +25,8 @@ function logIn(){
             console.log("login ok");
             $('#loginSuccess').show( "slow" ).delay(2000).hide( "slow" );
             $("#password").val("");
-            location.href = "home.html"
+            checkAdminOrNot();
+            // location.href = "home.html"
         })
         .fail(function () {
             console.log("login failed");

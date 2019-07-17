@@ -80,6 +80,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/register.html", "/js/register.js").permitAll()
 				.antMatchers("/api/**").permitAll()
 				//.antMatchers("/**").permitAll()
+				.antMatchers("/home-admin.html").permitAll()
 				.anyRequest().fullyAuthenticated();
 
 		http.formLogin()
