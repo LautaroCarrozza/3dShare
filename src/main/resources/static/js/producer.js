@@ -260,7 +260,7 @@ function loadProducerPage() {
 
                 }
 
-                else{
+                else if (element.inProgress === false & element.status !== "Finalizado") {
                     row.append($(
                         "            <th scope=\"row\">" + rowPendingReqCount + "</th>\n" +
                         "            <td>"+currentUserName+"</td>\n" +

@@ -50,6 +50,8 @@ public class User {
 
     private int totalProducerRating;
 
+    private boolean isAdmin;
+
     public User(String name, String password, String email, double latitude, double longitude, String city) {
         this.name = name;
         this.password = password;
@@ -59,6 +61,7 @@ public class User {
         this.city = city;
         this.totalCustomerRating = 0;
         this.totalProducerRating = 0;
+        this.isAdmin = false;
     }
 
     public User() {
@@ -240,6 +243,11 @@ public class User {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
 }
 
 

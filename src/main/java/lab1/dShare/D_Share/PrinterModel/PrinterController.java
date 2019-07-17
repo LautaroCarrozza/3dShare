@@ -1,5 +1,7 @@
 package lab1.dShare.D_Share.PrinterModel;
 
+import lab1.dShare.D_Share.Catalogos.CPrinterService;
+import lab1.dShare.D_Share.Catalogos.CatalogPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ public class PrinterController {
     public Set<Printer> getAllPrinters(){
         return printerService.getAllPrinters();
     }
+
 
     @GetMapping("/byRating")
     public List<Printer> getPrintersByRating(){

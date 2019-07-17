@@ -1,5 +1,6 @@
 package lab1.dShare.D_Share.MaterialModel;
 
+import lab1.dShare.D_Share.Catalogos.CatalogMaterial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

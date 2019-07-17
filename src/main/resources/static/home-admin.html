@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin home page</title>
+<link rel="stylesheet" href="../static/css/style.css" />
+
+<meta charset="UTF-8">
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+</script>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+        }
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: #fff;
+    }
+    #printer-form{
+        display: block;
+    }
+
+</style>
+<!-- Custom styles for this template -->
+<link href="navbar-top.css" rel="stylesheet">
+
+</head>
+
+<body onload="loadAdminPage()">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#" onclick="redirectHome()">3DShare</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" >Administrador <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="jumbotron">
+                <h2 style="text-align: center">Impresoras</h2>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyAdminPrinter">
+
+                    </tbody>
+                </table>
+                <form class="printer-form" id="printer-form" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-group">
+                                <input class="form-control" id="printer-model" type="text" name="printer-model" placeholder="Modelo" required="required">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <button id="loadPrinter" class="btn btn-success" type="submit" onclick="addPrinter()">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="jumbotron">
+                <h2 style="text-align: center">Materiales</h2>
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyAdminMaterial">
+
+                    </tbody>
+                </table>
+                <form class="printer-form" id="material-form" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-group">
+                                <input class="form-control" id="material-model" type="text" name="material-model" placeholder="Nombre" required = "required">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <button id="loadMaterial" class="btn btn-success" type="submit" onclick="addMaterial()">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
