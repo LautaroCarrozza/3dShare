@@ -29,14 +29,15 @@ public class AppWebController {
 //        }
 //        else return "";
 //    }
-    @RequestMapping(path = "/home-admin.html")
-    public ResponseEntity<Object> redirect(Authentication authentication){
-        if (authentication == null)
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        else if (!userService.getUserByName(authentication.getName()).isAdmin()){
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        else return new ResponseEntity<>(HttpStatus.CONTINUE);
-    }
+
+//    @RequestMapping(path = "/home-admin.html")
+//    public ResponseEntity<Object> redirect(Authentication authentication){
+//        if (authentication == null)
+//            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+//        else if (!userService.getUserByName(authentication.getName()).isAdmin()){
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//        else return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 }
