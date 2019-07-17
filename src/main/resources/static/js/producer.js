@@ -42,7 +42,7 @@ $('#printer-form').on('submit', function () {
 });
 
 
-function acceptRequest(orderId, printer, material, client) {
+function acceptRequest(orderId, printer, material, client, fileDirectory) {
 
     $.ajax({
         type: 'POST',
@@ -64,12 +64,12 @@ function acceptRequest(orderId, printer, material, client) {
                 "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
                 "                   Status</button>" +
                 "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>" +
+                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+","+ "\""+ fileDirectory+"\""+")'>Detalles</button>" +
                 "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4, lastRow,"+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
                 "               </ul>"+
                 "            </td>"
             ));
@@ -116,7 +116,7 @@ function loadOrderDetails(orderId, printerName, materialName, clientId,fileDirec
     });
 }
 
-function updateStatus(orderId, status, row, printer, material, client) {
+function updateStatus(orderId, status, row, printer, material, client, fileDirectory) {
     getUserName(client);
 
     $.post("/orders/status/"+ orderId,{
@@ -152,12 +152,12 @@ function updateStatus(orderId, status, row, printer, material, client) {
                 "               <button class=\"btn btn-secondary dropdown-toggle\" type=\"button\" id=\"dropdownStatusButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n"+
                 "                   Status</button>" +
                 "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
-                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>" +
+                "               onclick='loadOrderDetails("+orderId+","+ "\""+ printer+"\""+","+"\""+material+"\""+","+client+","+ "\""+ fileDirectory+"\""+")'>Detalles</button>" +
                 "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
-                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 1,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 2,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 3,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
+                "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+orderId+", 4,"+row+","+"\""+printer+"\""+","+"\""+material+"\""+","+client+","+"\""+ fileDirectory+"\""+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
                 "               </ul>"+
                 "            </td>"
         })
@@ -217,10 +217,10 @@ function loadProducerPage() {
                         "               <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
                         "               onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>" +
                         "               <ul id=\"contextMenu\" class=\"dropdown-menu\" role=\"menu\">\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 3, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
-                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 4, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 1, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+"\""+ element.fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En proceso</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 2, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+"\""+ element.fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En produccion</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 3, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+"\""+ element.fileDirectory+"\""+"); return false;' class=\"dropdown-item\">En trafico</a></li>\n" +
+                        "                   <li><a tabindex=\"-1\" href=\"#\" onclick='updateStatus("+element.id+", 4, "+rowFinishedOrdersCount+","+"\"" +element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+"\""+ element.fileDirectory+"\""+"); return false;' class=\"dropdown-item\">Entregado</a></li>\n"+
                         "               </ul>"+
                         "            </td>"
                     ));
@@ -269,7 +269,7 @@ function loadProducerPage() {
                         "            <td style='text-align: right'>" +
                         "            <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#Order-details-modal\"" +
                         "            onclick='loadOrderDetails("+element.id+","+ "\""+ element.printer+"\""+","+"\""+element.material+"\""+","+element.client+","+ "\""+ element.fileDirectory+"\""+")'>Detalles</button>\n" +
-                        "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+","+ "\""+ element.printer+"\""+"," +"\""+element.material+"\""+","+element.client+")'>✓</button>" +
+                        "               <button id='button' type=\"button\" class=\"btn btn-success\" onclick='acceptRequest("+element.id+","+ "\""+ element.printer+"\""+"," +"\""+element.material+"\""+","+element.client+","+"\""+ element.fileDirectory+"\""+")'>✓</button>" +
                         "               <button type=\"button\" class=\"btn btn-danger\" onclick='rejectRequest("+element.id+")'>✕</button>" +
                         "            </td>\n"
 
@@ -288,9 +288,6 @@ function loadProducerPage() {
     });
 
 }
-
-
-
 
 function clearModal() {
     $("#clientDetails br").remove();
